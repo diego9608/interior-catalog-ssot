@@ -21,13 +21,7 @@
     <small>Offline listo · v1</small>
   </footer>
   <div id="snackbar"></div>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/app/sw.js')
-        .then(reg => console.log('Service Worker registered', reg))
-        .catch(err => console.log('Service Worker registration failed', err));
-    }
-  </script>
+  <script src="/app/sw-register.js" defer></script>
   <script src="/shared/theme.js" defer></script>
   <script src="/app/app.js" type="module"></script>
 </body>
