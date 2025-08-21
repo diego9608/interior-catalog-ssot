@@ -1,6 +1,6 @@
 // Service Worker for offline functionality
-const CACHE_NAME = 'ssot-field-v2';
-const API_CACHE = 'ssot-api-v1';
+const CACHE_NAME = 'ssot-field-v3';
+const API_CACHE = 'ssot-api-v2';
 const urlsToCache = [
   '/app/',
   '/app/index.html',
@@ -24,6 +24,7 @@ self.addEventListener('install', event => {
         return cache.addAll(urlsToCache);
       })
   );
+  self.skipWaiting();
 });
 
 // Fetch event - cache strategies
@@ -115,4 +116,5 @@ self.addEventListener('activate', event => {
       );
     })
   );
+  self.clients.claim();
 });

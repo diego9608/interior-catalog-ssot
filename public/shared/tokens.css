@@ -197,18 +197,31 @@ a:hover {
   opacity: 0.9;
 }
 
-/* Theme toggle button styling */
-#themeToggle {
-  background: transparent;
+/* Icon button utilities */
+.btn-icon { 
+  display: inline-grid; 
+  place-items: center; 
+  width: 36px; 
+  height: 36px; 
   border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: var(--s-2);
-  font-size: 1.2rem;
+  border-radius: 8px; 
+  background: var(--surface); 
+  color: var(--text);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
-#themeToggle:hover {
-  background: var(--surface);
-  transform: scale(1.1);
+.btn-icon:hover {
+  background: var(--bg);
+  transform: scale(1.05);
 }
+
+.icon { 
+  width: 18px; 
+  height: 18px; 
+}
+
+/* Theme toggle icon visibility */
+.icon-sun { display: none; }                    /* Default: light theme shows moon */
+html.dark .icon-moon { display: none; }         /* Dark theme: hide moon */
+html.dark .icon-sun { display: inline; }        /* Dark theme: show sun */
