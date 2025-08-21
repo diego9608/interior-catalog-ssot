@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="manifest" href="/app/manifest.webmanifest">
+  <title>SSOT Field App</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+  <header>
+    <h1>SSOT • Field App</h1>
+    <div id="status-bar"></div>
+  </header>
+  <main id="app"></main>
+  <footer>
+    <small>Offline listo · v1</small>
+  </footer>
+  <div id="snackbar"></div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/app/sw.js')
+        .then(reg => console.log('Service Worker registered', reg))
+        .catch(err => console.log('Service Worker registration failed', err));
+    }
+  </script>
+  <script src="/app/app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+/* Mobile-first responsive styles */
+:root {
+  --primary: #111111;
+  --secondary: #666666;
+  --success: #28a745;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #17a2b8;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --border: #dee2e6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--primary);
+  background: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: var(--primary);
+  color: white;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#status-bar {
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+  max-width: 768px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+footer {
+  background: var(--light);
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: white;
+  transition: border-color 0.15s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--info);
+  box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.1);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin-top: 0.25rem;
+}
+
+/* Buttons */
+button, .btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #333;
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}
+
+.btn-outline {
+  background: white;
+  color: var(--primary);
+  border: 1px solid var(--border);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.card-header {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Status indicators */
+.item {
+  padding: 1rem;
+  border-left: 4px solid var(--border);
+  margin-bottom: 1rem;
+  background: var(--light);
+  border-radius: 4px;
+}
+
+.item.pass {
+  border-left-color: var(--success);
+  background: rgba(40, 167, 69, 0.05);
+}
+
+.item.fail {
+  border-left-color: var(--danger);
+  background: rgba(220, 53, 69, 0.05);
+}
+
+.item.pending {
+  border-left-color: var(--warning);
+  background: rgba(255, 193, 7, 0.05);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.badge-high {
+  background: var(--danger);
+  color: white;
+}
+
+.badge-medium {
+  background: var(--warning);
+  color: var(--dark);
+}
+
+.badge-low {
+  background: var(--info);
+  color: white;
+}
+
+/* Signature canvas */
+#signature-canvas {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 1rem 0;
+  touch-action: none;
+  background: white;
+}
+
+/* Project list */
+.project-list {
+  list-style: none;
+}
+
+.project-item {
+  display: block;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.15s;
+}
+
+.project-item:hover {
+  background: var(--light);
+  transform: translateX(4px);
+}
+
+/* Phase navigation */
+.phase-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.phase-nav a {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--primary);
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.phase-nav a.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* Evidence preview */
+.evidence-preview {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.evidence-preview img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* Snackbar */
+#snackbar {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--dark);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 1000;
+  max-width: 90%;
+  text-align: center;
+}
+
+#snackbar.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--secondary);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  main {
+    padding: 2rem;
+  }
+  
+  .phase-nav {
+    justify-content: center;
+  }
+}
+
+/* Print styles */
+@media print {
+  header, footer, #snackbar {
+    display: none;
+  }
+  
+  main {
+    max-width: 100%;
+    padding: 0;
+  }
+}

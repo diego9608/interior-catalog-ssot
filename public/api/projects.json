@@ -1,0 +1,11 @@
+[
+  {
+    "id": "DEMO-001",
+    "cliente": "Demo Cliente",
+    "phases": [
+      "pre_cnc",
+      "pre_instalacion",
+      "entrega"
+    ]
+  }
+]

@@ -1,0 +1,139 @@
+{
+  "projectId": "DEMO-001",
+  "auto": {
+    "pieces.total_qty": 32,
+    "cuts.placements_total": 32
+  },
+  "phases": {
+    "pre_cnc": [
+      {
+        "id": "CUT-COUNT",
+        "desc": "Total de piezas en cutlist coincide con piezas planificadas",
+        "type": "auto_eq",
+        "severity": "high",
+        "evidence": "none",
+        "left": "cuts.placements_total",
+        "right": "pieces.total_qty",
+        "left_value": 32,
+        "right_value": 32
+      },
+      {
+        "id": "KERF-CAL",
+        "desc": "Kerf medido del disco (mm)",
+        "type": "number_range",
+        "severity": "medium",
+        "evidence": "photo",
+        "min": 2.5,
+        "max": 3.5,
+        "units": "mm"
+      },
+      {
+        "id": "ADH-STOCK",
+        "desc": "Adhesivos requeridos disponibles (PUR zona húmeda, EVA interior)",
+        "type": "bool_true",
+        "severity": "high",
+        "evidence": "photo"
+      },
+      {
+        "id": "EDG-BANDING",
+        "desc": "Rollo/banda para cantos disponible según piezas",
+        "type": "bool_true",
+        "severity": "medium",
+        "evidence": "photo"
+      },
+      {
+        "id": "CNC-TOOLING",
+        "desc": "Sierras/fresas en buen estado (MRO verificado)",
+        "type": "bool_true",
+        "severity": "medium",
+        "evidence": "note"
+      }
+    ],
+    "pre_instalacion": [
+      {
+        "id": "PASO-UTIL",
+        "desc": "Paso útil en cocina",
+        "type": "number_range",
+        "severity": "high",
+        "evidence": "photo",
+        "min": 1000,
+        "max": 1500,
+        "units": "mm"
+      },
+      {
+        "id": "SERV-READY",
+        "desc": "Servicios listos (eléctrico/agua/gas según aplique)",
+        "type": "bool_true",
+        "severity": "high",
+        "evidence": "photo"
+      },
+      {
+        "id": "NIVEL-PISO",
+        "desc": "Desnivel de piso (mm por metro)",
+        "type": "number_max",
+        "severity": "medium",
+        "evidence": "photo",
+        "max": 3,
+        "units": "mm/m"
+      },
+      {
+        "id": "MUROS-PLANO",
+        "desc": "Desplome/planitud de muros (mm a 2 m)",
+        "type": "number_max",
+        "severity": "medium",
+        "evidence": "photo",
+        "max": 5,
+        "units": "mm/2m"
+      },
+      {
+        "id": "ANCLAJES",
+        "desc": "Anclajes y taquetes adecuados disponibles",
+        "type": "bool_true",
+        "severity": "high",
+        "evidence": "photo"
+      }
+    ],
+    "entrega": [
+      {
+        "id": "HOLGURA-FRENTES",
+        "desc": "Holgura entre frentes",
+        "type": "number_range",
+        "severity": "high",
+        "evidence": "photo",
+        "min": 1,
+        "max": 3,
+        "units": "mm"
+      },
+      {
+        "id": "ALINEACION",
+        "desc": "Alineación de frentes y nivel de líneas",
+        "type": "bool_true",
+        "severity": "medium",
+        "evidence": "photo"
+      },
+      {
+        "id": "CIERRE-DB",
+        "desc": "Cierre de puertas/cajones (dB a 1 m)",
+        "type": "number_max",
+        "severity": "medium",
+        "evidence": "video",
+        "max": 55,
+        "units": "dB"
+      },
+      {
+        "id": "SILICONADOS",
+        "desc": "Sellos/siliconados continuos y limpios",
+        "type": "bool_true",
+        "severity": "high",
+        "evidence": "photo"
+      },
+      {
+        "id": "LIMPIEZA",
+        "desc": "Limpieza final y entrega sin residuos",
+        "type": "bool_true",
+        "severity": "low",
+        "evidence": "photo"
+      }
+    ]
+  }
+}

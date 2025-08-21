@@ -1,0 +1,9 @@
+{
+  "projectId": "DEMO-001",
+  "cliente": "Demo Cliente",
+  "labels_hint": "data/projects/DEMO-001/labels/",
+  "cuts_summary": {
+    "sheets_used": 3,
+    "waste_pct": 0.298
+  }
+}

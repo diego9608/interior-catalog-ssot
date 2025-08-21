@@ -1,0 +1,9 @@
+{
+  "name": "Interior SSOT • Field App",
+  "short_name": "SSOT Field",
+  "start_url": "/app/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111111",
+  "icons": []
+}

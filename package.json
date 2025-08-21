@@ -12,7 +12,8 @@
     "bom:labels": "node scripts/generate-bom-and-labels.js",
     "qc:generate": "node scripts/qc-generate.js",
     "qc:verify": "node scripts/qc-verify.js",
-    "build": "npm run calc:costs && npm run optimize:cuts && npm run bom:labels",
+    "app:prepare": "node scripts/app-prepare.js",
+    "build": "npm run calc:costs && npm run optimize:cuts && npm run bom:labels && npm run app:prepare",
     "test": "npm run validate:all"
   },
   "keywords": [
