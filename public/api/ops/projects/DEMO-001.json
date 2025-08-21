@@ -1,0 +1,38 @@
+{
+  "projectId": "DEMO-001",
+  "cliente": "Demo Cliente",
+  "cost_p50": 25242.52,
+  "cost_p80": 27009.5,
+  "timeline_days_p50": 10.4,
+  "timeline_days_p80": 11.97,
+  "panels_delta_vs_heuristic": 578.59,
+  "optimization_savings_vs_naive": 198.17,
+  "sheets_used": 3,
+  "waste_pct": 0.298,
+  "pieces_area_m2": 6.26,
+  "total_sheet_area_m2": 8.93,
+  "phase_status": {
+    "pre_cnc": {
+      "pass": true,
+      "high_fails": 0
+    },
+    "pre_instalacion": {
+      "pass": true,
+      "high_fails": 0
+    },
+    "entrega": {
+      "pass": false,
+      "high_fails": 1
+    }
+  },
+  "qc_overall_pass": false,
+  "pieces_count": 32,
+  "panels_materials": {
+    "mat.melamina.mdf18_mr": 3
+  },
+  "hardware": {
+    "guias": 6,
+    "bisagras": 16
+  },
+  "generated_at": "2025-08-21T06:41:55.115Z"
+}

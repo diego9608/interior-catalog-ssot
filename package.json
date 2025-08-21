@@ -13,7 +13,8 @@
     "qc:generate": "node scripts/qc-generate.js",
     "qc:verify": "node scripts/qc-verify.js",
     "app:prepare": "node scripts/app-prepare.js",
-    "build": "npm run calc:costs && npm run optimize:cuts && npm run bom:labels && npm run app:prepare",
+    "ops:prepare": "node scripts/ops-prepare.js",
+    "build": "npm run calc:costs && npm run optimize:cuts && npm run bom:labels && npm run app:prepare && npm run ops:prepare",
     "test": "npm run validate:all"
   },
   "keywords": [

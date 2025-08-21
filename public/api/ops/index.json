@@ -1,0 +1,14 @@
+[
+  {
+    "projectId": "DEMO-001",
+    "cliente": "Demo Cliente",
+    "cost_p50": 25242.52,
+    "cost_p80": 27009.5,
+    "timeline_days_p50": 10.4,
+    "sheets_used": 3,
+    "waste_pct": 0.298,
+    "qc_overall_pass": false,
+    "pieces_count": 32,
+    "generated_at": "2025-08-21T06:41:55.115Z"
+  }
+]

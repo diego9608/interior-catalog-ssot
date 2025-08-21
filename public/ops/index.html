@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SSOT • Operaciones</title>
+  <link rel="stylesheet" href="/ops/styles.css">
+</head>
+<body>
+  <header>
+    <h1>SSOT • Operaciones</h1>
+    <div class="controls">
+      <select id="project-filter">
+        <option value="all">Todos los proyectos</option>
+      </select>
+      <div class="status-filter">
+        <button class="filter-btn active" data-status="all">Todos</button>
+        <button class="filter-btn" data-status="ok">OK</button>
+        <button class="filter-btn" data-status="blocked">BLOCKED</button>
+      </div>
+      <button id="export-csv" class="btn btn-export">📥 Export CSV</button>
+    </div>
+  </header>
+  
+  <main>
+    <!-- KPI Cards -->
+    <section id="kpi-cards" class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Costo P50</div>
+        <div class="kpi-value" id="kpi-cost-p50">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Costo P80</div>
+        <div class="kpi-value" id="kpi-cost-p80">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Plazo P50</div>
+        <div class="kpi-value" id="kpi-timeline-p50">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Merma Real</div>
+        <div class="kpi-value" id="kpi-waste">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Sheets</div>
+        <div class="kpi-value" id="kpi-sheets">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">QC Gate</div>
+        <div class="kpi-value" id="kpi-qc">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Piezas BOM</div>
+        <div class="kpi-value" id="kpi-pieces">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Proyectos</div>
+        <div class="kpi-value" id="kpi-projects">—</div>
+      </div>
+    </section>
+    
+    <!-- Projects Table -->
+    <section id="projects-section">
+      <h2>Proyectos</h2>
+      <div class="table-wrapper">
+        <table id="projects-table">
+          <thead>
+            <tr>
+              <th data-sort="projectId">ID</th>
+              <th data-sort="cliente">Cliente</th>
+              <th data-sort="cost_p50">Costo P50</th>
+              <th data-sort="cost_p80">Costo P80</th>
+              <th data-sort="timeline_days_p50">Plazo</th>
+              <th data-sort="waste_pct">Merma</th>
+              <th data-sort="sheets_used">Sheets</th>
+              <th data-sort="qc_overall_pass">QC</th>
+              <th data-sort="pieces_count">Piezas</th>
+              <th data-sort="generated_at">Actualizado</th>
+            </tr>
+          </thead>
+          <tbody id="projects-tbody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+    <!-- Project Detail -->
+    <section id="project-detail" class="hidden">
+      <h2 id="detail-title">Detalle del Proyecto</h2>
+      
+      <div class="detail-grid">
+        <!-- QC Phases -->
+        <div class="detail-card">
+          <h3>QC Fases</h3>
+          <div id="qc-phases">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Panels Info -->
+        <div class="detail-card">
+          <h3>Paneles</h3>
+          <div id="panels-info">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Hardware -->
+        <div class="detail-card">
+          <h3>Herrajes</h3>
+          <div id="hardware-info">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Trends -->
+        <div class="detail-card">
+          <h3>Tendencias</h3>
+          <div class="trend-item">
+            <label>Costo P50</label>
+            <div id="trend-cost" class="sparkline"></div>
+          </div>
+          <div class="trend-item">
+            <label>Merma %</label>
+            <div id="trend-waste" class="sparkline"></div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn btn-back" onclick="showProjectsList()">← Volver a lista</button>
+    </section>
+  </main>
+  
+  <footer>
+    <small>Dashboard Operativo v1 • Read-only</small>
+  </footer>
+  
+  <script src="/ops/ops.js"></script>
+</body>
+</html>
