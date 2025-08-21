@@ -213,7 +213,6 @@ a:hover {
 
 .btn-icon:hover {
   background: var(--bg);
-  transform: scale(1.05);
 }
 
 .icon { 
