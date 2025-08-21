@@ -1,0 +1,61 @@
+{
+  "projectId": "DEMO-001",
+  "phase": "pre_cnc",
+  "generated_at": "2025-08-21T06:20:24.257Z",
+  "gate": {
+    "high_fail_blocks": true
+  },
+  "items": [
+    {
+      "id": "CUT-COUNT",
+      "desc": "Total de piezas en cutlist coincide con piezas planificadas",
+      "type": "auto_eq",
+      "severity": "high",
+      "evidence": "none",
+      "left": "cuts.placements_total",
+      "right": "pieces.total_qty",
+      "left_value": 32,
+      "right_value": 32,
+      "requires_input": false
+    },
+    {
+      "id": "KERF-CAL",
+      "desc": "Kerf medido del disco (mm)",
+      "type": "number_range",
+      "severity": "medium",
+      "evidence": "photo",
+      "min": 2.5,
+      "max": 3.5,
+      "units": "mm",
+      "requires_input": true,
+      "input_field": "KERF-CAL"
+    },
+    {
+      "id": "ADH-STOCK",
+      "desc": "Adhesivos requeridos disponibles (PUR zona húmeda, EVA interior)",
+      "type": "bool_true",
+      "severity": "high",
+      "evidence": "photo",
+      "requires_input": true,
+      "input_field": "ADH-STOCK"
+    },
+    {
+      "id": "EDG-BANDING",
+      "desc": "Rollo/banda para cantos disponible según piezas",
+      "type": "bool_true",
+      "severity": "medium",
+      "evidence": "photo",
+      "requires_input": true,
+      "input_field": "EDG-BANDING"
+    },
+    {
+      "id": "CNC-TOOLING",
+      "desc": "Sierras/fresas en buen estado (MRO verificado)",
+      "type": "bool_true",
+      "severity": "medium",
+      "evidence": "note",
+      "requires_input": true,
+      "input_field": "CNC-TOOLING"
+    }
+  ]
+}

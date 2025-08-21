@@ -10,6 +10,8 @@
     "calc:costs": "node scripts/calc-costs.js",
     "optimize:cuts": "node scripts/optimize-cuts.js",
     "bom:labels": "node scripts/generate-bom-and-labels.js",
+    "qc:generate": "node scripts/qc-generate.js",
+    "qc:verify": "node scripts/qc-verify.js",
     "build": "npm run calc:costs && npm run optimize:cuts && npm run bom:labels",
     "test": "npm run validate:all"
   },
@@ -25,6 +27,8 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
+    "pdfkit": "^0.17.1",
     "qrcode": "^1.5.4",
     "yaml": "^2.8.1"
   }

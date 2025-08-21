@@ -1,0 +1,62 @@
+{
+  "projectId": "DEMO-001",
+  "phase": "pre_instalacion",
+  "generated_at": "2025-08-21T06:20:24.260Z",
+  "gate": {
+    "high_fail_blocks": true
+  },
+  "items": [
+    {
+      "id": "PASO-UTIL",
+      "desc": "Paso útil en cocina",
+      "type": "number_range",
+      "severity": "high",
+      "evidence": "photo",
+      "min": 1000,
+      "max": 1500,
+      "units": "mm",
+      "requires_input": true,
+      "input_field": "PASO-UTIL"
+    },
+    {
+      "id": "SERV-READY",
+      "desc": "Servicios listos (eléctrico/agua/gas según aplique)",
+      "type": "bool_true",
+      "severity": "high",
+      "evidence": "photo",
+      "requires_input": true,
+      "input_field": "SERV-READY"
+    },
+    {
+      "id": "NIVEL-PISO",
+      "desc": "Desnivel de piso (mm por metro)",
+      "type": "number_max",
+      "severity": "medium",
+      "evidence": "photo",
+      "max": 3,
+      "units": "mm/m",
+      "requires_input": true,
+      "input_field": "NIVEL-PISO"
+    },
+    {
+      "id": "MUROS-PLANO",
+      "desc": "Desplome/planitud de muros (mm a 2 m)",
+      "type": "number_max",
+      "severity": "medium",
+      "evidence": "photo",
+      "max": 5,
+      "units": "mm/2m",
+      "requires_input": true,
+      "input_field": "MUROS-PLANO"
+    },
+    {
+      "id": "ANCLAJES",
+      "desc": "Anclajes y taquetes adecuados disponibles",
+      "type": "bool_true",
+      "severity": "high",
+      "evidence": "photo",
+      "requires_input": true,
+      "input_field": "ANCLAJES"
+    }
+  ]
+}

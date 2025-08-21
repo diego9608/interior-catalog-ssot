@@ -1,0 +1,14 @@
+{
+  "projectId": "DEMO-001",
+  "phase": "entrega",
+  "responsable": "Carlos Martínez",
+  "station": "Instalación",
+  "timestamp": "2025-08-21T16:45:00Z",
+  "answers": {
+    "HOLGURA-FRENTES": 5,
+    "ALINEACION": true,
+    "CIERRE-DB": 52,
+    "SILICONADOS": true,
+    "LIMPIEZA": true
+  }
+}

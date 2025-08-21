@@ -1,0 +1,107 @@
+phases:
+  pre_cnc:
+    gate:
+      high_fail_blocks: true
+    items:
+      - id: CUT-COUNT
+        desc: "Total de piezas en cutlist coincide con piezas planificadas"
+        type: auto_eq           # compara fuentes internas (no requiere input)
+        left: "cuts.placements_total"
+        right: "pieces.total_qty"
+        severity: high
+        evidence: none
+      - id: KERF-CAL
+        desc: "Kerf medido del disco (mm)"
+        type: number_range
+        min: 2.5
+        max: 3.5
+        units: "mm"
+        severity: medium
+        evidence: photo
+      - id: ADH-STOCK
+        desc: "Adhesivos requeridos disponibles (PUR zona húmeda, EVA interior)"
+        type: bool_true
+        severity: high
+        evidence: photo
+      - id: EDG-BANDING
+        desc: "Rollo/banda para cantos disponible según piezas"
+        type: bool_true
+        severity: medium
+        evidence: photo
+      - id: CNC-TOOLING
+        desc: "Sierras/fresas en buen estado (MRO verificado)"
+        type: bool_true
+        severity: medium
+        evidence: note
+
+  pre_instalacion:
+    gate:
+      high_fail_blocks: true
+    items:
+      - id: PASO-UTIL
+        desc: "Paso útil en cocina"
+        type: number_range
+        min: 1000
+        max: 1500
+        units: "mm"
+        severity: high
+        evidence: photo
+      - id: SERV-READY
+        desc: "Servicios listos (eléctrico/agua/gas según aplique)"
+        type: bool_true
+        severity: high
+        evidence: photo
+      - id: NIVEL-PISO
+        desc: "Desnivel de piso (mm por metro)"
+        type: number_max
+        max: 3
+        units: "mm/m"
+        severity: medium
+        evidence: photo
+      - id: MUROS-PLANO
+        desc: "Desplome/planitud de muros (mm a 2 m)"
+        type: number_max
+        max: 5
+        units: "mm/2m"
+        severity: medium
+        evidence: photo
+      - id: ANCLAJES
+        desc: "Anclajes y taquetes adecuados disponibles"
+        type: bool_true
+        severity: high
+        evidence: photo
+
+  entrega:
+    gate:
+      high_fail_blocks: true
+    items:
+      - id: HOLGURA-FRENTES
+        desc: "Holgura entre frentes"
+        type: number_range
+        min: 1
+        max: 3
+        units: "mm"
+        severity: high
+        evidence: photo
+      - id: ALINEACION
+        desc: "Alineación de frentes y nivel de líneas"
+        type: bool_true
+        severity: medium
+        evidence: photo
+      - id: CIERRE-DB
+        desc: "Cierre de puertas/cajones (dB a 1 m)"
+        type: number_max
+        max: 55
+        units: "dB"
+        severity: medium
+        evidence: video
+      - id: SILICONADOS
+        desc: "Sellos/siliconados continuos y limpios"
+        type: bool_true
+        severity: high
+        evidence: photo
+      - id: LIMPIEZA
+        desc: "Limpieza final y entrega sin residuos"
+        type: bool_true
+        severity: low
+        evidence: photo

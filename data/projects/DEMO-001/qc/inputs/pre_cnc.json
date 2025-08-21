@@ -1,0 +1,13 @@
+{
+  "projectId": "DEMO-001",
+  "phase": "pre_cnc",
+  "responsable": "Juan Pérez",
+  "station": "Corte/CNC",
+  "timestamp": "2025-08-21T10:30:00Z",
+  "answers": {
+    "KERF-CAL": 3.0,
+    "ADH-STOCK": true,
+    "EDG-BANDING": true,
+    "CNC-TOOLING": true
+  }
+}

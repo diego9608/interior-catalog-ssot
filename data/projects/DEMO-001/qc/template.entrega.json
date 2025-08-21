@@ -1,0 +1,60 @@
+{
+  "projectId": "DEMO-001",
+  "phase": "entrega",
+  "generated_at": "2025-08-21T06:20:24.262Z",
+  "gate": {
+    "high_fail_blocks": true
+  },
+  "items": [
+    {
+      "id": "HOLGURA-FRENTES",
+      "desc": "Holgura entre frentes",
+      "type": "number_range",
+      "severity": "high",
+      "evidence": "photo",
+      "min": 1,
+      "max": 3,
+      "units": "mm",
+      "requires_input": true,
+      "input_field": "HOLGURA-FRENTES"
+    },
+    {
+      "id": "ALINEACION",
+      "desc": "Alineación de frentes y nivel de líneas",
+      "type": "bool_true",
+      "severity": "medium",
+      "evidence": "photo",
+      "requires_input": true,
+      "input_field": "ALINEACION"
+    },
+    {
+      "id": "CIERRE-DB",
+      "desc": "Cierre de puertas/cajones (dB a 1 m)",
+      "type": "number_max",
+      "severity": "medium",
+      "evidence": "video",
+      "max": 55,
+      "units": "dB",
+      "requires_input": true,
+      "input_field": "CIERRE-DB"
+    },
+    {
+      "id": "SILICONADOS",
+      "desc": "Sellos/siliconados continuos y limpios",
+      "type": "bool_true",
+      "severity": "high",
+      "evidence": "photo",
+      "requires_input": true,
+      "input_field": "SILICONADOS"
+    },
+    {
+      "id": "LIMPIEZA",
+      "desc": "Limpieza final y entrega sin residuos",
+      "type": "bool_true",
+      "severity": "low",
+      "evidence": "photo",
+      "requires_input": true,
+      "input_field": "LIMPIEZA"
+    }
+  ]
+}

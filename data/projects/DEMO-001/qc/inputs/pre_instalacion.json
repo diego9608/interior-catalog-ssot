@@ -1,0 +1,14 @@
+{
+  "projectId": "DEMO-001",
+  "phase": "pre_instalacion",
+  "responsable": "María González",
+  "station": "Sitio",
+  "timestamp": "2025-08-21T14:00:00Z",
+  "answers": {
+    "PASO-UTIL": 1200,
+    "SERV-READY": true,
+    "NIVEL-PISO": 2.5,
+    "MUROS-PLANO": 4,
+    "ANCLAJES": true
+  }
+}
