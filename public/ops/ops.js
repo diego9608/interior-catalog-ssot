@@ -44,6 +44,11 @@
 
       updateKPIs();
       renderTable();
+      
+      // Initialize trends if module loaded
+      if (window.opsT && window.opsT.initTrends) {
+        window.opsT.initTrends(state.history);
+      }
     } catch (error) {
       console.error('Error loading data:', error);
     }

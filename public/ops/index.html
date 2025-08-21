@@ -21,6 +21,23 @@
         <button class="filter-btn" data-status="ok">PASS</button>
         <button class="filter-btn" data-status="blocked">FAIL</button>
       </div>
+      <!-- Date range controls -->
+      <div class="date-controls">
+        <button class="range-btn" data-range="7d" data-i18n="ops.range.7d">7d</button>
+        <button class="range-btn active" data-range="30d" data-i18n="ops.range.30d">30d</button>
+        <button class="range-btn" data-range="90d" data-i18n="ops.range.90d">90d</button>
+        <button class="range-btn" data-range="ytd" data-i18n="ops.range.ytd">YTD</button>
+        <button class="range-btn" data-range="all" data-i18n="ops.range.all">Todo</button>
+        <button class="range-btn" data-range="custom" data-i18n="ops.range.custom">Custom</button>
+      </div>
+      <div class="date-inputs hidden" id="custom-dates">
+        <input type="date" id="date-from" aria-label="From">
+        <input type="date" id="date-to" aria-label="To">
+      </div>
+      <label class="grouping-toggle">
+        <input type="checkbox" id="group-global">
+        <span data-i18n="ops.groupGlobal">Agrupar Global</span>
+      </label>
       <button id="export-csv" class="btn btn-export" data-i18n="ops.exportCSV">📥 Export CSV</button>
       <select id="langSelector" aria-label="Language">
         <option value="es">ES</option>
@@ -43,6 +60,37 @@
   </header>
   
   <main>
+    <!-- Trends Section -->
+    <section id="trends-section" class="trends-container">
+      <h2 data-i18n="ops.trends">Tendencias</h2>
+      <div class="trends-grid">
+        <div class="trend-card">
+          <label data-i18n="ops.trends.costP50">Costo P50</label>
+          <svg id="trend-cost-p50" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Costo P50">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.costP80">Costo P80</label>
+          <svg id="trend-cost-p80" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Costo P80">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.waste">Merma (%)</label>
+          <svg id="trend-waste" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Merma">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.qcPass">QC Pass Rate</label>
+          <svg id="trend-qc" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de QC Pass Rate">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+      </div>
+    </section>
+    
     <!-- KPI Cards -->
     <section id="kpi-cards" class="kpi-grid">
       <div class="kpi-card">
@@ -89,9 +137,11 @@
               <th data-sort="projectId">ID</th>
               <th data-sort="cliente" data-i18n="ops.client">Cliente</th>
               <th data-sort="cost_p50" data-i18n="ops.costP50">Costo P50</th>
+              <th data-i18n="ops.deltaTarget">Δ Meta</th>
               <th data-sort="cost_p80" data-i18n="ops.costP80">Costo P80</th>
               <th data-sort="timeline_days_p50" data-i18n="ops.timeline">Plazo</th>
               <th data-sort="waste_pct" data-i18n="ops.waste">Merma</th>
+              <th data-i18n="ops.deltaWaste">Δ Meta</th>
               <th data-sort="sheets_used">Sheets</th>
               <th data-sort="qc_overall_pass">QC</th>
               <th data-sort="pieces_count" data-i18n="ops.pieces">Piezas</th>
@@ -159,6 +209,7 @@
   <script src="/ops/sw-register.js" defer></script>
   <script src="/shared/i18n.js" defer></script>
   <script src="/shared/theme.js" defer></script>
+  <script src="/ops/ops-trends.js" defer></script>
   <script src="/ops/ops.js" defer></script>
 </body>
 </html>

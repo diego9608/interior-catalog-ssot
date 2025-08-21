@@ -45,7 +45,32 @@
     "hinges": "Hinges",
     "noHistory": "No historical data",
     "backToList": "Back to list",
-    "days": "days"
+    "days": "days",
+    "allProjects": "All projects",
+    "timelineP50": "Timeline P50",
+    "bomPieces": "BOM Pieces",
+    "deltaTarget": "Δ Target",
+    "deltaWaste": "Δ Target",
+    "groupGlobal": "Group Global",
+    "range": {
+      "7d": "7d",
+      "30d": "30d",
+      "90d": "90d",
+      "ytd": "YTD",
+      "all": "All",
+      "custom": "Custom"
+    },
+    "trends": {
+      "costP50": "Cost P50",
+      "costP80": "Cost P80",
+      "waste": "Waste (%)",
+      "qcPass": "QC Pass Rate"
+    },
+    "targets": {
+      "cost": "Cost Target",
+      "waste": "Waste Target",
+      "timeline": "Timeline Target"
+    }
   },
   "app": {
     "title": "Field App",

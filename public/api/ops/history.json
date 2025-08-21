@@ -1,10 +1,17 @@
 [
   {
-    "date": "2025-08-21",
-    "projectId": "DEMO-001",
-    "cost_p50": 25242.52,
-    "cost_p80": 27009.5,
-    "waste_pct": 0.298,
-    "qc_overall_pass": false
+    "generated_at": "2025-08-21T10:17:06.611Z",
+    "commit": "60543ec",
+    "projects": [
+      {
+        "projectId": "DEMO-001",
+        "cliente": "Demo Cliente",
+        "cost_p50": 25242.52,
+        "cost_p80": 27009.5,
+        "timeline_days_p50": 10.4,
+        "waste_pct": 0.298,
+        "qc_overall_pass": false
+      }
+    ]
   }
 ]

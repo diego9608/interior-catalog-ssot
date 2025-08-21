@@ -45,7 +45,32 @@
     "hinges": "Bisagras",
     "noHistory": "Sin datos históricos",
     "backToList": "Volver a lista",
-    "days": "días"
+    "days": "días",
+    "allProjects": "Todos los proyectos",
+    "timelineP50": "Plazo P50",
+    "bomPieces": "Piezas BOM",
+    "deltaTarget": "Δ Meta",
+    "deltaWaste": "Δ Meta",
+    "groupGlobal": "Agrupar Global",
+    "range": {
+      "7d": "7d",
+      "30d": "30d",
+      "90d": "90d",
+      "ytd": "YTD",
+      "all": "Todo",
+      "custom": "Custom"
+    },
+    "trends": {
+      "costP50": "Costo P50",
+      "costP80": "Costo P80",
+      "waste": "Merma (%)",
+      "qcPass": "QC Pass Rate"
+    },
+    "targets": {
+      "cost": "Meta Costo",
+      "waste": "Meta Merma",
+      "timeline": "Meta Plazo"
+    }
   },
   "app": {
     "title": "Field App",
