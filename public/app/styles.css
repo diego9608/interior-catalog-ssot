@@ -372,3 +372,106 @@ button, .btn {
     padding: 0;
   }
 }
+
+/* Theme overrides via tokens */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+header {
+  background: var(--brand);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main {
+  background: var(--bg);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.card-header {
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+label {
+  color: var(--text);
+}
+
+input, select, textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+
+.btn-success {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.project-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.project-item:hover {
+  background: var(--bg);
+}
+
+.phase-nav a {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.phase-nav a.active {
+  background: var(--brand);
+  color: white;
+}
+
+#signature-canvas {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+#snackbar {
+  background: var(--brand);
+}
+
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+}

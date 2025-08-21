@@ -23,6 +23,17 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
+    # Content Security Policy - strict but allows necessary features
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    # Force HTTPS
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # Prevent MIME type sniffing
     X-Content-Type-Options = "nosniff"
+    # XSS Protection (legacy but still useful)
+    X-XSS-Protection = "1; mode=block"
+    # Prevent framing
+    X-Frame-Options = "DENY"
+    # Referrer Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Permissions Policy - restrict features
+    Permissions-Policy = "geolocation=(), microphone=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"

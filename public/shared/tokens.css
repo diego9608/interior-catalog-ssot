@@ -1,0 +1,207 @@
+/* Design tokens + theming (light/dark) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/Inter-Variable.woff2') format('woff2');
+}
+
+:root {
+  /* Colors - Light theme */
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #111111;
+  --text-secondary: #6b7280;
+  --muted: #9ca3af;
+  --border: #e5e7eb;
+  
+  --brand: #111111;
+  --accent: #0f766e;      /* PASS/Success */
+  --danger: #b91c1c;      /* FAIL/Error */
+  --warning: #d97706;     /* Pending */
+  --link: #2563eb;
+  --focus: #2563eb;
+  
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+  
+  /* Radius */
+  --r-sm: 4px;
+  --r: 6px;
+  --r-lg: 12px;
+  --r-full: 9999px;
+  
+  /* Spacing (8pt grid) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-8: 48px;
+  --s-10: 64px;
+  
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-mono: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  
+  /* Transitions */
+  --transition-fast: 120ms ease;
+  --transition: 160ms ease;
+  --transition-slow: 240ms ease;
+}
+
+/* Auto dark mode based on system preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0c0f;
+    --surface: #111418;
+    --text: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --muted: #6b7280;
+    --border: #1f2937;
+    
+    --brand: #e5e7eb;
+    --accent: #14b8a6;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --link: #60a5fa;
+    --focus: #60a5fa;
+    
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.2);
+    --shadow: 0 1px 2px rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -2px rgba(0,0,0,.2);
+  }
+}
+
+/* Manual dark mode toggle via .dark class on html */
+.dark {
+  --bg: #0b0c0f;
+  --surface: #111418;
+  --text: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --muted: #6b7280;
+  --border: #1f2937;
+  
+  --brand: #e5e7eb;
+  --accent: #14b8a6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --link: #60a5fa;
+  --focus: #60a5fa;
+  
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.2);
+  --shadow: 0 1px 2px rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -2px rgba(0,0,0,.2);
+}
+
+/* Base resets using tokens */
+* {
+  transition: background-color var(--transition), 
+              border-color var(--transition),
+              color var(--transition);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+/* Typography with tokens */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  font-weight: 600;
+}
+
+p, span {
+  color: var(--text);
+}
+
+small, .meta {
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Common components with tokens */
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: var(--s-1) var(--s-2);
+  border-radius: var(--r);
+  text-transform: uppercase;
+}
+
+.badge.pass {
+  background: var(--accent);
+  color: white;
+}
+
+.badge.fail {
+  background: var(--danger);
+  color: white;
+}
+
+.badge.pending {
+  background: var(--warning);
+  color: white;
+}
+
+.card, .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: white;
+  border: 1px solid var(--brand);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Theme toggle button styling */
+#themeToggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: var(--s-2);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+#themeToggle:hover {
+  background: var(--surface);
+  transform: scale(1.1);
+}

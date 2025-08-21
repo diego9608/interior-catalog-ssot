@@ -4,8 +4,8 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>SSOT • Operaciones</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/shared/tokens.css">
   <link rel="stylesheet" href="/ops/styles.css">
 </head>
 <body>
@@ -21,6 +21,7 @@
         <button class="filter-btn" data-status="blocked">FAIL</button>
       </div>
       <button id="export-csv" class="btn btn-export">📥 Export CSV</button>
+      <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
     </div>
   </header>
   
@@ -138,6 +139,7 @@
     <small>Dashboard Operativo v1 • Read-only</small>
   </footer>
   
-  <script src="/ops/ops.js"></script>
+  <script src="/shared/theme.js" defer></script>
+  <script src="/ops/ops.js" defer></script>
 </body>
 </html>

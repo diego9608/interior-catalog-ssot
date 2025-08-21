@@ -442,3 +442,116 @@ footer {
     font-size: 10pt;
   }
 }
+
+/* Theme overrides via tokens */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+header {
+  background: var(--brand);
+  color: white;
+}
+
+.controls {
+  gap: var(--s-2);
+}
+
+.filter-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+}
+
+.filter-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.filter-btn.active {
+  background: white;
+  color: var(--brand);
+  border-color: white;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.kpi-label {
+  color: var(--text-secondary);
+}
+
+.kpi-value {
+  color: var(--text);
+}
+
+.table-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+thead {
+  background: var(--bg);
+}
+
+th {
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+}
+
+th:hover {
+  background: var(--border);
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr:hover {
+  background: var(--bg);
+}
+
+td {
+  color: var(--text);
+}
+
+.badge.pass {
+  background: var(--accent);
+}
+
+.badge.fail {
+  background: var(--danger);
+}
+
+.badge.pending {
+  background: var(--warning);
+}
+
+.detail-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.detail-card h3 {
+  color: var(--text);
+}
+
+.info-label {
+  color: var(--text-secondary);
+}
+
+.info-value {
+  color: var(--text);
+}
+
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+}

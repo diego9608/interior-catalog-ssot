@@ -4,8 +4,8 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>SSOT • Portal Operativo</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/shared/tokens.css">
   <link rel="stylesheet" href="/home.css">
 </head>
 <body>
@@ -17,6 +17,7 @@
     <nav class="actions">
       <a class="btn" href="/app/">Abrir Field App</a>
       <a class="btn btn-primary" href="/ops/">Ver Dashboard</a>
+      <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
     </nav>
   </header>
 
@@ -64,6 +65,7 @@
     <small>SSOT • Static-first • Netlify • GitHub</small>
   </footer>
 
-  <script defer src="/index.js"></script>
+  <script src="/shared/theme.js" defer></script>
+  <script src="/index.js" defer></script>
 </body>
 </html>
