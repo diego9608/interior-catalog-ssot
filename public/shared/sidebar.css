@@ -13,7 +13,7 @@
   background: var(--bg);
 }
 
-.app-sidebar {
+#sidebar, .app-sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -30,11 +30,13 @@
 
 /* Expand on hover for desktop */
 @media (min-width: 1024px) {
+  #sidebar:hover,
   .app-sidebar:hover {
     width: var(--sidebar-width);
   }
   
   /* Keep expanded if user is interacting with sidebar content */
+  #sidebar:focus-within,
   .app-sidebar:focus-within {
     width: var(--sidebar-width);
   }
@@ -89,6 +91,8 @@
   transition: opacity var(--sidebar-transition);
 }
 
+#sidebar:hover .sidebar-logo-text,
+#sidebar:focus-within .sidebar-logo-text,
 .app-sidebar:hover .sidebar-logo-text,
 .app-sidebar:focus-within .sidebar-logo-text,
 .app-sidebar.manually-expanded .sidebar-logo-text {
@@ -173,6 +177,8 @@
   transition: opacity var(--sidebar-transition), width var(--sidebar-transition);
 }
 
+#sidebar:hover .sidebar-nav-text,
+#sidebar:focus-within .sidebar-nav-text,
 .app-sidebar:hover .sidebar-nav-text,
 .app-sidebar:focus-within .sidebar-nav-text,
 .app-sidebar.manually-expanded .sidebar-nav-text {
@@ -219,6 +225,8 @@
   transition: opacity var(--sidebar-transition);
 }
 
+#sidebar:hover .sidebar-user-info,
+#sidebar:focus-within .sidebar-user-info,
 .app-sidebar:hover .sidebar-user-info,
 .app-sidebar:focus-within .sidebar-user-info,
 .app-sidebar.manually-expanded .sidebar-user-info {
@@ -247,6 +255,8 @@
 
 /* Adjust margin when sidebar is hovered */
 @media (min-width: 1024px) {
+  body:has(#sidebar:hover) .app-main,
+  body:has(#sidebar:focus-within) .app-main,
   body:has(.app-sidebar:hover) .app-main,
   body:has(.app-sidebar:focus-within) .app-main {
     margin-left: var(--sidebar-width);
@@ -318,11 +328,13 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  #sidebar,
   .app-sidebar {
     transform: translateX(-100%);
     z-index: 201;
   }
   
+  #sidebar.mobile-open,
   .app-sidebar.mobile-open {
     transform: translateX(0);
   }

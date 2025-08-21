@@ -22,13 +22,20 @@
 
   // Initialize sidebar
   function initSidebar() {
-    let sidebar = document.getElementById('sidebar') || document.getElementById('app-sidebar');
+    let sidebar = document.getElementById('sidebar');
     if (!sidebar) {
-      // Create sidebar element if it doesn't exist
-      sidebar = document.createElement('div');
-      sidebar.id = 'sidebar';
-      sidebar.className = 'app-sidebar';
-      document.body.appendChild(sidebar);
+      // Try to find app-sidebar
+      sidebar = document.getElementById('app-sidebar');
+      if (sidebar) {
+        // Add the ID 'sidebar' for consistency
+        sidebar.id = 'sidebar';
+      } else {
+        // Create sidebar element if it doesn't exist
+        sidebar = document.createElement('div');
+        sidebar.id = 'sidebar';
+        sidebar.className = 'app-sidebar';
+        document.body.appendChild(sidebar);
+      }
     }
 
     // Create sidebar HTML with hover-friendly classes
@@ -117,7 +124,7 @@
 
   // Toggle sidebar collapsed state
   function toggleSidebar() {
-    const sidebar = document.getElementById('app-sidebar');
+    const sidebar = document.getElementById('sidebar');
     if (!sidebar) return;
 
     sidebarState.collapsed = !sidebarState.collapsed;
@@ -127,7 +134,7 @@
 
   // Toggle mobile sidebar
   function toggleMobileSidebar() {
-    const sidebar = document.getElementById('app-sidebar');
+    const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
     
     if (!sidebar) return;
@@ -145,7 +152,7 @@
 
   // Close mobile sidebar
   function closeMobileSidebar() {
-    const sidebar = document.getElementById('app-sidebar');
+    const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
     
     if (sidebar) sidebar.classList.remove('mobile-open');
@@ -188,7 +195,7 @@
 
     // Create sidebar elements
     const sidebar = document.createElement('aside');
-    sidebar.id = 'app-sidebar';
+    sidebar.id = 'sidebar';
     sidebar.className = 'app-sidebar';
     
     const overlay = document.createElement('div');
