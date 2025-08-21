@@ -18,7 +18,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: var(--primary);
@@ -151,6 +151,8 @@ main {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary);
+  font-feature-settings: "tnum" 1, "cv02" 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .kpi-value.ok {
@@ -232,6 +234,8 @@ tbody tr:hover {
 td {
   padding: 0.75rem;
   font-size: 0.875rem;
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .badge {
@@ -239,17 +243,18 @@ td {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
   font-weight: 600;
-  border-radius: 3px;
+  border-radius: 6px;
   text-transform: uppercase;
+  font-feature-settings: "tnum" 1;
 }
 
-.badge.ok {
-  background: var(--success);
+.badge.ok, .badge.pass {
+  background: #0f766e;
   color: white;
 }
 
-.badge.blocked {
-  background: var(--danger);
+.badge.blocked, .badge.fail {
+  background: #b91c1c;
   color: white;
 }
 
@@ -356,6 +361,12 @@ td {
 .sparkline svg {
   width: 100%;
   height: 100%;
+}
+
+/* Focus and Accessibility */
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
 }
 
 /* Utility */

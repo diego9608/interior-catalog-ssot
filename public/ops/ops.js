@@ -2,10 +2,19 @@
 (function() {
   'use strict';
 
+  // Number formatting utilities
+  const fmt = {
+    mxn: v => v !== null && v !== undefined ? 
+      new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 2 }).format(v) : '—',
+    pct: v => v !== null && v !== undefined ? `${(v * 100).toFixed(1)}%` : '—',
+    days: v => v !== null && v !== undefined ? `${v.toFixed(1)} días` : '—',
+    num: v => v !== null && v !== undefined ? v.toLocaleString('es-MX') : '—'
+  };
+
   const state = {
     projects: [],
     history: [],
-    currentFilter: 'all',
+    currentFilter: localStorage.getItem('ops.filter') || 'all',
     currentSort: { field: 'projectId', direction: 'asc' },
     selectedProject: null
   };
@@ -47,22 +56,22 @@
     // Cost P50 - median
     const costP50Values = filtered.map(p => p.cost_p50).filter(v => v !== null);
     document.getElementById('kpi-cost-p50').textContent = 
-      costP50Values.length > 0 ? `$${median(costP50Values).toLocaleString()}` : '—';
+      costP50Values.length > 0 ? fmt.mxn(median(costP50Values)) : '—';
 
     // Cost P80 - 80th percentile
     const costP80Values = filtered.map(p => p.cost_p80).filter(v => v !== null);
     document.getElementById('kpi-cost-p80').textContent = 
-      costP80Values.length > 0 ? `$${percentile(costP80Values, 80).toLocaleString()}` : '—';
+      costP80Values.length > 0 ? fmt.mxn(percentile(costP80Values, 80)) : '—';
 
     // Timeline P50 - median days
     const timelineValues = filtered.map(p => p.timeline_days_p50).filter(v => v !== null);
     document.getElementById('kpi-timeline-p50').textContent = 
-      timelineValues.length > 0 ? `${Math.round(median(timelineValues))} días` : '—';
+      timelineValues.length > 0 ? fmt.days(median(timelineValues)) : '—';
 
     // Waste percentage - average
     const wasteValues = filtered.map(p => p.waste_pct).filter(v => v !== null);
     document.getElementById('kpi-waste').textContent = 
-      wasteValues.length > 0 ? `${(average(wasteValues) * 100).toFixed(1)}%` : '—';
+      wasteValues.length > 0 ? fmt.pct(average(wasteValues)) : '—';
 
     // Total sheets used
     const sheetsTotal = filtered.reduce((sum, p) => sum + (p.sheets_used || 0), 0);
@@ -127,18 +136,18 @@
       // QC status badge
       let qcBadge = '<span class="badge pending">—</span>';
       if (project.qc_overall_pass === true) {
-        qcBadge = '<span class="badge ok">OK</span>';
+        qcBadge = '<span class="badge pass">PASS</span>';
       } else if (project.qc_overall_pass === false) {
-        qcBadge = '<span class="badge blocked">BLOCKED</span>';
+        qcBadge = '<span class="badge fail">FAIL</span>';
       }
 
       tr.innerHTML = `
         <td>${project.projectId}</td>
         <td>${project.cliente || '—'}</td>
-        <td>${project.cost_p50 ? `$${project.cost_p50.toLocaleString()}` : '—'}</td>
-        <td>${project.cost_p80 ? `$${project.cost_p80.toLocaleString()}` : '—'}</td>
+        <td>${fmt.mxn(project.cost_p50)}</td>
+        <td>${fmt.mxn(project.cost_p80)}</td>
         <td>${project.timeline_days_p50 ? `${project.timeline_days_p50}d` : '—'}</td>
-        <td>${project.waste_pct !== null ? `${(project.waste_pct * 100).toFixed(1)}%` : '—'}</td>
+        <td>${fmt.pct(project.waste_pct)}</td>
         <td>${project.sheets_used || '—'}</td>
         <td>${qcBadge}</td>
         <td>${project.pieces_count || '—'}</td>
@@ -176,6 +185,12 @@
 
   // Show project detail view
   async function showProjectDetail(projectId) {
+    location.hash = `#/${projectId}`;
+    await loadProjectDetail(projectId);
+  }
+
+  // Load project detail
+  async function loadProjectDetail(projectId) {
     try {
       // Load detailed project data
       const response = await fetch(`/api/ops/projects/${projectId}.json`);
@@ -417,9 +432,17 @@
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
         state.currentFilter = e.target.dataset.status;
+        localStorage.setItem('ops.filter', state.currentFilter);
         updateKPIs();
         renderTable();
       });
+    });
+
+    // Set active filter button on load
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      if (btn.dataset.status === state.currentFilter) {
+        btn.classList.add('active');
+      }
     });
 
     // Project filter dropdown
@@ -457,16 +480,34 @@
 
   // Show projects list (from detail view)
   window.showProjectsList = function() {
+    location.hash = '';
     document.getElementById('project-detail').classList.add('hidden');
     document.getElementById('projects-section').classList.remove('hidden');
     document.getElementById('kpi-cards').classList.remove('hidden');
     state.selectedProject = null;
   };
 
+  // Router for hash-based navigation
+  async function router() {
+    const hash = location.hash.slice(1);
+    if (hash.startsWith('/')) {
+      const projectId = hash.slice(1);
+      if (projectId && state.projects.find(p => p.projectId === projectId)) {
+        await loadProjectDetail(projectId);
+      }
+    } else {
+      showProjectsList();
+    }
+  }
+
   // Initialize
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
     setupEventHandlers();
-    loadData();
+    await loadData();
+    await router();
   });
+
+  // Handle hash changes
+  window.addEventListener('hashchange', router);
 
 })();

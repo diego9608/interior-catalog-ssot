@@ -1,5 +1,6 @@
 // Service Worker for offline functionality
 const CACHE_NAME = 'ssot-field-v1';
+const API_CACHE = 'ssot-api-v1';
 const urlsToCache = [
   '/app/',
   '/app/index.html',
@@ -22,10 +23,48 @@ self.addEventListener('install', event => {
   );
 });
 
-// Fetch event - cache-first strategy
+// Fetch event - cache strategies
 self.addEventListener('fetch', event => {
+  const { request } = event;
+  const url = new URL(request.url);
+  
+  // Special handling for /api/ops/* endpoints
+  if (url.pathname.startsWith('/api/ops/')) {
+    event.respondWith(
+      (async () => {
+        try {
+          // Try network first for ops API
+          const networkResponse = await fetch(request);
+          if (networkResponse.ok) {
+            // Cache the response
+            const cache = await caches.open(API_CACHE);
+            cache.put(request, networkResponse.clone());
+            return networkResponse;
+          }
+        } catch (error) {
+          // Network failed, try cache
+          console.log('Network failed for ops API, trying cache');
+        }
+        
+        // Fallback to cache
+        const cachedResponse = await caches.match(request);
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        
+        // Return empty JSON as last resort
+        return new Response(
+          JSON.stringify([]),
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+      })()
+    );
+    return;
+  }
+  
+  // Default cache-first strategy for other resources
   event.respondWith(
-    caches.match(event.request)
+    caches.match(request)
       .then(response => {
         // Cache hit - return response
         if (response) {
@@ -33,7 +72,7 @@ self.addEventListener('fetch', event => {
         }
 
         // Clone the request
-        const fetchRequest = event.request.clone();
+        const fetchRequest = request.clone();
 
         return fetch(fetchRequest).then(response => {
           // Check if valid response
@@ -45,14 +84,14 @@ self.addEventListener('fetch', event => {
           const responseToCache = response.clone();
 
           caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
+            cache.put(request, responseToCache);
           });
 
           return response;
         }).catch(() => {
           // Offline fallback
           console.log('Offline - returning cached version if available');
-          return caches.match(event.request);
+          return caches.match(request);
         });
       })
   );
@@ -60,7 +99,7 @@ self.addEventListener('fetch', event => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
+  const cacheWhitelist = [CACHE_NAME, API_CACHE];
 
   event.waitUntil(
     caches.keys().then(cacheNames => {

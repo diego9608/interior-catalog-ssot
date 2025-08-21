@@ -1,6 +1,8 @@
 (async function(){
-  const fmt = (n,cur='MXN') => (typeof n==='number' ? n.toLocaleString('es-MX',{style:'currency',currency:cur,maximumFractionDigits:2}) : '—');
-  const pct = (p) => (typeof p==='number' ? `${(p*100).toFixed(1)}%` : '—');
+  const fmt = {
+    mxn: n => typeof n === 'number' ? new Intl.NumberFormat('es-MX', {style:'currency', currency:'MXN', maximumFractionDigits:2}).format(n) : '—',
+    pct: p => typeof p === 'number' ? `${(p*100).toFixed(1)}%` : '—'
+  };
 
   // Cargar endpoints (robusto ante distintos formatos)
   const safeFetch = async (url, fallback) => {
@@ -23,9 +25,9 @@
 
   // --- KPI Cards ---
   const cards = [
-    {t:'Costo P50', v: fmt(first?.cost_p50)},
-    {t:'Costo P80', v: fmt(first?.cost_p80)},
-    {t:'Merma real', v: pct(first?.waste_pct)},
+    {t:'Costo P50', v: fmt.mxn(first?.cost_p50)},
+    {t:'Costo P80', v: fmt.mxn(first?.cost_p80)},
+    {t:'Merma real', v: fmt.pct(first?.waste_pct)},
     {t:'QC Gate', v: first?.qc_overall_pass === true ? 'PASS' : (first?.qc_overall_pass === false ? 'FAIL' : '—')}
   ];
   document.getElementById('kpiCards').innerHTML = cards.map(c =>
@@ -40,13 +42,13 @@
     const ids = projects.length ? projects : ops.map(o=>o.projectId);
     tbody.innerHTML = ids.map(id => {
       const o = byId[id] || {};
-      const qc = o.qc_overall_pass === true ? `<span class="ok">PASS</span>` :
+      const qc = o.qc_overall_pass === true ? `<span class="pass">PASS</span>` :
                  o.qc_overall_pass === false ? `<span class="fail">FAIL</span>` : '—';
       return `<tr>
         <td>${id}</td>
-        <td>${fmt(o.cost_p50)}</td>
-        <td>${fmt(o.cost_p80)}</td>
-        <td>${pct(o.waste_pct)}</td>
+        <td>${fmt.mxn(o.cost_p50)}</td>
+        <td>${fmt.mxn(o.cost_p80)}</td>
+        <td>${fmt.pct(o.waste_pct)}</td>
         <td>${qc}</td>
       </tr>`;
     }).join('');

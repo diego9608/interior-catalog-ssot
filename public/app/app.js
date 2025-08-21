@@ -5,7 +5,8 @@ const app = {
   checklists: null,
   formData: {},
   evidence: {},
-  signature: null
+  signature: null,
+  installPrompt: null
 };
 
 // Router
@@ -530,19 +531,22 @@ window.exportJSON = function() {
     data.signature_png = app.signature;
   }
   
-  // Create download
+  // Create download with standardized naming
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '').replace('T', '-').slice(0, -1);
+  const filename = `${app.currentProject}-${app.currentPhase}-qc-${timestamp}.json`;
+  
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `${app.currentPhase}.json`;
+  a.download = filename;
   a.click();
   URL.revokeObjectURL(url);
   
   const answerCount = Object.keys(data.answers).length;
   const evidenceCount = Object.keys(app.evidence).reduce((sum, key) => sum + app.evidence[key].length, 0);
-  console.log(`📤 QC export: saved ${app.currentPhase}.json (answers: ${answerCount}, evidence imgs: ${evidenceCount})`);
-  showSnackbar(`Exportado: ${app.currentPhase}.json`);
+  console.log(`📤 QC export: saved ${filename} (answers: ${answerCount}, evidence imgs: ${evidenceCount})`);
+  showSnackbar(`Exportado: ${filename}`);
 };
 
 // Import JSON
@@ -559,6 +563,34 @@ function showSnackbar(message) {
     snackbar.className = '';
   }, 3000);
 }
+
+// PWA Install prompt
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  app.installPrompt = e;
+  // Show install button if needed
+  const installBtn = document.getElementById('install-btn');
+  if (installBtn) {
+    installBtn.classList.remove('hidden');
+  }
+});
+
+window.installPWA = async function() {
+  if (!app.installPrompt) return;
+  
+  app.installPrompt.prompt();
+  const { outcome } = await app.installPrompt.userChoice;
+  
+  if (outcome === 'accepted') {
+    showSnackbar('App instalada exitosamente');
+  }
+  
+  app.installPrompt = null;
+  const installBtn = document.getElementById('install-btn');
+  if (installBtn) {
+    installBtn.classList.add('hidden');
+  }
+};
 
 // Initialize app
 window.addEventListener('hashchange', router);
