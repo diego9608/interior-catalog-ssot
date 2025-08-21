@@ -12,9 +12,13 @@
 </head>
 <body>
   <header>
-    <h1>SSOT • Field App</h1>
+    <h1 data-i18n="app.title">SSOT • Field App</h1>
     <div id="status-bar"></div>
-    <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
+    <select id="langSelector" aria-label="Language">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+    <button id="themeToggle" data-i18n-aria="app.changeTheme" aria-label="Cambiar tema">🌙</button>
   </header>
   <main id="app"></main>
   <footer>
@@ -22,6 +26,7 @@
   </footer>
   <div id="snackbar"></div>
   <script src="/app/sw-register.js" defer></script>
+  <script src="/shared/i18n.js" defer></script>
   <script src="/shared/theme.js" defer></script>
   <script src="/app/app.js" type="module"></script>
 </body>

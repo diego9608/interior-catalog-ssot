@@ -14,8 +14,12 @@
     "qc:verify": "node scripts/qc-verify.js",
     "app:prepare": "node scripts/app-prepare.js",
     "ops:prepare": "node scripts/ops-prepare.js",
-    "build": "npm run calc:costs && npm run optimize:cuts && npm run bom:labels && npm run app:prepare && npm run ops:prepare",
-    "test": "npm run validate:all"
+    "critical:inline": "node scripts/inline-critical.js",
+    "qa": "node scripts/qa-test.js",
+    "build": "npm run calc:costs && npm run optimize:cuts && npm run bom:labels && npm run app:prepare && npm run ops:prepare && npm run critical:inline",
+    "test": "npm run validate:all",
+    "prebuild": "npm run validate:all",
+    "postbuild": "npm run qa"
   },
   "keywords": [
     "interior-design",

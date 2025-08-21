@@ -5,23 +5,28 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>SSOT • Operaciones</title>
   <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <style>/* CRITICAL CSS START */*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);font-size:14px;line-height:1.5;color:var(--text,#111);background:var(--bg,#f6f7f9);min-height:100vh;display:flex;flex-direction:column}:root{--bg:#f6f7f9;--surface:#fff;--text:#111;--text-secondary:#6b7280;--border:#e5e7eb;--brand:#111;--accent:#0f766e;--danger:#b91c1c;--success:#28a745;}@media(prefers-color-scheme:dark){:root{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}}.dark{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}header{background:var(--brand);color:#fff;padding:1rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,0.1)}header h1{font-size:1.25rem;font-weight:600;margin-bottom:1rem}.controls{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center}.filter-btn{padding:0.5rem 1rem;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:0.875rem}.filter-btn.active{background:#fff;color:var(--brand);border-color:#fff}.btn-export{background:var(--success);color:#fff;border-color:var(--success)}main{flex:1;padding:1rem;max-width:1400px;margin:0 auto;width:100%}.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;box-shadow:0 1px 3px rgba(0,0,0,0.05)}.kpi-label{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;font-weight:600;margin-bottom:0.25rem}.kpi-value{font-size:1.5rem;font-weight:700;color:var(--text)}.kpi-value.ok{color:var(--success)}.kpi-value.blocked{color:var(--danger)}#projects-section h2{font-size:1.25rem;margin-bottom:1rem}.table-wrapper{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px}#langSelector{padding:0.5rem;background:#fff;color:var(--brand);border:1px solid var(--border);border-radius:4px;font-size:0.875rem}@media(min-width:768px){header h1{font-size:1.5rem}.kpi-grid{grid-template-columns:repeat(4,1fr)}}/* CRITICAL CSS END */</style>
   <link rel="stylesheet" href="/shared/tokens.css">
   <link rel="stylesheet" href="/ops/styles.css">
 </head>
 <body>
   <header>
-    <h1>SSOT • Operaciones</h1>
+    <h1 data-i18n="ops.title">SSOT • Operaciones</h1>
     <div class="controls">
       <select id="project-filter">
-        <option value="all">Todos los proyectos</option>
+        <option value="all" data-i18n="ops.allProjects">Todos los proyectos</option>
       </select>
       <div class="status-filter">
-        <button class="filter-btn active" data-status="all">Todos</button>
+        <button class="filter-btn active" data-status="all" data-i18n="ops.all">Todos</button>
         <button class="filter-btn" data-status="ok">PASS</button>
         <button class="filter-btn" data-status="blocked">FAIL</button>
       </div>
-      <button id="export-csv" class="btn btn-export">📥 Export CSV</button>
-      <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
+      <button id="export-csv" class="btn btn-export" data-i18n="ops.exportCSV">📥 Export CSV</button>
+      <select id="langSelector" aria-label="Language">
+        <option value="es">ES</option>
+        <option value="en">EN</option>
+      </select>
+      <button id="themeToggle" data-i18n-aria="ops.changeTheme" aria-label="Cambiar tema">🌙</button>
     </div>
   </header>
   
@@ -29,19 +34,19 @@
     <!-- KPI Cards -->
     <section id="kpi-cards" class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-label">Costo P50</div>
+        <div class="kpi-label" data-i18n="ops.costP50">Costo P50</div>
         <div class="kpi-value" id="kpi-cost-p50">—</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Costo P80</div>
+        <div class="kpi-label" data-i18n="ops.costP80">Costo P80</div>
         <div class="kpi-value" id="kpi-cost-p80">—</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Plazo P50</div>
+        <div class="kpi-label" data-i18n="ops.timelineP50">Plazo P50</div>
         <div class="kpi-value" id="kpi-timeline-p50">—</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Merma Real</div>
+        <div class="kpi-label" data-i18n="ops.realWaste">Merma Real</div>
         <div class="kpi-value" id="kpi-waste">—</div>
       </div>
       <div class="kpi-card">
@@ -49,36 +54,36 @@
         <div class="kpi-value" id="kpi-sheets">—</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">QC Gate</div>
+        <div class="kpi-label" data-i18n="ops.qcGate">QC Gate</div>
         <div class="kpi-value" id="kpi-qc">—</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Piezas BOM</div>
+        <div class="kpi-label" data-i18n="ops.bomPieces">Piezas BOM</div>
         <div class="kpi-value" id="kpi-pieces">—</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Proyectos</div>
+        <div class="kpi-label" data-i18n="ops.projects">Proyectos</div>
         <div class="kpi-value" id="kpi-projects">—</div>
       </div>
     </section>
     
     <!-- Projects Table -->
     <section id="projects-section">
-      <h2>Proyectos</h2>
+      <h2 data-i18n="ops.projects">Proyectos</h2>
       <div class="table-wrapper">
         <table id="projects-table">
           <thead>
             <tr>
               <th data-sort="projectId">ID</th>
-              <th data-sort="cliente">Cliente</th>
-              <th data-sort="cost_p50">Costo P50</th>
-              <th data-sort="cost_p80">Costo P80</th>
-              <th data-sort="timeline_days_p50">Plazo</th>
-              <th data-sort="waste_pct">Merma</th>
+              <th data-sort="cliente" data-i18n="ops.client">Cliente</th>
+              <th data-sort="cost_p50" data-i18n="ops.costP50">Costo P50</th>
+              <th data-sort="cost_p80" data-i18n="ops.costP80">Costo P80</th>
+              <th data-sort="timeline_days_p50" data-i18n="ops.timeline">Plazo</th>
+              <th data-sort="waste_pct" data-i18n="ops.waste">Merma</th>
               <th data-sort="sheets_used">Sheets</th>
               <th data-sort="qc_overall_pass">QC</th>
-              <th data-sort="pieces_count">Piezas</th>
-              <th data-sort="generated_at">Actualizado</th>
+              <th data-sort="pieces_count" data-i18n="ops.pieces">Piezas</th>
+              <th data-sort="generated_at" data-i18n="ops.updated">Actualizado</th>
             </tr>
           </thead>
           <tbody id="projects-tbody">
@@ -90,12 +95,12 @@
     
     <!-- Project Detail -->
     <section id="project-detail" class="hidden">
-      <h2 id="detail-title">Detalle del Proyecto</h2>
+      <h2 id="detail-title" data-i18n="ops.projectDetail">Detalle del Proyecto</h2>
       
       <div class="detail-grid">
         <!-- QC Phases -->
         <div class="detail-card">
-          <h3>QC Fases</h3>
+          <h3 data-i18n="ops.qcPhases">QC Fases</h3>
           <div id="qc-phases">
             <!-- Populated by JS -->
           </div>
@@ -103,7 +108,7 @@
         
         <!-- Panels Info -->
         <div class="detail-card">
-          <h3>Paneles</h3>
+          <h3 data-i18n="ops.panels">Paneles</h3>
           <div id="panels-info">
             <!-- Populated by JS -->
           </div>
@@ -111,7 +116,7 @@
         
         <!-- Hardware -->
         <div class="detail-card">
-          <h3>Herrajes</h3>
+          <h3 data-i18n="ops.hardware">Herrajes</h3>
           <div id="hardware-info">
             <!-- Populated by JS -->
           </div>
@@ -119,7 +124,7 @@
         
         <!-- Trends -->
         <div class="detail-card">
-          <h3>Tendencias</h3>
+          <h3 data-i18n="ops.trends">Tendencias</h3>
           <div class="trend-item">
             <label>Costo P50</label>
             <div id="trend-cost" class="sparkline"></div>
@@ -131,7 +136,7 @@
         </div>
       </div>
       
-      <button class="btn btn-back" onclick="showProjectsList()">← Volver a lista</button>
+      <button class="btn btn-back" onclick="showProjectsList()" data-i18n="ops.backToList">← Volver a lista</button>
     </section>
   </main>
   
@@ -140,6 +145,7 @@
   </footer>
   
   <script src="/ops/sw-register.js" defer></script>
+  <script src="/shared/i18n.js" defer></script>
   <script src="/shared/theme.js" defer></script>
   <script src="/ops/ops.js" defer></script>
 </body>
