@@ -1,0 +1,9 @@
+{
+  "saw_kerf_mm": 3,
+  "min_offcut_mm": [80, 80],
+  "default_sheet_mm": [1220, 2440],
+  "materials": {
+    "mat.melamina.mdf18_mr": { "rotate": true,  "grain": "none" },
+    "mat.madera.chapada_roble": { "rotate": false, "grain": "long_edge" }
+  }
+}

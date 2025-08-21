@@ -8,7 +8,8 @@
     "validate:rules": "node scripts/verify-rules.js",
     "validate:all": "npm run validate:data && npm run validate:rules",
     "calc:costs": "node scripts/calc-costs.js",
-    "build": "npm run calc:costs",
+    "optimize:cuts": "node scripts/optimize-cuts.js",
+    "build": "npm run calc:costs && npm run optimize:cuts",
     "test": "npm run validate:all"
   },
   "keywords": [

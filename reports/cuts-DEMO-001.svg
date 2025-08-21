@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1564" height="1016" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .sheet { fill: #f0f0f0; stroke: #333; stroke-width: 2; }
+    .piece { fill: #a0c4ff; stroke: #004494; stroke-width: 1; }
+    .offcut { fill: #ffcccc; stroke: #cc0000; stroke-width: 1; stroke-dasharray: 5,5; }
+    .label { font-family: Arial, sans-serif; font-size: 10px; fill: #333; }
+    .title { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #333; }
+  </style>
+  <text x="782" y="15" class="title" text-anchor="middle">Cut Layout - DEMO-001 - mat.melamina.mdf18_mr</text>
+  <rect x="20" y="20" width="488" height="976" class="sheet"/>
+  <rect x="20" y="20" width="224" height="288" class="piece"/>
+  <text x="132" y="164" class="label" text-anchor="middle" dominant-baseline="middle">SD-001</text>
+  <rect x="245.20000000000002" y="20" width="224" height="288" class="piece"/>
+  <text x="357.20000000000005" y="164" class="label" text-anchor="middle" dominant-baseline="middle">SD-001</text>
+  <rect x="20" y="309.2" width="224" height="288" class="piece"/>
+  <text x="132" y="453.2" class="label" text-anchor="middle" dominant-baseline="middle">SD-001</text>
+  <rect x="245.20000000000002" y="309.2" width="224" height="288" class="piece"/>
+  <text x="357.20000000000005" y="453.2" class="label" text-anchor="middle" dominant-baseline="middle">SD-001</text>
+  <rect x="20" y="598.4" width="120" height="280" class="piece"/>
+  <text x="80" y="738.4" class="label" text-anchor="middle" dominant-baseline="middle">DR-001</text>
+  <rect x="141.2" y="598.4" width="120" height="280" class="piece"/>
+  <text x="201.2" y="738.4" class="label" text-anchor="middle" dominant-baseline="middle">DR-001</text>
+  <rect x="262.4" y="598.4" width="120" height="280" class="piece"/>
+  <text x="322.4" y="738.4" class="label" text-anchor="middle" dominant-baseline="middle">DR-001</text>
+  <rect x="383.6" y="598.4" width="120" height="280" class="piece"/>
+  <text x="443.6" y="738.4" class="label" text-anchor="middle" dominant-baseline="middle">DR-001</text>
+  <rect x="20" y="879.6" width="240" height="72" class="piece"/>
+  <text x="140" y="915.6" class="label" text-anchor="middle" dominant-baseline="middle">DF-001</text>
+  <rect x="261.20000000000005" y="879.6" width="240" height="72" class="piece"/>
+  <text x="381.20000000000005" y="915.6" class="label" text-anchor="middle" dominant-baseline="middle">DF-001</text>
+  <rect x="20" y="952.8000000000001" width="224" height="40" class="piece"/>
+  <text x="132" y="972.8000000000001" class="label" text-anchor="middle" dominant-baseline="middle">RL-001</text>
+  <rect x="245.20000000000002" y="952.8000000000001" width="224" height="40" class="piece"/>
+  <text x="357.20000000000005" y="972.8000000000001" class="label" text-anchor="middle" dominant-baseline="middle">RL-001</text>
+  <text x="264" y="1011" class="label" text-anchor="middle">Sheet 1</text>
+  <rect x="538" y="20" width="488" height="976" class="sheet"/>
+  <rect x="538" y="20" width="120" height="280" class="piece"/>
+  <text x="598" y="160" class="label" text-anchor="middle" dominant-baseline="middle">DR-001</text>
+  <rect x="659.2" y="20" width="120" height="280" class="piece"/>
+  <text x="719.2" y="160" class="label" text-anchor="middle" dominant-baseline="middle">DR-001</text>
+  <rect x="780.4" y="20" width="120" height="280" class="piece"/>
+  <text x="840.4" y="160" class="label" text-anchor="middle" dominant-baseline="middle">DR-001</text>
+  <rect x="901.6" y="20" width="120" height="280" class="piece"/>
+  <text x="961.6" y="160" class="label" text-anchor="middle" dominant-baseline="middle">DR-001</text>
+  <rect x="538" y="301.2" width="280" height="120" class="piece"/>
+  <text x="678" y="361.2" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="538" y="422.40000000000003" width="280" height="120" class="piece"/>
+  <text x="678" y="482.40000000000003" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="538" y="543.6" width="280" height="120" class="piece"/>
+  <text x="678" y="603.6" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="538" y="664.8000000000001" width="280" height="120" class="piece"/>
+  <text x="678" y="724.8000000000001" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="538" y="786" width="280" height="120" class="piece"/>
+  <text x="678" y="846" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="538" y="907.2" width="240" height="72" class="piece"/>
+  <text x="658" y="943.2" class="label" text-anchor="middle" dominant-baseline="middle">DF-001</text>
+  <rect x="779.2" y="907.2" width="240" height="72" class="piece"/>
+  <text x="899.2" y="943.2" class="label" text-anchor="middle" dominant-baseline="middle">DF-001</text>
+  <text x="782" y="1011" class="label" text-anchor="middle">Sheet 2</text>
+  <rect x="1056" y="20" width="488" height="976" class="sheet"/>
+  <rect x="1056" y="20" width="280" height="120" class="piece"/>
+  <text x="1196" y="80" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="1056" y="141.2" width="280" height="120" class="piece"/>
+  <text x="1196" y="201.2" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="1056" y="262.4" width="280" height="120" class="piece"/>
+  <text x="1196" y="322.4" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="1056" y="383.6" width="280" height="120" class="piece"/>
+  <text x="1196" y="443.6" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="1056" y="504.8" width="280" height="120" class="piece"/>
+  <text x="1196" y="564.8" class="label" text-anchor="middle" dominant-baseline="middle">SH-001</text>
+  <rect x="1056" y="626" width="240" height="72" class="piece"/>
+  <text x="1176" y="662" class="label" text-anchor="middle" dominant-baseline="middle">DF-001</text>
+  <rect x="1297.2" y="626" width="240" height="72" class="piece"/>
+  <text x="1417.2" y="662" class="label" text-anchor="middle" dominant-baseline="middle">DF-001</text>
+  <rect x="1056" y="699.2" width="224" height="40" class="piece"/>
+  <text x="1168" y="719.2" class="label" text-anchor="middle" dominant-baseline="middle">RL-001</text>
+  <rect x="1281.2" y="699.2" width="224" height="40" class="piece"/>
+  <text x="1393.2" y="719.2" class="label" text-anchor="middle" dominant-baseline="middle">RL-001</text>
+  <rect x="1056" y="740.4000000000001" width="481.20000000000005" height="255.60000000000002" class="offcut"/>
+  <text x="1300" y="1011" class="label" text-anchor="middle">Sheet 3</text>
+</svg>

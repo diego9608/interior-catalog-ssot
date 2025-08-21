@@ -1,0 +1,6 @@
+piece_id,material_id,w_mm,h_mm,qty,rotate,banding,notes
+DF-001,mat.melamina.mdf18_mr,600,180,6,true,F,B,Drawer fronts
+DR-001,mat.melamina.mdf18_mr,300,700,8,true,L,R,Doors
+SH-001,mat.melamina.mdf18_mr,700,300,10,true,F,B,Shelves
+SD-001,mat.melamina.mdf18_mr,560,720,4,true,-,Base sides
+RL-001,mat.melamina.mdf18_mr,560,100,4,true,-,Back rails
