@@ -1,7 +1,8 @@
 // Service Worker for /ops - handles offline and API caching
-const OPS_CACHE = 'ops-static-v5';
+const OPS_CACHE = 'ops-static-v6';
 const OPS_API_CACHE = 'ops-api-v3';
 const OPS_HISTORY_CACHE = 'ops-history-v1';
+const OPS_WAREHOUSE_CACHE = 'ops-warehouse-v1';
 
 const STATIC_ASSETS = [
   '/ops/',
@@ -9,6 +10,8 @@ const STATIC_ASSETS = [
   '/ops/styles.css',
   '/ops/ops.js',
   '/ops/ops-trends.js',
+  '/ops/warehouse.js',
+  '/ops/warehouse-labels.js',
   '/shared/tokens.css',
   '/shared/theme.js',
   '/shared/i18n.js',
@@ -33,7 +36,7 @@ self.addEventListener('activate', event => {
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          if (![OPS_CACHE, OPS_API_CACHE, OPS_HISTORY_CACHE].includes(cacheName)) {
+          if (![OPS_CACHE, OPS_API_CACHE, OPS_HISTORY_CACHE, OPS_WAREHOUSE_CACHE].includes(cacheName)) {
             console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
@@ -48,6 +51,53 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
+  
+  // Warehouse endpoints - stale-while-revalidate
+  if (url.pathname.startsWith('/api/warehouse/')) {
+    event.respondWith(
+      (async () => {
+        const cache = await caches.open(OPS_WAREHOUSE_CACHE);
+        const cachedResponse = await cache.match(request);
+        
+        // Return cached immediately if available
+        if (cachedResponse) {
+          // But also fetch fresh in background
+          fetch(request).then(networkResponse => {
+            if (networkResponse.ok) {
+              cache.put(request, networkResponse.clone());
+            }
+          }).catch(() => {});
+          
+          return cachedResponse;
+        }
+        
+        // No cache, fetch and cache
+        try {
+          const networkResponse = await fetch(request);
+          if (networkResponse.ok) {
+            cache.put(request, networkResponse.clone());
+          }
+          return networkResponse;
+        } catch (error) {
+          // Return empty data as fallback
+          const filename = url.pathname.split('/').pop();
+          let fallbackData = '[]';
+          if (filename === 'stats.json') {
+            fallbackData = JSON.stringify({
+              as_of: new Date().toISOString(),
+              counts: { available: 0, reserved: 0, consumed: 0, scrap: 0 },
+              area_m2: { available: 0, reserved: 0, consumed_ytd: 0 }
+            });
+          }
+          return new Response(
+            fallbackData,
+            { headers: { 'Content-Type': 'application/json' } }
+          );
+        }
+      })()
+    );
+    return;
+  }
   
   // History endpoints - stale-while-revalidate
   if (url.pathname === '/api/ops/history.json' || url.pathname.includes('/api/ops/snapshots/')) {

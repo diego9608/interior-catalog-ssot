@@ -592,6 +592,133 @@ window.installPWA = async function() {
   }
 };
 
+// Warehouse scan functionality
+window.scanOffcut = async function() {
+  // Check for BarcodeDetector API
+  if ('BarcodeDetector' in window) {
+    try {
+      // Request camera permission
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { facingMode: 'environment' } 
+      });
+      
+      // Create video element
+      const video = document.createElement('video');
+      video.srcObject = stream;
+      video.play();
+      
+      // Create barcode detector
+      const barcodeDetector = new BarcodeDetector({
+        formats: ['qr_code', 'code_128', 'code_39']
+      });
+      
+      // Scan for barcode
+      const detectBarcode = async () => {
+        try {
+          const barcodes = await barcodeDetector.detect(video);
+          if (barcodes.length > 0) {
+            const code = barcodes[0].rawValue;
+            
+            // Stop camera
+            stream.getTracks().forEach(track => track.stop());
+            
+            // Process scan
+            processScan(code);
+          } else {
+            // Keep scanning
+            requestAnimationFrame(detectBarcode);
+          }
+        } catch (err) {
+          console.error('Barcode detection error:', err);
+        }
+      };
+      
+      detectBarcode();
+      
+    } catch (err) {
+      console.error('Camera access error:', err);
+      // Fallback to manual input
+      showManualInput();
+    }
+  } else {
+    // BarcodeDetector not available, use manual input
+    showManualInput();
+  }
+};
+
+function showManualInput() {
+  const code = prompt('Ingrese el código del remanente (ej: OC-20250821-0001):');
+  if (code) {
+    processScan(code);
+  }
+}
+
+function processScan(code) {
+  // Parse code (format: O:<offcut_id> or just offcut_id)
+  const offcutId = code.startsWith('O:') ? code.slice(2) : code;
+  
+  // Create transaction
+  const tx = {
+    id: `TX-APP-${Date.now()}`,
+    ts: new Date().toISOString(),
+    type: 'SCAN',
+    offcut_id: offcutId,
+    project_id: app.currentProject || null,
+    payload: {
+      location: 'field',
+      scanner: 'app'
+    },
+    user: app.formData.responsable || 'field',
+    note: 'Scanned via Field App'
+  };
+  
+  // Add to local buffer
+  let buffer = JSON.parse(localStorage.getItem('wh.tx.buffer') || '[]');
+  buffer.push(tx);
+  localStorage.setItem('wh.tx.buffer', JSON.stringify(buffer));
+  
+  // Show result
+  showSnackbar(`Remanente ${offcutId} escaneado`);
+}
+
+// Add scan route handler
+const originalRouter = router;
+router = async function() {
+  if (location.hash === '#/scan-offcut') {
+    const content = `
+      <div class="scan-container">
+        <h2>Escanear Remanente</h2>
+        <button onclick="scanOffcut()" class="btn btn-primary">
+          📷 Escanear QR/Código
+        </button>
+        <div id="scan-result"></div>
+        <div class="scan-buffer">
+          <h3>Buffer Local</h3>
+          <div id="buffer-count">0 transacciones</div>
+          <button onclick="clearScanBuffer()" class="btn">Limpiar Buffer</button>
+        </div>
+      </div>
+    `;
+    
+    document.getElementById('content').innerHTML = content;
+    
+    // Update buffer count
+    const buffer = JSON.parse(localStorage.getItem('wh.tx.buffer') || '[]');
+    document.getElementById('buffer-count').textContent = `${buffer.length} transacciones`;
+  } else {
+    // Original router logic
+    await originalRouter();
+  }
+};
+
+window.clearScanBuffer = function() {
+  if (confirm('¿Limpiar el buffer de transacciones?')) {
+    localStorage.removeItem('wh.tx.buffer');
+    document.getElementById('buffer-count').textContent = '0 transacciones';
+    showSnackbar('Buffer limpiado');
+  }
+};
+
 // Initialize app
 window.addEventListener('hashchange', router);
 window.addEventListener('DOMContentLoaded', router);
