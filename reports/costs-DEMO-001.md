@@ -7,17 +7,17 @@
 
 | Concepto | Monto (MXN) |
 |----------|----------|
-| Materiales | 16,343.06 |
-| Costo Directo | 20,149.68 |
-| **P50** | **25,187.09** |
-| **P80** | **26,950.19** |
+| Materiales | 16,386.11 |
+| Costo Directo | 20,194.02 |
+| **P50** | **25,242.52** |
+| **P80** | **27,009.50** |
 
 ## Desglose de Materiales
 
 | Concepto | Área/Cantidad | Precio Unit. | Merma | Costo |
 |----------|---------------|--------------|-------|-------|
 | Encimera | 2.6 m² | 3,800.00 | 12% | 11,065.60 |
-| Paneles* | - | - | 30% | 2,457.46 (Δ+535.54) |
+| Paneles* | - | - | 30% | 2,500.51 (Δ+578.59) |
 | Guías | 6 u | 230.00 | - | 1,380.00 |
 | Bisagras | 16 u | 90.00 | - | 1,440.00 |
 
@@ -49,6 +49,6 @@
 |----------|-------|
 | mat.melamina.mdf18_mr - Hojas usadas | 3 |
 | mat.melamina.mdf18_mr - Merma real | 29.8% |
-| **Delta vs heurístico** | **+535.54 MXN** |
-| **Ahorro vs baseline** | **241.22 MXN** |
+| **Delta vs heurístico** | **+578.59 MXN** |
+| **Ahorro vs baseline** | **198.17 MXN** |
 

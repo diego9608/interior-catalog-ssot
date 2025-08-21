@@ -1,0 +1,527 @@
+{
+  "projectId": "DEMO-001",
+  "generated_at": "2025-08-21T05:42:37.192Z",
+  "materials": {
+    "panels": {
+      "mat.melamina.mdf18_mr": {
+        "sheet_mm": [
+          1220,
+          2440
+        ],
+        "sheets_used": 3,
+        "sheet_area_m2": 2.9768,
+        "total_sheet_area_m2": 8.930399999999999,
+        "pieces_area_m2": 6.2648,
+        "waste_area_m2": 2.6656,
+        "waste_pct": 0.298
+      }
+    },
+    "countertops": {
+      "mat.cuarzo.calacatta": {
+        "area_m2": 2.6
+      }
+    }
+  },
+  "hardware": {
+    "hard.guia.total45kg": {
+      "count": 6
+    },
+    "hard.bisagra.110.slow": {
+      "count": 16,
+      "bisagras_por_puerta": 2
+    }
+  },
+  "adhesives": [
+    {
+      "id": "adh.pur.zona_humeda",
+      "estacion": "zona_humeda"
+    },
+    {
+      "id": "adh.eva.interior",
+      "estacion": "interior"
+    }
+  ],
+  "sheets": [
+    {
+      "material_id": "mat.melamina.mdf18_mr",
+      "sheet_index": 1,
+      "placements_count": 12
+    },
+    {
+      "material_id": "mat.melamina.mdf18_mr",
+      "sheet_index": 2,
+      "placements_count": 11
+    },
+    {
+      "material_id": "mat.melamina.mdf18_mr",
+      "sheet_index": 3,
+      "placements_count": 9
+    }
+  ],
+  "pieces": [
+    {
+      "piece_uid": "SD-001#01",
+      "piece_id": "SD-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 560,
+      "h_mm": 720,
+      "sheet_index": 1,
+      "x_mm": 0,
+      "y_mm": 0,
+      "rotated": false,
+      "banding": [],
+      "notes": "Base sides"
+    },
+    {
+      "piece_uid": "SD-001#02",
+      "piece_id": "SD-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 560,
+      "h_mm": 720,
+      "sheet_index": 1,
+      "x_mm": 563,
+      "y_mm": 0,
+      "rotated": false,
+      "banding": [],
+      "notes": "Base sides"
+    },
+    {
+      "piece_uid": "SD-001#03",
+      "piece_id": "SD-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 560,
+      "h_mm": 720,
+      "sheet_index": 1,
+      "x_mm": 0,
+      "y_mm": 723,
+      "rotated": false,
+      "banding": [],
+      "notes": "Base sides"
+    },
+    {
+      "piece_uid": "SD-001#04",
+      "piece_id": "SD-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 560,
+      "h_mm": 720,
+      "sheet_index": 1,
+      "x_mm": 563,
+      "y_mm": 723,
+      "rotated": false,
+      "banding": [],
+      "notes": "Base sides"
+    },
+    {
+      "piece_uid": "DR-001#01",
+      "piece_id": "DR-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 300,
+      "h_mm": 700,
+      "sheet_index": 1,
+      "x_mm": 0,
+      "y_mm": 1446,
+      "rotated": false,
+      "banding": [
+        "L"
+      ],
+      "notes": "R"
+    },
+    {
+      "piece_uid": "DR-001#02",
+      "piece_id": "DR-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 300,
+      "h_mm": 700,
+      "sheet_index": 1,
+      "x_mm": 303,
+      "y_mm": 1446,
+      "rotated": false,
+      "banding": [
+        "L"
+      ],
+      "notes": "R"
+    },
+    {
+      "piece_uid": "DR-001#03",
+      "piece_id": "DR-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 300,
+      "h_mm": 700,
+      "sheet_index": 1,
+      "x_mm": 606,
+      "y_mm": 1446,
+      "rotated": false,
+      "banding": [
+        "L"
+      ],
+      "notes": "R"
+    },
+    {
+      "piece_uid": "DR-001#04",
+      "piece_id": "DR-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 300,
+      "h_mm": 700,
+      "sheet_index": 1,
+      "x_mm": 909,
+      "y_mm": 1446,
+      "rotated": false,
+      "banding": [
+        "L"
+      ],
+      "notes": "R"
+    },
+    {
+      "piece_uid": "DF-001#01",
+      "piece_id": "DF-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 600,
+      "h_mm": 180,
+      "sheet_index": 1,
+      "x_mm": 0,
+      "y_mm": 2149,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "DF-001#02",
+      "piece_id": "DF-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 600,
+      "h_mm": 180,
+      "sheet_index": 1,
+      "x_mm": 603,
+      "y_mm": 2149,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "RL-001#01",
+      "piece_id": "RL-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 560,
+      "h_mm": 100,
+      "sheet_index": 1,
+      "x_mm": 0,
+      "y_mm": 2332,
+      "rotated": false,
+      "banding": [],
+      "notes": "Back rails"
+    },
+    {
+      "piece_uid": "RL-001#02",
+      "piece_id": "RL-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 560,
+      "h_mm": 100,
+      "sheet_index": 1,
+      "x_mm": 563,
+      "y_mm": 2332,
+      "rotated": false,
+      "banding": [],
+      "notes": "Back rails"
+    },
+    {
+      "piece_uid": "DR-001#05",
+      "piece_id": "DR-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 300,
+      "h_mm": 700,
+      "sheet_index": 2,
+      "x_mm": 0,
+      "y_mm": 0,
+      "rotated": false,
+      "banding": [
+        "L"
+      ],
+      "notes": "R"
+    },
+    {
+      "piece_uid": "DR-001#06",
+      "piece_id": "DR-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 300,
+      "h_mm": 700,
+      "sheet_index": 2,
+      "x_mm": 303,
+      "y_mm": 0,
+      "rotated": false,
+      "banding": [
+        "L"
+      ],
+      "notes": "R"
+    },
+    {
+      "piece_uid": "DR-001#07",
+      "piece_id": "DR-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 300,
+      "h_mm": 700,
+      "sheet_index": 2,
+      "x_mm": 606,
+      "y_mm": 0,
+      "rotated": false,
+      "banding": [
+        "L"
+      ],
+      "notes": "R"
+    },
+    {
+      "piece_uid": "DR-001#08",
+      "piece_id": "DR-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 300,
+      "h_mm": 700,
+      "sheet_index": 2,
+      "x_mm": 909,
+      "y_mm": 0,
+      "rotated": false,
+      "banding": [
+        "L"
+      ],
+      "notes": "R"
+    },
+    {
+      "piece_uid": "SH-001#01",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 2,
+      "x_mm": 0,
+      "y_mm": 703,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#02",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 2,
+      "x_mm": 0,
+      "y_mm": 1006,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#03",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 2,
+      "x_mm": 0,
+      "y_mm": 1309,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#04",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 2,
+      "x_mm": 0,
+      "y_mm": 1612,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#05",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 2,
+      "x_mm": 0,
+      "y_mm": 1915,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "DF-001#03",
+      "piece_id": "DF-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 600,
+      "h_mm": 180,
+      "sheet_index": 2,
+      "x_mm": 0,
+      "y_mm": 2218,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "DF-001#04",
+      "piece_id": "DF-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 600,
+      "h_mm": 180,
+      "sheet_index": 2,
+      "x_mm": 603,
+      "y_mm": 2218,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#06",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 3,
+      "x_mm": 0,
+      "y_mm": 0,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#07",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 3,
+      "x_mm": 0,
+      "y_mm": 303,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#08",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 3,
+      "x_mm": 0,
+      "y_mm": 606,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#09",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 3,
+      "x_mm": 0,
+      "y_mm": 909,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "SH-001#10",
+      "piece_id": "SH-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 700,
+      "h_mm": 300,
+      "sheet_index": 3,
+      "x_mm": 0,
+      "y_mm": 1212,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "DF-001#05",
+      "piece_id": "DF-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 600,
+      "h_mm": 180,
+      "sheet_index": 3,
+      "x_mm": 0,
+      "y_mm": 1515,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "DF-001#06",
+      "piece_id": "DF-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 600,
+      "h_mm": 180,
+      "sheet_index": 3,
+      "x_mm": 603,
+      "y_mm": 1515,
+      "rotated": false,
+      "banding": [
+        "F"
+      ],
+      "notes": "B"
+    },
+    {
+      "piece_uid": "RL-001#03",
+      "piece_id": "RL-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 560,
+      "h_mm": 100,
+      "sheet_index": 3,
+      "x_mm": 0,
+      "y_mm": 1698,
+      "rotated": false,
+      "banding": [],
+      "notes": "Back rails"
+    },
+    {
+      "piece_uid": "RL-001#04",
+      "piece_id": "RL-001",
+      "material_id": "mat.melamina.mdf18_mr",
+      "w_mm": 560,
+      "h_mm": 100,
+      "sheet_index": 3,
+      "x_mm": 563,
+      "y_mm": 1698,
+      "rotated": false,
+      "banding": [],
+      "notes": "Back rails"
+    }
+  ]
+}

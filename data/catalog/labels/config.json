@@ -1,0 +1,9 @@
+{
+  "label_size_mm": [100, 60],
+  "margin_mm": 5,
+  "qr_size_mm": 28,
+  "font_size_pt": 9,
+  "qr_payload": "json",
+  "base_url": "",
+  "include_banding_map": true
+}

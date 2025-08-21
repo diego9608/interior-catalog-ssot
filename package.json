@@ -9,7 +9,8 @@
     "validate:all": "npm run validate:data && npm run validate:rules",
     "calc:costs": "node scripts/calc-costs.js",
     "optimize:cuts": "node scripts/optimize-cuts.js",
-    "build": "npm run calc:costs && npm run optimize:cuts",
+    "bom:labels": "node scripts/generate-bom-and-labels.js",
+    "build": "npm run calc:costs && npm run optimize:cuts && npm run bom:labels",
     "test": "npm run validate:all"
   },
   "keywords": [
@@ -24,6 +25,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
+    "qrcode": "^1.5.4",
     "yaml": "^2.8.1"
   }
 }

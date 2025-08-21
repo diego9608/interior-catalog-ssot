@@ -40,15 +40,15 @@
             "pieces_area_m2": 6.26,
             "waste_pct_real": 0.3,
             "price_m2": 280,
-            "cost": 2457.46,
-            "salvage_credit_applied": true,
-            "salvage_credit": 43.05
+            "cost": 2500.51,
+            "salvage_credit_applied": false,
+            "salvage_credit": 0
           }
         },
-        "cost_total": 2457.46,
-        "delta_vs_heuristic": 535.54,
+        "cost_total": 2500.51,
+        "delta_vs_heuristic": 578.59,
         "naive_baseline_cost": 2698.68,
-        "optimization_savings_vs_naive": 241.22
+        "optimization_savings_vs_naive": 198.17
       }
     },
     "hardware": {
@@ -66,7 +66,7 @@
     },
     "consumibles": {
       "pct": 0.03,
-      "cost": 490.29
+      "cost": 491.58
     },
     "labor": {
       "install_hours": 6.48,
@@ -76,10 +76,10 @@
     }
   },
   "totals": {
-    "materials": 16343.06,
-    "direct": 20149.68,
-    "p50": 25187.09,
-    "p80": 26950.19
+    "materials": 16386.11,
+    "direct": 20194.02,
+    "p50": 25242.52,
+    "p80": 27009.5
   },
   "timeline_days": {
     "p50": 10.4,

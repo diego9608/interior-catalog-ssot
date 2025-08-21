@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100mm" height="60mm" viewBox="0 0 377.95 226.77" xmlns="http://www.w3.org/2000/svg">
+  <!-- Border -->
+  <rect x="1" y="1" width="375.95" height="224.77" fill="none" stroke="black" stroke-width="1"/>
+  
+  <!-- QR Code -->
+  <g transform="translate(253.22649999999996, 18.8975)">
+    <rect x="0" y="0" width="105.82600000000001" height="105.82600000000001" fill="white"/>
+    <path d="M0 0h37v37H0z" fill="black" transform="scale(0.41338281250000003)"/>
+  </g>
+  
+  <!-- Text content -->
+  <text x="18.8975" y="30.8975" font-family="Arial, sans-serif" font-size="9pt" fill="black">
+    <tspan x="18.8975" dy="0">Proyecto: DEMO-001</tspan>
+    <tspan x="18.8975" dy="14">Pieza: RL-001#03</tspan>
+    <tspan x="18.8975" dy="14">Material: mdf18_mr</tspan>
+    <tspan x="18.8975" dy="14">Dim: 560×100mm</tspan>
+    <tspan x="18.8975" dy="14">Hoja #3 @ 0,1698</tspan>
+    
+  </text>
+</svg>
