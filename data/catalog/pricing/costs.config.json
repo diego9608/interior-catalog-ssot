@@ -1,0 +1,6 @@
+{
+  "use_cut_merma_override": true,
+  "optimization_baseline_waste_pct": 0.35,
+  "apply_salvage_credit": false,
+  "salvage_credit_pct": 0.20
+}

@@ -26,10 +26,30 @@
       "cost": 11065.6
     },
     "paneles": {
-      "area_m2": 6.24,
-      "price_m2": 280,
-      "waste_pct": 0.1,
-      "cost": 1921.92
+      "heuristic": {
+        "area_m2": 6.24,
+        "waste_pct_pricing": 0.1,
+        "cost": 1921.92
+      },
+      "override_real": {
+        "enabled": true,
+        "materials": {
+          "mat.melamina.mdf18_mr": {
+            "sheet_area_m2": 2.98,
+            "sheets_used": 3,
+            "pieces_area_m2": 6.26,
+            "waste_pct_real": 0.3,
+            "price_m2": 280,
+            "cost": 2457.46,
+            "salvage_credit_applied": true,
+            "salvage_credit": 43.05
+          }
+        },
+        "cost_total": 2457.46,
+        "delta_vs_heuristic": 535.54,
+        "naive_baseline_cost": 2698.68,
+        "optimization_savings_vs_naive": 241.22
+      }
     },
     "hardware": {
       "guias": {
@@ -46,7 +66,7 @@
     },
     "consumibles": {
       "pct": 0.03,
-      "cost": 474.23
+      "cost": 490.29
     },
     "labor": {
       "install_hours": 6.48,
@@ -56,10 +76,10 @@
     }
   },
   "totals": {
-    "materials": 15807.52,
-    "direct": 19598.07,
-    "p50": 24497.58,
-    "p80": 26212.41
+    "materials": 16343.06,
+    "direct": 20149.68,
+    "p50": 25187.09,
+    "p80": 26950.19
   },
   "timeline_days": {
     "p50": 10.4,

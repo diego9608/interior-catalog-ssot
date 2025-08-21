@@ -23,7 +23,8 @@ function loadPricingCatalogs() {
     'paneles.tableros.json',
     'hardware.json',
     'labor.json',
-    'overheads.json'
+    'overheads.json',
+    'costs.config.json'
   ];
   
   for (const file of files) {
@@ -130,21 +131,119 @@ function calculateProjectCosts(projectDir, pricing, materials, vendors) {
     }
   }
   
-  // 2. Calculate paneles (panels)
+  // 2. Calculate paneles (panels) - heuristic first
+  let panel_cost_heuristic = 0;
+  let panel_area_heuristic = 0;
+  
   if (specs.frentes) {
     const panelPrice = pricing.paneles_tableros?.items?.[specs.frentes];
     const coeffs = pricing.paneles_tableros?.coefficients || {};
     
     if (panelPrice) {
-      const panel_area = (scope.lineales_base_ml || 0) * (coeffs.panel_area_m2_per_ml_base || 1.2) +
-                        (scope.lineales_altos_ml || 0) * (coeffs.panel_area_m2_per_ml_altos || 0.8);
+      panel_area_heuristic = (scope.lineales_base_ml || 0) * (coeffs.panel_area_m2_per_ml_base || 1.2) +
+                            (scope.lineales_altos_ml || 0) * (coeffs.panel_area_m2_per_ml_altos || 0.8);
       
-      breakdown.paneles.area_m2 = panel_area;
-      breakdown.paneles.price_m2 = panelPrice.price_m2;
-      breakdown.paneles.waste_pct = panelPrice.waste_factor_pct;
-      breakdown.paneles.cost = panelPrice.price_m2 * panel_area * (1 + panelPrice.waste_factor_pct);
+      panel_cost_heuristic = panelPrice.price_m2 * panel_area_heuristic * (1 + panelPrice.waste_factor_pct);
+      
+      // Initialize breakdown with heuristic values
+      breakdown.paneles = {
+        heuristic: {
+          area_m2: panel_area_heuristic,
+          waste_pct_pricing: panelPrice.waste_factor_pct,
+          cost: panel_cost_heuristic
+        },
+        override_real: {
+          enabled: false,
+          materials: {},
+          cost_total: 0,
+          delta_vs_heuristic: 0,
+          naive_baseline_cost: 0,
+          optimization_savings_vs_naive: 0
+        }
+      };
     } else {
       warnings.push(`E-COST-002 Price not found for ${specs.frentes} in paneles.tableros.json`);
+      breakdown.paneles = {
+        heuristic: { area_m2: 0, waste_pct_pricing: 0, cost: 0 },
+        override_real: {
+          enabled: false,
+          materials: {},
+          cost_total: 0,
+          delta_vs_heuristic: 0,
+          naive_baseline_cost: 0,
+          optimization_savings_vs_naive: 0
+        }
+      };
+    }
+  }
+  
+  // Check for cost override with cuts report
+  const costsConfig = pricing.costs_config || {};
+  const use_cut_merma_override = costsConfig.use_cut_merma_override || false;
+  const optimization_baseline_waste_pct = costsConfig.optimization_baseline_waste_pct || 0.35;
+  const apply_salvage_credit = costsConfig.apply_salvage_credit || false;
+  const salvage_credit_pct = costsConfig.salvage_credit_pct || 0.20;
+  
+  if (use_cut_merma_override) {
+    const cutsReportPath = path.join(__dirname, '..', 'reports', `cuts-${projectId}.json`);
+    
+    if (fs.existsSync(cutsReportPath)) {
+      const cutsReport = JSON.parse(fs.readFileSync(cutsReportPath, 'utf8'));
+      
+      if (cutsReport.material_sheets) {
+        breakdown.paneles.override_real.enabled = true;
+        let panel_cost_real_total = 0;
+        let naive_cost_total = 0;
+        
+        for (const [material, materialData] of Object.entries(cutsReport.material_sheets)) {
+          const materialPrice = pricing.paneles_tableros?.items?.[material];
+          
+          if (materialPrice) {
+            const sheet_area_m2 = materialData.sheet_area_m2;
+            const sheets_used = materialData.sheets_used;
+            const pieces_area_m2 = materialData.pieces_area_m2;
+            const waste_pct_real = materialData.waste_pct;
+            const price_m2 = materialPrice.price_m2;
+            
+            // Calculate real cost for this material
+            let material_cost = price_m2 * sheet_area_m2 * sheets_used;
+            
+            // Apply salvage credit if enabled
+            let salvage_credit = 0;
+            if (apply_salvage_credit && materialData.offcuts && Array.isArray(materialData.offcuts)) {
+              let offcuts_area_m2 = 0;
+              for (const offcut of materialData.offcuts) {
+                offcuts_area_m2 += (offcut.w * offcut.h) / 1e6;
+              }
+              salvage_credit = offcuts_area_m2 * price_m2 * salvage_credit_pct;
+              material_cost -= salvage_credit;
+            }
+            
+            // Calculate naive baseline cost
+            const naive_required_area = pieces_area_m2 / (1 - optimization_baseline_waste_pct);
+            const naive_cost = naive_required_area * price_m2;
+            
+            breakdown.paneles.override_real.materials[material] = {
+              sheet_area_m2,
+              sheets_used,
+              pieces_area_m2,
+              waste_pct_real,
+              price_m2,
+              cost: material_cost,
+              salvage_credit_applied: apply_salvage_credit,
+              salvage_credit
+            };
+            
+            panel_cost_real_total += material_cost;
+            naive_cost_total += naive_cost;
+          }
+        }
+        
+        breakdown.paneles.override_real.cost_total = panel_cost_real_total;
+        breakdown.paneles.override_real.delta_vs_heuristic = panel_cost_real_total - panel_cost_heuristic;
+        breakdown.paneles.override_real.naive_baseline_cost = naive_cost_total;
+        breakdown.paneles.override_real.optimization_savings_vs_naive = naive_cost_total - panel_cost_real_total;
+      }
     }
   }
   
@@ -185,7 +284,12 @@ function calculateProjectCosts(projectDir, pricing, materials, vendors) {
   
   // 4. Calculate consumibles
   const overheads = pricing.overheads || {};
-  const materials_subtotal = breakdown.encimera.cost + breakdown.paneles.cost + breakdown.hardware.total;
+  // Use real panel cost if override is enabled
+  const panel_cost_for_calc = breakdown.paneles.override_real.enabled ? 
+    breakdown.paneles.override_real.cost_total : 
+    (breakdown.paneles.heuristic ? breakdown.paneles.heuristic.cost : 0);
+  
+  const materials_subtotal = breakdown.encimera.cost + panel_cost_for_calc + breakdown.hardware.total;
   breakdown.consumibles.pct = overheads.consumibles_pct || 0.03;
   breakdown.consumibles.cost = materials_subtotal * breakdown.consumibles.pct;
   
@@ -203,25 +307,26 @@ function calculateProjectCosts(projectDir, pricing, materials, vendors) {
   breakdown.labor.install_hours = install_hours;
   const install_cost = install_hours * (laborRates.instalacion || 350);
   
-  // CNC hours
-  const cnc_hours = breakdown.paneles.area_m2 * (laborCoeffs.cnc_hours_per_m2_panel || 0.4);
+  // CNC hours - use heuristic area for labor calculation
+  const panel_area_for_labor = breakdown.paneles.heuristic ? breakdown.paneles.heuristic.area_m2 : 0;
+  const cnc_hours = panel_area_for_labor * (laborCoeffs.cnc_hours_per_m2_panel || 0.4);
   breakdown.labor.cnc_hours = cnc_hours;
   const cnc_cost = cnc_hours * (laborRates.cnc || 420);
   
-  // Finishing hours (depends on material)
+  // Finishing hours (depends on material) - use heuristic area for labor calculation
   let finishing_hours = 0;
   if (specs.frentes === 'mat.madera.chapada_roble') {
-    finishing_hours = breakdown.paneles.area_m2 * (laborCoeffs.finishing_hours_per_m2_panel_madera_chapada || 0.5);
+    finishing_hours = panel_area_for_labor * (laborCoeffs.finishing_hours_per_m2_panel_madera_chapada || 0.5);
   } else if (specs.frentes === 'mat.melamina.mdf18_mr') {
-    finishing_hours = breakdown.paneles.area_m2 * (laborCoeffs.finishing_hours_per_m2_panel_melamina || 0);
+    finishing_hours = panel_area_for_labor * (laborCoeffs.finishing_hours_per_m2_panel_melamina || 0);
   }
   breakdown.labor.finishing_hours = finishing_hours;
   const finishing_cost = finishing_hours * (laborRates.acabados || 380);
   
   breakdown.labor.cost = install_cost + cnc_cost + finishing_cost;
   
-  // 6. Calculate totals
-  const materials_total = breakdown.encimera.cost + breakdown.paneles.cost + breakdown.hardware.total;
+  // 6. Calculate totals - use real panel cost if override is enabled
+  const materials_total = breakdown.encimera.cost + panel_cost_for_calc + breakdown.hardware.total;
   const direct_total = materials_total + breakdown.consumibles.cost + breakdown.labor.cost;
   const p50 = direct_total * (1 + (overheads.overhead_pct || 0.10) + (overheads.profit_pct || 0.15));
   const p80 = p50 * (1 + (overheads.risk_p80_pct || 0.07));
@@ -290,8 +395,24 @@ function saveJsonReport(report) {
     fs.mkdirSync(reportsDir, { recursive: true });
   }
   
+  // Create clean report structure for JSON output
+  const jsonReport = JSON.parse(JSON.stringify(report));
+  
+  // Ensure all numeric values are properly rounded
+  const roundObject = (obj) => {
+    for (const key in obj) {
+      if (typeof obj[key] === 'number') {
+        obj[key] = parseFloat(obj[key].toFixed(2));
+      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        roundObject(obj[key]);
+      }
+    }
+  };
+  
+  roundObject(jsonReport);
+  
   const reportPath = path.join(reportsDir, `costs-${report.projectId}.json`);
-  fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+  fs.writeFileSync(reportPath, JSON.stringify(jsonReport, null, 2));
   
   console.log(`${colors.gray}JSON report saved: reports/costs-${report.projectId}.json${colors.reset}`);
 }
@@ -316,9 +437,36 @@ function saveMarkdownReport(report) {
   md += `| Concepto | Área/Cantidad | Precio Unit. | Merma | Costo |\n`;
   md += `|----------|---------------|--------------|-------|-------|\n`;
   md += `| Encimera | ${report.breakdown.encimera.area_m2} m² | ${formatNumber(report.breakdown.encimera.price_m2)} | ${(report.breakdown.encimera.waste_pct * 100).toFixed(0)}% | ${formatNumber(report.breakdown.encimera.cost)} |\n`;
-  md += `| Paneles | ${report.breakdown.paneles.area_m2} m² | ${formatNumber(report.breakdown.paneles.price_m2)} | ${(report.breakdown.paneles.waste_pct * 100).toFixed(0)}% | ${formatNumber(report.breakdown.paneles.cost)} |\n`;
+  
+  // Handle panels with override information
+  if (report.breakdown.paneles?.override_real?.enabled) {
+    const override = report.breakdown.paneles.override_real;
+    let panelCostDisplay = formatNumber(override.cost_total);
+    if (override.delta_vs_heuristic !== 0) {
+      const deltaSign = override.delta_vs_heuristic >= 0 ? '+' : '';
+      panelCostDisplay += ` (Δ${deltaSign}${formatNumber(override.delta_vs_heuristic)})`;
+    }
+    // Show real waste percentage from cuts
+    let wasteDisplay = '-';
+    if (override.materials) {
+      const firstMaterial = Object.values(override.materials)[0];
+      if (firstMaterial && firstMaterial.waste_pct_real !== undefined) {
+        wasteDisplay = `${(firstMaterial.waste_pct_real * 100).toFixed(0)}%`;
+      }
+    }
+    md += `| Paneles* | - | - | ${wasteDisplay} | ${panelCostDisplay} |\n`;
+  } else if (report.breakdown.paneles?.heuristic) {
+    const heuristic = report.breakdown.paneles.heuristic;
+    md += `| Paneles | ${heuristic.area_m2} m² | - | ${(heuristic.waste_pct_pricing * 100).toFixed(0)}% | ${formatNumber(heuristic.cost)} |\n`;
+  }
+  
   md += `| Guías | ${report.breakdown.hardware.guias.count} u | ${formatNumber(report.breakdown.hardware.guias.price)} | - | ${formatNumber(report.breakdown.hardware.guias.cost)} |\n`;
   md += `| Bisagras | ${report.breakdown.hardware.bisagras.count} u | ${formatNumber(report.breakdown.hardware.bisagras.price)} | - | ${formatNumber(report.breakdown.hardware.bisagras.cost)} |\n\n`;
+  
+  // Add panel override details if enabled
+  if (report.breakdown.paneles?.override_real?.enabled) {
+    md += `\n*_Paneles calculados con merma real del optimizador de corte_\n\n`;
+  }
   
   md += `## Mano de Obra\n\n`;
   md += `| Concepto | Horas | Costo |\n`;
@@ -336,6 +484,23 @@ function saveMarkdownReport(report) {
   md += `| Instalación | ${report.timeline_days.install.toFixed(2)} |\n`;
   md += `| **P50** | **${report.timeline_days.p50.toFixed(2)}** |\n`;
   md += `| **P80** | **${report.timeline_days.p80.toFixed(2)}** |\n\n`;
+  
+  // Add cost adjustment section if override is enabled
+  if (report.breakdown.paneles?.override_real?.enabled) {
+    const override = report.breakdown.paneles.override_real;
+    md += `## Ajuste por Merma Real\n\n`;
+    md += `| Concepto | Valor |\n`;
+    md += `|----------|-------|\n`;
+    
+    // Show details for each material
+    for (const [material, data] of Object.entries(override.materials)) {
+      md += `| ${material} - Hojas usadas | ${data.sheets_used} |\n`;
+      md += `| ${material} - Merma real | ${(data.waste_pct_real * 100).toFixed(1)}% |\n`;
+    }
+    
+    md += `| **Delta vs heurístico** | **${override.delta_vs_heuristic >= 0 ? '+' : ''}${formatNumber(override.delta_vs_heuristic)} ${report.currency}** |\n`;
+    md += `| **Ahorro vs baseline** | **${formatNumber(override.optimization_savings_vs_naive)} ${report.currency}** |\n\n`;
+  }
   
   if (report.warnings.length > 0) {
     md += `## Advertencias\n\n`;
@@ -381,6 +546,14 @@ function main() {
       console.log(`${colors.cyan}${colors.bold}Project: ${report.projectId}${colors.reset}`);
       console.log(`${colors.green}💰 P50: ${formatNumber(report.totals.p50)} ${report.currency} | P80: ${formatNumber(report.totals.p80)} ${report.currency}${colors.reset}`);
       console.log(`${colors.blue}🕒 Plazo P50: ${report.timeline_days.p50.toFixed(2)} días | P80: ${report.timeline_days.p80.toFixed(2)} días${colors.reset}`);
+      
+      // Show panel override status if enabled
+      if (report.breakdown.paneles?.override_real?.enabled) {
+        const delta = report.breakdown.paneles.override_real.delta_vs_heuristic;
+        const savings = report.breakdown.paneles.override_real.optimization_savings_vs_naive;
+        const deltaSign = delta >= 0 ? '+' : '';
+        console.log(`${colors.cyan}🔁 Panels override: ON | Δ ${deltaSign}${formatNumber(delta)} ${report.currency} | Savings vs naive: ${formatNumber(savings)} ${report.currency}${colors.reset}`);
+      }
       
       if (report.warnings.length > 0) {
         console.log(`${colors.yellow}⚠️  ${report.warnings.length} warning(s):${colors.reset}`);
