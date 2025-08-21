@@ -102,6 +102,25 @@
     "medium": "Medio",
     "low": "Bajo"
   },
+  "sidebar": {
+    "home": "Inicio",
+    "operations": "Operación",
+    "clients": "Clientes",
+    "suppliers": "Proveedores",
+    "inventory": "Inventario",
+    "finance": "Finanzas",
+    "reports": "Reportes",
+    "settings": "Configuración"
+  },
+  "clients": {
+    "title": "Portafolio de Clientes",
+    "comingSoon": "Próximamente",
+    "description": "El portafolio visual de clientes estará disponible pronto. Mostrará proyectos desde 2017 con fotos, ubicaciones, acabados y más.",
+    "feature1": "Galería visual con lazy-load",
+    "feature2": "Búsqueda y filtros avanzados",
+    "feature3": "Timeline y métricas por cliente",
+    "feature4": "Disponible offline"
+  },
   "common": {
     "yes": "Sí",
     "no": "No",

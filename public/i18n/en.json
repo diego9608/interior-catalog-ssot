@@ -102,6 +102,25 @@
     "medium": "Medium",
     "low": "Low"
   },
+  "sidebar": {
+    "home": "Home",
+    "operations": "Operations",
+    "clients": "Clients",
+    "suppliers": "Suppliers",
+    "inventory": "Inventory",
+    "finance": "Finance",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "clients": {
+    "title": "Client Portfolio",
+    "comingSoon": "Coming Soon",
+    "description": "The visual client portfolio will be available soon. It will showcase projects since 2017 with photos, locations, finishes and more.",
+    "feature1": "Visual gallery with lazy-load",
+    "feature2": "Advanced search and filters",
+    "feature3": "Timeline and metrics per client",
+    "feature4": "Available offline"
+  },
   "common": {
     "yes": "Yes",
     "no": "No",
