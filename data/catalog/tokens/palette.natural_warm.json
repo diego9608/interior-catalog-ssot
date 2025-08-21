@@ -1,0 +1,12 @@
+{
+  "id": "palette.natural_warm",
+  "nombre": "Paleta Natural Cálida",
+  "descripcion": "Combinación de materiales naturales con tonos cálidos",
+  "materiales": [
+    "mat.madera.chapada_roble",
+    "mat.cuarzo.calacatta",
+    "mat.melamina.mdf18_mr"
+  ],
+  "acabados": [],
+  "notas": "Ideal para ambientes acogedores con estilo escandinavo-mediterráneo"
+}

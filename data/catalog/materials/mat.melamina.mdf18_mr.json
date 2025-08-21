@@ -1,0 +1,23 @@
+{
+  "id": "mat.melamina.mdf18_mr",
+  "nombre": "Melamina MDF 18mm Resistente Humedad",
+  "tipo": "melamina_mdf",
+  "espesores_mm": [18],
+  "tolerancia_corte_mm": 1,
+  "radio_interno_min_mm": 3,
+  "mantenimiento": {
+    "limpieza": "Paño seco o ligeramente húmedo",
+    "sellado_anual": false
+  },
+  "score": {
+    "rayado": 5,
+    "manchas": 6,
+    "golpe": 5,
+    "calor": 4,
+    "costo5a": 8
+  },
+  "huella": {
+    "co2e_kg_m2": 12
+  },
+  "notas": "MDF hidrófugo con recubrimiento melamínico, balance ideal costo-beneficio"
+}

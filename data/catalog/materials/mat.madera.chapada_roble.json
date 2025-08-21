@@ -1,0 +1,23 @@
+{
+  "id": "mat.madera.chapada_roble",
+  "nombre": "Madera Chapada Roble Natural",
+  "tipo": "madera_chapada",
+  "espesores_mm": [18, 20],
+  "tolerancia_corte_mm": 0.8,
+  "radio_interno_min_mm": 10,
+  "mantenimiento": {
+    "limpieza": "Paño seco, aceite específico trimestral",
+    "sellado_anual": true
+  },
+  "score": {
+    "rayado": 4,
+    "manchas": 3,
+    "golpe": 6,
+    "calor": 3,
+    "costo5a": 5
+  },
+  "huella": {
+    "co2e_kg_m2": 8
+  },
+  "notas": "Chapa de roble 0.6mm sobre MDF, acabado natural mate"
+}

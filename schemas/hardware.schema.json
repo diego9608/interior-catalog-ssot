@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "categoria",
+    "capacidad_kg",
+    "ciclos",
+    "caracteristicas",
+    "fabricante"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^hard\\."
+    },
+    "categoria": {
+      "type": "string",
+      "enum": [
+        "bisagra",
+        "guia",
+        "tirador",
+        "pata",
+        "amortiguador"
+      ]
+    },
+    "capacidad_kg": {
+      "type": "number",
+      "minimum": 0
+    },
+    "ciclos": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "apertura_grados": {
+      "type": "number"
+    },
+    "caracteristicas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fabricante": {
+      "type": "string"
+    }
+  }
+}

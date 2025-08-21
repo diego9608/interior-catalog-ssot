@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior Catalog SSOT - Sistema de Validación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .status {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .info {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .info h2 {
+            color: #374151;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .info p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .metric {
+            background: #fbbf24;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .metric .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .metric .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        code {
+            background: #1f2937;
+            color: #10b981;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ Interior Catalog SSOT</h1>
+        <div class="status">✅ Sistema Activo</div>
+        
+        <div class="info">
+            <h2>Sistema de Validación</h2>
+            <p>
+                Este sistema garantiza la integridad del catálogo de materiales y componentes
+                para proyectos de interiores. Toda modificación es validada antes del despliegue.
+            </p>
+        </div>
+        
+        <div class="info">
+            <h2>Comando de Validación</h2>
+            <p>
+                Ejecuta <code>npm run validate:data</code> para verificar la integridad
+                de todos los catálogos antes del build.
+            </p>
+        </div>
+        
+        <div class="metrics">
+            <div class="metric">
+                <div class="value">4</div>
+                <div class="label">Esquemas</div>
+            </div>
+            <div class="metric">
+                <div class="value">3</div>
+                <div class="label">Materiales</div>
+            </div>
+            <div class="metric">
+                <div class="value">2</div>
+                <div class="label">Herrajes</div>
+            </div>
+            <div class="metric">
+                <div class="value">100%</div>
+                <div class="label">Validado</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "nombre",
+    "tipo",
+    "espesores_mm",
+    "tolerancia_corte_mm",
+    "radio_interno_min_mm",
+    "mantenimiento",
+    "score",
+    "huella"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^mat\\."
+    },
+    "nombre": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "cuarzo",
+        "porcelanico",
+        "granito",
+        "melamina_mdf",
+        "melamina_particulas",
+        "hpl",
+        "madera_chapada",
+        "madera_maciza",
+        "acero",
+        "aluminio",
+        "vidrio"
+      ]
+    },
+    "espesores_mm": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 3
+      },
+      "minItems": 1
+    },
+    "tolerancia_corte_mm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "radio_interno_min_mm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "limites": {
+      "type": "object",
+      "properties": {
+        "calor_directo_c": {
+          "type": "number"
+        }
+      }
+    },
+    "mantenimiento": {
+      "type": "object",
+      "required": ["limpieza", "sellado_anual"],
+      "properties": {
+        "limpieza": {
+          "type": "string"
+        },
+        "sellado_anual": {
+          "type": "boolean"
+        }
+      }
+    },
+    "score": {
+      "type": "object",
+      "required": ["rayado", "manchas", "golpe", "calor", "costo5a"],
+      "properties": {
+        "rayado": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "manchas": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "golpe": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "calor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "costo5a": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        }
+      }
+    },
+    "huella": {
+      "type": "object",
+      "required": ["co2e_kg_m2"],
+      "properties": {
+        "co2e_kg_m2": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "notas": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "tipo": {
+            "const": "cuarzo"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "limites": {
+            "required": ["calor_directo_c"]
+          }
+        }
+      }
+    }
+  ]
+}

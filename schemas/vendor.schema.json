@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "nombre",
+    "lead_time_dias",
+    "zonas",
+    "contacto"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^vend\\."
+    },
+    "nombre": {
+      "type": "string"
+    },
+    "lead_time_dias": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "zonas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contacto": {
+      "type": "object",
+      "required": ["email"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    }
+  }
+}

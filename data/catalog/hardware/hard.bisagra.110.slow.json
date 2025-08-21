@@ -1,0 +1,14 @@
+{
+  "id": "hard.bisagra.110.slow",
+  "categoria": "bisagra",
+  "capacidad_kg": 5,
+  "ciclos": 50000,
+  "apertura_grados": 110,
+  "caracteristicas": [
+    "cierre suave",
+    "clip-on",
+    "ajuste 3D",
+    "acero niquelado"
+  ],
+  "fabricante": "Blum BLUMOTION"
+}

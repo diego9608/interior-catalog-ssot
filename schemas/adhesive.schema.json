@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "tipo",
+    "uso",
+    "viscosidad",
+    "tiempo_curado_min",
+    "resistencia_agua"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^adh\\."
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "PUR",
+        "EVA",
+        "contacto",
+        "epoxi"
+      ]
+    },
+    "uso": {
+      "type": "string",
+      "enum": [
+        "zona_humeda",
+        "interior"
+      ]
+    },
+    "viscosidad": {
+      "type": "string"
+    },
+    "tiempo_curado_min": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "resistencia_agua": {
+      "type": "string",
+      "enum": [
+        "alta",
+        "media",
+        "baja"
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "hard.guia.total45kg",
+  "categoria": "guia",
+  "capacidad_kg": 45,
+  "ciclos": 60000,
+  "caracteristicas": [
+    "extensión total",
+    "cierre suave",
+    "rodamientos de bolas",
+    "montaje lateral"
+  ],
+  "fabricante": "Hettich Quadro V6"
+}

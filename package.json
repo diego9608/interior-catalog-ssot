@@ -1,0 +1,22 @@
+{
+  "name": "interior-catalog-ssot",
+  "version": "1.0.0",
+  "description": "Interior design catalog system with single source of truth and validation",
+  "main": "index.js",
+  "scripts": {
+    "validate:data": "node scripts/validate-catalogs.js",
+    "build": "npm run validate:data && echo 'Build complete'",
+    "test": "npm run validate:data"
+  },
+  "keywords": [
+    "interior-design",
+    "catalog",
+    "ssot",
+    "validation"
+  ],
+  "author": "Diego",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

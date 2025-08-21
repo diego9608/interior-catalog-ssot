@@ -1,0 +1,8 @@
+{
+  "id": "adh.eva.interior",
+  "tipo": "EVA",
+  "uso": "interior",
+  "viscosidad": "baja",
+  "tiempo_curado_min": 5,
+  "resistencia_agua": "baja"
+}

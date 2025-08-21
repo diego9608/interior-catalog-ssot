@@ -1,0 +1,8 @@
+{
+  "id": "adh.pur.zona_humeda",
+  "tipo": "PUR",
+  "uso": "zona_humeda",
+  "viscosidad": "media-alta",
+  "tiempo_curado_min": 30,
+  "resistencia_agua": "alta"
+}

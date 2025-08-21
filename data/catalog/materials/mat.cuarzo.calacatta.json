@@ -1,0 +1,26 @@
+{
+  "id": "mat.cuarzo.calacatta",
+  "nombre": "Cuarzo Calacatta Premium",
+  "tipo": "cuarzo",
+  "espesores_mm": [20, 30],
+  "tolerancia_corte_mm": 0.5,
+  "radio_interno_min_mm": 5,
+  "limites": {
+    "calor_directo_c": 150
+  },
+  "mantenimiento": {
+    "limpieza": "Paño húmedo con detergente neutro",
+    "sellado_anual": false
+  },
+  "score": {
+    "rayado": 8,
+    "manchas": 9,
+    "golpe": 7,
+    "calor": 6,
+    "costo5a": 4
+  },
+  "huella": {
+    "co2e_kg_m2": 30
+  },
+  "notas": "Veteado tipo mármol Calacatta, ideal para encimeras premium"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "vend.fenix_cuarzos",
+  "nombre": "Fenix Cuarzos SA de CV",
+  "lead_time_dias": 10,
+  "zonas": [
+    "Monterrey",
+    "San Pedro",
+    "Santa Catarina",
+    "Guadalupe"
+  ],
+  "contacto": {
+    "email": "ventas@fenixcuarzos.mx"
+  }
+}

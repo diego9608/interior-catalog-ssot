@@ -1,0 +1,25 @@
+{
+  "id": "DEMO-001",
+  "fecha": "2025-01-21",
+  "cliente": "Demo Cliente",
+  "ambiente": "cocina",
+  "dimensiones": {
+    "ancho_paso_mm": 1100,
+    "alto_mm": 2400,
+    "profundidad_mm": 600
+  },
+  "especificaciones": {
+    "encimera": "mat.cuarzo.calacatta",
+    "frentes": "mat.melamina.mdf18_mr",
+    "cuerpo": "mat.melamina.mdf18_mr",
+    "herrajes_estandar": [
+      "hard.bisagra.110.slow",
+      "hard.guia.total45kg"
+    ],
+    "adhesivo_zona_humeda": "adh.pur.zona_humeda",
+    "adhesivo_interior": "adh.eva.interior"
+  },
+  "proveedor_principal": "vend.fenix_cuarzos",
+  "paleta": "palette.natural_warm",
+  "notas": "Proyecto demo para validación del sistema SSOT"
+}
