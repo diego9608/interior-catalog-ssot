@@ -1,5 +1,5 @@
 // Service Worker for /ops - handles offline and API caching
-const OPS_CACHE = 'ops-static-v5';
+const OPS_CACHE = 'ops-static-v6';
 const OPS_API_CACHE = 'ops-api-v3';
 const OPS_HISTORY_CACHE = 'ops-history-v1';
 
@@ -10,6 +10,10 @@ const STATIC_ASSETS = [
   '/ops/ops.js',
   '/ops/ops-trends.js',
   '/shared/tokens.css',
+  '/shared/shell.css',
+  '/shared/shell.js',
+  '/shared/sidebar.css',
+  '/shared/sidebar.js',
   '/shared/theme.js',
   '/shared/i18n.js',
   '/fonts/Inter-Variable.woff2'

@@ -22,8 +22,14 @@
 
   // Initialize sidebar
   function initSidebar() {
-    const sidebar = document.getElementById('app-sidebar');
-    if (!sidebar) return;
+    let sidebar = document.getElementById('sidebar') || document.getElementById('app-sidebar');
+    if (!sidebar) {
+      // Create sidebar element if it doesn't exist
+      sidebar = document.createElement('div');
+      sidebar.id = 'sidebar';
+      sidebar.className = 'app-sidebar';
+      document.body.appendChild(sidebar);
+    }
 
     // Create sidebar HTML
     sidebar.innerHTML = `

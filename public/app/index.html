@@ -8,12 +8,20 @@
   <title>SSOT Field App</title>
   <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/shared/tokens.css">
+  <link rel="stylesheet" href="/shared/shell.css">
   <link rel="stylesheet" href="/shared/sidebar.css">
   <link rel="stylesheet" href="/app/styles.css">
 </head>
 <body class="has-app-shell">
   <header>
-    <h1 data-i18n="app.title">SSOT • Field App</h1>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <button id="sidebarToggle" class="btn-icon sidebar-toggle-btn" aria-label="Toggle menu" style="background: var(--surface); border: 1px solid var(--border); padding: 0.5rem; border-radius: 4px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="2">
+          <path d="M3 10h14M3 5h14M3 15h14"/>
+        </svg>
+      </button>
+      <h1 data-i18n="app.title">SSOT • Field App</h1>
+    </div>
     <div id="status-bar"></div>
     <select id="langSelector" aria-label="Language">
       <option value="es">ES</option>
@@ -39,9 +47,10 @@
   </footer>
   <div id="snackbar"></div>
   <script src="/app/sw-register.js" defer></script>
-  <script src="/shared/sidebar.js" defer></script>
   <script src="/shared/i18n.js" defer></script>
   <script src="/shared/theme.js" defer></script>
+  <script src="/shared/shell.js" defer></script>
+  <script src="/shared/sidebar.js" defer></script>
   <script src="/app/app.js" type="module"></script>
 </body>
 </html>
