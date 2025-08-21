@@ -1,5 +1,5 @@
 // Service Worker for /ops - handles offline and API caching
-const OPS_CACHE = 'ops-static-v1';
+const OPS_CACHE = 'ops-static-v2';
 const OPS_API_CACHE = 'ops-api-v1';
 
 const STATIC_ASSETS = [

@@ -1,5 +1,5 @@
 // Service Worker for offline functionality
-const CACHE_NAME = 'ssot-field-v1';
+const CACHE_NAME = 'ssot-field-v2';
 const API_CACHE = 'ssot-api-v1';
 const urlsToCache = [
   '/app/',
@@ -7,6 +7,9 @@ const urlsToCache = [
   '/app/app.js',
   '/app/styles.css',
   '/app/manifest.webmanifest',
+  '/shared/tokens.css',
+  '/shared/theme.js',
+  '/fonts/Inter-Variable.woff2',
   '/api/projects.json',
   '/api/DEMO-001/checklists.json',
   '/api/DEMO-001/meta.json'
