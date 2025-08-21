@@ -21,7 +21,26 @@
         <button class="filter-btn" data-status="ok">PASS</button>
         <button class="filter-btn" data-status="blocked">FAIL</button>
       </div>
+      <!-- Date range controls -->
+      <div class="date-controls">
+        <button class="range-btn" data-range="7d" data-i18n="ops.range.7d">7d</button>
+        <button class="range-btn active" data-range="30d" data-i18n="ops.range.30d">30d</button>
+        <button class="range-btn" data-range="90d" data-i18n="ops.range.90d">90d</button>
+        <button class="range-btn" data-range="ytd" data-i18n="ops.range.ytd">YTD</button>
+        <button class="range-btn" data-range="all" data-i18n="ops.range.all">Todo</button>
+        <button class="range-btn" data-range="custom" data-i18n="ops.range.custom">Custom</button>
+      </div>
+      <div class="date-inputs hidden" id="custom-dates">
+        <input type="date" id="date-from" aria-label="From">
+        <input type="date" id="date-to" aria-label="To">
+      </div>
+      <label class="grouping-toggle">
+        <input type="checkbox" id="group-global">
+        <span data-i18n="ops.groupGlobal">Agrupar Global</span>
+      </label>
+      <button id="navWarehouse" class="btn" data-i18n="wh.warehouse">Almacén</button>
       <button id="export-csv" class="btn btn-export" data-i18n="ops.exportCSV">📥 Export CSV</button>
+      <button id="export-patch" class="btn hidden" data-i18n="wh.exportPatch">Export JSON</button>
       <select id="langSelector" aria-label="Language">
         <option value="es">ES</option>
         <option value="en">EN</option>
@@ -43,6 +62,37 @@
   </header>
   
   <main>
+    <!-- Trends Section -->
+    <section id="trends-section" class="trends-container">
+      <h2 data-i18n="ops.trends">Tendencias</h2>
+      <div class="trends-grid">
+        <div class="trend-card">
+          <label data-i18n="ops.trends.costP50">Costo P50</label>
+          <svg id="trend-cost-p50" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Costo P50">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.costP80">Costo P80</label>
+          <svg id="trend-cost-p80" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Costo P80">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.waste">Merma (%)</label>
+          <svg id="trend-waste" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Merma">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.qcPass">QC Pass Rate</label>
+          <svg id="trend-qc" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de QC Pass Rate">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+      </div>
+    </section>
+    
     <!-- KPI Cards -->
     <section id="kpi-cards" class="kpi-grid">
       <div class="kpi-card">
@@ -89,9 +139,11 @@
               <th data-sort="projectId">ID</th>
               <th data-sort="cliente" data-i18n="ops.client">Cliente</th>
               <th data-sort="cost_p50" data-i18n="ops.costP50">Costo P50</th>
+              <th data-i18n="ops.deltaTarget">Δ Meta</th>
               <th data-sort="cost_p80" data-i18n="ops.costP80">Costo P80</th>
               <th data-sort="timeline_days_p50" data-i18n="ops.timeline">Plazo</th>
               <th data-sort="waste_pct" data-i18n="ops.waste">Merma</th>
+              <th data-i18n="ops.deltaWaste">Δ Meta</th>
               <th data-sort="sheets_used">Sheets</th>
               <th data-sort="qc_overall_pass">QC</th>
               <th data-sort="pieces_count" data-i18n="ops.pieces">Piezas</th>
@@ -150,7 +202,76 @@
       
       <button class="btn btn-back" onclick="showProjectsList()" data-i18n="ops.backToList">← Volver a lista</button>
     </section>
+    
+    <!-- Warehouse Section -->
+    <section id="warehouse-section" class="hidden">
+      <h2 data-i18n="wh.inventory">Inventario de Remanentes</h2>
+      
+      <!-- KPIs -->
+      <div id="warehouse-kpis" class="kpi-grid">
+        <!-- Populated by JS -->
+      </div>
+      
+      <!-- Filters -->
+      <div class="warehouse-filters">
+        <input type="text" id="filter-search" placeholder="Buscar ID/QR" data-i18n-placeholder="wh.searchPlaceholder">
+        <input type="text" id="filter-material" placeholder="Material" data-i18n-placeholder="wh.filterMaterial">
+        <input type="number" id="filter-thickness" placeholder="Espesor" data-i18n-placeholder="wh.filterThickness">
+        <select id="filter-status">
+          <option value="all" data-i18n="common.all">Todos</option>
+          <option value="available" data-i18n="wh.available">Disponible</option>
+          <option value="reserved" data-i18n="wh.reserved">Reservado</option>
+          <option value="consumed" data-i18n="wh.consumed">Consumido</option>
+          <option value="scrap" data-i18n="wh.scrap">Descarte</option>
+        </select>
+        <input type="text" id="filter-location" placeholder="Ubicación" data-i18n-placeholder="wh.filterLocation">
+      </div>
+      
+      <!-- Quick Actions -->
+      <div class="warehouse-actions">
+        <button class="btn btn-primary" onclick="warehouse.newOffcut()" data-i18n="wh.newOffcut">Nuevo</button>
+        <button class="btn" onclick="warehouse.reserveOffcut()" data-i18n="wh.reserve">Reservar</button>
+        <button class="btn" onclick="warehouse.consumeOffcut()" data-i18n="wh.consume">Consumir</button>
+        <button class="btn" onclick="warehouse.moveOffcut()" data-i18n="wh.move">Mover</button>
+        <button class="btn" onclick="warehouse.printLabels()" data-i18n="wh.printLabels">Imprimir Etiquetas</button>
+      </div>
+      
+      <!-- Inventory Table -->
+      <div class="table-wrapper">
+        <table id="warehouse-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="select-all-offcuts"></th>
+              <th data-i18n="wh.id">ID</th>
+              <th data-i18n="wh.material">Material</th>
+              <th data-i18n="wh.thickness">Espesor</th>
+              <th data-i18n="wh.dimensions">Dimensiones</th>
+              <th data-i18n="wh.area">Área</th>
+              <th data-i18n="wh.location">Ubicación</th>
+              <th data-i18n="wh.status">Estado</th>
+              <th data-i18n="wh.origin">Origen</th>
+              <th data-i18n="wh.updated">Actualizado</th>
+            </tr>
+          </thead>
+          <tbody id="warehouse-tbody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+    <!-- Labels Print View -->
+    <section id="labels-section" class="hidden">
+      <div id="labels-container">
+        <!-- Populated by JS -->
+      </div>
+    </section>
   </main>
+  
+  <!-- Modal for warehouse actions -->
+  <div id="warehouse-modal" class="modal hidden">
+    <!-- Populated by JS -->
+  </div>
   
   <footer>
     <small>Dashboard Operativo v1 • Read-only</small>
@@ -159,6 +280,9 @@
   <script src="/ops/sw-register.js" defer></script>
   <script src="/shared/i18n.js" defer></script>
   <script src="/shared/theme.js" defer></script>
+  <script src="/ops/ops-trends.js" defer></script>
+  <script src="/ops/warehouse.js" defer></script>
+  <script src="/ops/warehouse-labels.js" defer></script>
   <script src="/ops/ops.js" defer></script>
 </body>
 </html>

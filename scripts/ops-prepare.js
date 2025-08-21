@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 // Color codes for terminal output
 const colors = {
@@ -12,6 +13,15 @@ const colors = {
   gray: '\x1b[90m',
   bold: '\x1b[1m'
 };
+
+// Get git SHA
+function getGitSHA() {
+  try {
+    return execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim();
+  } catch (e) {
+    return process.env.COMMIT_REF || 'unknown';
+  }
+}
 
 // Process a single project
 function processProject(projectId) {
@@ -38,7 +48,11 @@ function processProject(projectId) {
     pieces_count: null,
     panels_materials: {},
     hardware: { guias: null, bisagras: null },
-    generated_at: null
+    generated_at: null,
+    // Target metas (optional)
+    target_cost_p50: null,
+    target_waste_pct: null,
+    target_timeline_days: null
   };
   
   const warnings = [];
@@ -172,8 +186,45 @@ function processProject(projectId) {
   return { metrics, warnings };
 }
 
-// Update history
-function updateHistory(metrics) {
+// Create snapshot for a build
+function createSnapshot(allMetrics, sha, generatedAt) {
+  const snapshotsDir = path.join(__dirname, '..', 'public', 'api', 'ops', 'snapshots');
+  if (!fs.existsSync(snapshotsDir)) {
+    fs.mkdirSync(snapshotsDir, { recursive: true });
+  }
+  
+  // Format timestamp for filename: YYYYMMDD-HHMMSS
+  const timestamp = generatedAt.replace(/[:.]/g, '').replace('T', '-').slice(0, 15);
+  const snapshotPath = path.join(snapshotsDir, `${timestamp}_${sha}.json`);
+  
+  // Create snapshot data
+  const snapshot = {
+    generated_at: generatedAt,
+    commit: sha,
+    projects: allMetrics.map(m => ({
+      projectId: m.projectId,
+      cliente: m.cliente,
+      generated_at: m.generated_at,
+      commit: sha,
+      cost_p50: m.cost_p50,
+      cost_p80: m.cost_p80,
+      timeline_days_p50: m.timeline_days_p50,
+      waste_pct: m.waste_pct,
+      sheets_used: m.sheets_used,
+      pieces_count: m.pieces_count,
+      qc_overall_pass: m.qc_overall_pass,
+      target_cost_p50: m.target_cost_p50,
+      target_waste_pct: m.target_waste_pct,
+      target_timeline_days: m.target_timeline_days
+    }))
+  };
+  
+  fs.writeFileSync(snapshotPath, JSON.stringify(snapshot, null, 2));
+  return snapshotPath;
+}
+
+// Update history.json
+function updateHistory(allMetrics, sha, generatedAt) {
   const historyPath = path.join(__dirname, '..', 'public', 'api', 'ops', 'history.json');
   
   let history = [];
@@ -181,61 +232,67 @@ function updateHistory(metrics) {
     history = JSON.parse(fs.readFileSync(historyPath, 'utf8'));
   }
   
-  const today = new Date().toISOString().split('T')[0];
+  // Check if this SHA already exists
+  const existingSHA = history.find(h => h.commit === sha);
+  if (existingSHA) {
+    console.log(`${colors.gray}History already contains SHA ${sha}, skipping${colors.reset}`);
+    return history;
+  }
   
-  // Create snapshot
-  const snapshot = {
-    date: today,
-    projectId: metrics.projectId,
-    cost_p50: metrics.cost_p50,
-    cost_p80: metrics.cost_p80,
-    waste_pct: metrics.waste_pct,
-    qc_overall_pass: metrics.qc_overall_pass
+  // Add new entry
+  const newEntry = {
+    generated_at: generatedAt,
+    commit: sha,
+    projects: allMetrics.map(m => ({
+      projectId: m.projectId,
+      cliente: m.cliente,
+      cost_p50: m.cost_p50,
+      cost_p80: m.cost_p80,
+      timeline_days_p50: m.timeline_days_p50,
+      waste_pct: m.waste_pct,
+      qc_overall_pass: m.qc_overall_pass
+    }))
   };
   
-  // Find existing entry for this project+date
-  const existingIndex = history.findIndex(h => 
-    h.projectId === metrics.projectId && h.date === today
-  );
+  history.push(newEntry);
   
-  if (existingIndex >= 0) {
-    history[existingIndex] = snapshot;
-  } else {
-    history.push(snapshot);
-  }
+  // Sort by date descending
+  history.sort((a, b) => new Date(b.generated_at) - new Date(a.generated_at));
   
-  // Keep max 60 entries per project
-  const projectHistory = {};
-  for (const entry of history) {
-    if (!projectHistory[entry.projectId]) {
-      projectHistory[entry.projectId] = [];
-    }
-    projectHistory[entry.projectId].push(entry);
-  }
+  // Keep max 365 days or 1000 entries
+  const cutoffDate = new Date();
+  cutoffDate.setDate(cutoffDate.getDate() - 365);
   
-  const trimmedHistory = [];
-  for (const [projectId, entries] of Object.entries(projectHistory)) {
-    // Sort by date descending and keep latest 60
-    entries.sort((a, b) => new Date(b.date) - new Date(a.date));
-    trimmedHistory.push(...entries.slice(0, 60));
-  }
+  history = history.filter((entry, index) => {
+    const entryDate = new Date(entry.generated_at);
+    return index < 1000 && entryDate >= cutoffDate;
+  });
   
-  return trimmedHistory;
+  return history;
 }
 
 // Main execution
 function main() {
   console.log(`${colors.blue}${colors.bold}Preparing ops dashboard data...${colors.reset}`);
   
+  const sha = getGitSHA();
+  const generatedAt = new Date().toISOString();
+  
+  console.log(`${colors.gray}Build: SHA=${sha}, Time=${generatedAt}${colors.reset}`);
+  
   // Create output directories
   const opsDir = path.join(__dirname, '..', 'public', 'api', 'ops');
   const projectsDir = path.join(opsDir, 'projects');
+  const snapshotsDir = path.join(opsDir, 'snapshots');
   
   if (!fs.existsSync(opsDir)) {
     fs.mkdirSync(opsDir, { recursive: true });
   }
   if (!fs.existsSync(projectsDir)) {
     fs.mkdirSync(projectsDir, { recursive: true });
+  }
+  if (!fs.existsSync(snapshotsDir)) {
+    fs.mkdirSync(snapshotsDir, { recursive: true });
   }
   
   // Process all projects
@@ -245,7 +302,7 @@ function main() {
   });
   
   const summary = [];
-  const allHistory = [];
+  const allMetrics = [];
   let okCount = 0;
   let blockedCount = 0;
   let missingCount = 0;
@@ -272,10 +329,7 @@ function main() {
     };
     
     summary.push(summaryEntry);
-    
-    // Update history
-    const updatedHistory = updateHistory(metrics);
-    allHistory.push(...updatedHistory);
+    allMetrics.push(metrics);
     
     // Count status
     if (metrics.qc_overall_pass === true) {
@@ -296,28 +350,43 @@ function main() {
   const summaryPath = path.join(opsDir, 'index.json');
   fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2));
   
-  // Save history (deduplicated)
-  const uniqueHistory = [];
-  const seen = new Set();
+  // Create snapshot for this build
+  const snapshotPath = createSnapshot(allMetrics, sha, generatedAt);
+  console.log(`${colors.cyan}📸 Created snapshot: ${path.basename(snapshotPath)}${colors.reset}`);
   
-  for (const entry of allHistory) {
-    const key = `${entry.projectId}-${entry.date}`;
-    if (!seen.has(key)) {
-      seen.add(key);
-      uniqueHistory.push(entry);
-    }
+  // Update history.json
+  const history = updateHistory(allMetrics, sha, generatedAt);
+  const historyPath = path.join(opsDir, 'history.json');
+  
+  // Backfill initial history if empty
+  if (history.length === 0 && summary.length > 0) {
+    console.log(`${colors.yellow}Creating initial history from current data${colors.reset}`);
+    const initialEntry = {
+      generated_at: generatedAt,
+      commit: 'seed',
+      projects: summary.map(s => ({
+        projectId: s.projectId,
+        cliente: s.cliente,
+        cost_p50: s.cost_p50,
+        cost_p80: s.cost_p80,
+        timeline_days_p50: s.timeline_days_p50,
+        waste_pct: s.waste_pct,
+        qc_overall_pass: s.qc_overall_pass
+      }))
+    };
+    history.push(initialEntry);
   }
   
-  const historyPath = path.join(opsDir, 'history.json');
-  fs.writeFileSync(historyPath, JSON.stringify(uniqueHistory, null, 2));
+  fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
   
   console.log(`${colors.cyan}📊 OpsPrepare: ${projectDirs.length} project(s) → OK:${okCount} | BLOCKED:${blockedCount} | Missing:${missingCount}${colors.reset}`);
+  console.log(`${colors.cyan}📜 History: ${history.length} entries${colors.reset}`);
   
   // Save build metadata
   const metaPath = path.join(opsDir, 'meta.json');
   fs.writeFileSync(metaPath, JSON.stringify({
-    date: new Date().toISOString(),
-    sha: process.env.COMMIT_REF || null
+    date: generatedAt,
+    sha: sha
   }, null, 2));
   
   console.log(`${colors.green}${colors.bold}✅ Ops preparation complete${colors.reset}`);

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "TX-0001",
+    "ts": "2025-08-21T08:35:19Z",
+    "type": "IN",
+    "offcut_id": "OC-20250821-0001",
+    "project_id": null,
+    "payload": { "location": "A1-03", "origin": "DEMO-001/S-0007" },
+    "user": "ops",
+    "note": "Ingreso inicial de remanente"
+  },
+  {
+    "id": "TX-0002",
+    "ts": "2025-08-21T09:15:00Z",
+    "type": "IN",
+    "offcut_id": "OC-20250821-0002",
+    "project_id": null,
+    "payload": { "location": "A1-02", "origin": "DEMO-001/S-0012" },
+    "user": "ops",
+    "note": "Remanente de corte optimizado"
+  },
+  {
+    "id": "TX-0003",
+    "ts": "2025-08-20T14:20:00Z",
+    "type": "IN",
+    "offcut_id": "OC-20250820-0003",
+    "project_id": null,
+    "payload": { "location": "B2-01", "origin": "DEMO-002/S-0003" },
+    "user": "ops",
+    "note": ""
+  },
+  {
+    "id": "TX-0004",
+    "ts": "2025-08-21T07:00:00Z",
+    "type": "RESERVE",
+    "offcut_id": "OC-20250820-0003",
+    "project_id": "DEMO-003",
+    "payload": {},
+    "user": "prod",
+    "note": "Reservado para proyecto urgente"
+  },
+  {
+    "id": "TX-0005",
+    "ts": "2025-08-19T11:00:00Z",
+    "type": "IN",
+    "offcut_id": "OC-20250819-0004",
+    "project_id": null,
+    "payload": { "location": "C1-05", "origin": "LUX-001/S-0001" },
+    "user": "ops",
+    "note": "Material premium de proyecto luxury"
+  },
+  {
+    "id": "TX-0006",
+    "ts": "2025-08-18T16:30:00Z",
+    "type": "IN",
+    "offcut_id": "OC-20250818-0005",
+    "project_id": null,
+    "payload": { "location": "A1-01", "origin": "TEST-001/S-0099" },
+    "user": "ops",
+    "note": ""
+  },
+  {
+    "id": "TX-0007",
+    "ts": "2025-08-20T10:00:00Z",
+    "type": "CONSUME",
+    "offcut_id": "OC-20250818-0005",
+    "project_id": "SAMPLES",
+    "payload": {},
+    "user": "lab",
+    "note": "Usado para muestras de calidad"
+  }
+]

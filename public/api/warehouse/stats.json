@@ -1,0 +1,14 @@
+{
+  "as_of": "2025-08-21T10:34:20.672Z",
+  "counts": {
+    "available": 3,
+    "reserved": 1,
+    "consumed": 1,
+    "scrap": 0
+  },
+  "area_m2": {
+    "available": 0.544,
+    "reserved": 0.075,
+    "consumed_ytd": 0.015
+  }
+}

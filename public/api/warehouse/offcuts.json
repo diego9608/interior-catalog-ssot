@@ -1,0 +1,117 @@
+[
+  {
+    "id": "OC-20250821-0001",
+    "material_code": "MDF-18-BLC",
+    "material_name": "MDF Blanco",
+    "thickness_mm": 18,
+    "color": "Blanco",
+    "grain": "X",
+    "w_mm": 450,
+    "h_mm": 320,
+    "area_m2": 0.144,
+    "location": "A1-03",
+    "status": "available",
+    "origin": {
+      "project_id": "DEMO-001",
+      "sheet_id": "S-0007"
+    },
+    "reserved_by": null,
+    "created_at": "2025-08-21T08:35:19Z",
+    "updated_at": "2025-08-21T08:35:19Z",
+    "notes": "",
+    "tags": []
+  },
+  {
+    "id": "OC-20250821-0002",
+    "material_code": "MEL-15-ROB",
+    "material_name": "Melamina Roble",
+    "thickness_mm": 15,
+    "color": "Roble",
+    "grain": "H",
+    "w_mm": 600,
+    "h_mm": 400,
+    "area_m2": 0.24,
+    "location": "A1-02",
+    "status": "available",
+    "origin": {
+      "project_id": "DEMO-001",
+      "sheet_id": "S-0012"
+    },
+    "reserved_by": null,
+    "created_at": "2025-08-21T09:15:00Z",
+    "updated_at": "2025-08-21T09:15:00Z",
+    "notes": "Corte limpio",
+    "tags": [
+      "premium"
+    ]
+  },
+  {
+    "id": "OC-20250820-0003",
+    "material_code": "MDF-18-BLC",
+    "material_name": "MDF Blanco",
+    "thickness_mm": 18,
+    "color": "Blanco",
+    "grain": "X",
+    "w_mm": 300,
+    "h_mm": 250,
+    "area_m2": 0.075,
+    "location": "B2-01",
+    "status": "reserved",
+    "origin": {
+      "project_id": "DEMO-002",
+      "sheet_id": "S-0003"
+    },
+    "reserved_by": "DEMO-003",
+    "created_at": "2025-08-20T14:20:00Z",
+    "updated_at": "2025-08-21T07:00:00Z",
+    "notes": "Reservado para proyecto urgente",
+    "tags": []
+  },
+  {
+    "id": "OC-20250819-0004",
+    "material_code": "MAD-20-NOG",
+    "material_name": "Madera Nogal",
+    "thickness_mm": 20,
+    "color": "Nogal",
+    "grain": "V",
+    "w_mm": 800,
+    "h_mm": 200,
+    "area_m2": 0.16,
+    "location": "C1-05",
+    "status": "available",
+    "origin": {
+      "project_id": "LUX-001",
+      "sheet_id": "S-0001"
+    },
+    "reserved_by": null,
+    "created_at": "2025-08-19T11:00:00Z",
+    "updated_at": "2025-08-19T11:00:00Z",
+    "notes": "Material premium",
+    "tags": [
+      "luxury",
+      "special"
+    ]
+  },
+  {
+    "id": "OC-20250818-0005",
+    "material_code": "MEL-15-BLC",
+    "material_name": "Melamina Blanco",
+    "thickness_mm": 15,
+    "color": "Blanco",
+    "grain": "X",
+    "w_mm": 150,
+    "h_mm": 100,
+    "area_m2": 0.015,
+    "location": "A1-01",
+    "status": "consumed",
+    "origin": {
+      "project_id": "TEST-001",
+      "sheet_id": "S-0099"
+    },
+    "reserved_by": null,
+    "created_at": "2025-08-18T16:30:00Z",
+    "updated_at": "2025-08-20T10:00:00Z",
+    "notes": "Usado para muestras",
+    "tags": []
+  }
+]

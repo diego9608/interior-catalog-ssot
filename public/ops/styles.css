@@ -353,6 +353,98 @@ td {
   color: var(--primary);
 }
 
+/* Date Controls */
+.date-controls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.range-btn {
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.15s;
+}
+
+.range-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.range-btn.active {
+  background: white;
+  color: var(--brand);
+  border-color: white;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.date-inputs input {
+  padding: 0.5rem;
+  background: white;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.grouping-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.grouping-toggle input {
+  cursor: pointer;
+}
+
+/* Trends Section */
+.trends-container {
+  margin-bottom: 2rem;
+}
+
+.trends-container h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.trends-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.trend-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.trend-card label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.sparkline-svg {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
 /* Sparklines */
 .trend-item {
   margin-bottom: 1rem;
@@ -378,6 +470,185 @@ td {
 .sparkline svg {
   width: 100%;
   height: 100%;
+}
+
+/* Warehouse Section */
+.warehouse-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.warehouse-filters input,
+.warehouse-filters select {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.warehouse-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#warehouse-table th:first-child,
+#warehouse-table td:first-child {
+  width: 40px;
+  text-align: center;
+}
+
+.offcut-id {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Labels Print View */
+.labels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2mm;
+  padding: 10mm;
+}
+
+.label {
+  border: 1px solid #000;
+  padding: 5mm;
+  height: 35mm;
+  display: flex;
+  gap: 3mm;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+.label-qr {
+  flex-shrink: 0;
+}
+
+.label-qr svg {
+  width: 20mm;
+  height: 20mm;
+}
+
+.label-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.label-id {
+  font-weight: bold;
+  font-size: 11pt;
+  font-family: monospace;
+}
+
+.label-material {
+  font-weight: 600;
+  font-size: 9pt;
+}
+
+.label-specs {
+  font-size: 9pt;
+  display: flex;
+  gap: 5mm;
+}
+
+.label-area {
+  font-weight: bold;
+  font-size: 10pt;
+}
+
+.label-location {
+  font-weight: bold;
+  color: #0066cc;
+  font-size: 10pt;
+}
+
+.label-date {
+  font-size: 8pt;
+  color: #666;
+}
+
+/* Print styles */
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  header, footer, .no-print {
+    display: none !important;
+  }
+  
+  .labels-grid {
+    padding: 0;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  
+  .label {
+    border: 0.5pt solid #000;
+    margin: 0;
+  }
+  
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
 }
 
 /* Focus and Accessibility */
@@ -418,6 +689,10 @@ footer {
   }
   
   .kpi-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .trends-grid {
     grid-template-columns: repeat(4, 1fr);
   }
   
@@ -535,6 +810,14 @@ tbody tr:hover {
 
 td {
   color: var(--text);
+}
+
+.text-danger {
+  color: var(--danger);
+}
+
+.text-success {
+  color: var(--accent);
 }
 
 .badge.pass {

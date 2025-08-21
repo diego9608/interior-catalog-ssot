@@ -45,7 +45,32 @@
     "hinges": "Bisagras",
     "noHistory": "Sin datos históricos",
     "backToList": "Volver a lista",
-    "days": "días"
+    "days": "días",
+    "allProjects": "Todos los proyectos",
+    "timelineP50": "Plazo P50",
+    "bomPieces": "Piezas BOM",
+    "deltaTarget": "Δ Meta",
+    "deltaWaste": "Δ Meta",
+    "groupGlobal": "Agrupar Global",
+    "range": {
+      "7d": "7d",
+      "30d": "30d",
+      "90d": "90d",
+      "ytd": "YTD",
+      "all": "Todo",
+      "custom": "Custom"
+    },
+    "trends": {
+      "costP50": "Costo P50",
+      "costP80": "Costo P80",
+      "waste": "Merma (%)",
+      "qcPass": "QC Pass Rate"
+    },
+    "targets": {
+      "cost": "Meta Costo",
+      "waste": "Meta Merma",
+      "timeline": "Meta Plazo"
+    }
   },
   "app": {
     "title": "Field App",
@@ -90,6 +115,38 @@
     "error": "Error",
     "success": "Éxito",
     "warning": "Advertencia",
-    "info": "Información"
+    "info": "Información",
+    "all": "Todos",
+    "export_csv": "Exportar CSV"
+  },
+  "wh": {
+    "warehouse": "Almacén",
+    "inventory": "Inventario de Remanentes",
+    "available": "Disponible",
+    "reserved": "Reservado",
+    "consumed": "Consumido",
+    "scrap": "Descarte",
+    "totalArea": "Área Total",
+    "consumedYTD": "Consumidas YTD",
+    "newOffcut": "Nuevo Remanente",
+    "reserve": "Reservar",
+    "consume": "Consumir",
+    "move": "Mover",
+    "split": "Consumo parcial (SPLIT)",
+    "printLabels": "Imprimir Etiquetas",
+    "exportPatch": "Export JSON",
+    "id": "ID",
+    "material": "Material",
+    "thickness": "Espesor",
+    "dimensions": "Dimensiones",
+    "area": "Área",
+    "location": "Ubicación",
+    "status": "Estado",
+    "origin": "Origen",
+    "updated": "Actualizado",
+    "searchPlaceholder": "Buscar ID/QR",
+    "filterMaterial": "Material",
+    "filterThickness": "Espesor",
+    "filterLocation": "Ubicación"
   }
 }

@@ -44,6 +44,11 @@
 
       updateKPIs();
       renderTable();
+      
+      // Initialize trends if module loaded
+      if (window.opsT && window.opsT.initTrends) {
+        window.opsT.initTrends(state.history);
+      }
     } catch (error) {
       console.error('Error loading data:', error);
     }
@@ -484,13 +489,42 @@
     document.getElementById('project-detail').classList.add('hidden');
     document.getElementById('projects-section').classList.remove('hidden');
     document.getElementById('kpi-cards').classList.remove('hidden');
+    document.getElementById('trends-section')?.classList.remove('hidden');
+    document.getElementById('warehouse-section')?.classList.add('hidden');
+    document.getElementById('labels-section')?.classList.add('hidden');
+    document.getElementById('export-csv')?.classList.remove('hidden');
+    document.getElementById('export-patch')?.classList.add('hidden');
     state.selectedProject = null;
   };
 
   // Router for hash-based navigation
   async function router() {
     const hash = location.hash.slice(1);
-    if (hash.startsWith('/')) {
+    
+    // Hide all sections
+    document.querySelectorAll('main > section').forEach(section => {
+      section.classList.add('hidden');
+    });
+    
+    if (hash === '/warehouse') {
+      // Show warehouse section
+      document.getElementById('warehouse-section')?.classList.remove('hidden');
+      document.getElementById('export-patch')?.classList.remove('hidden');
+      document.getElementById('export-csv')?.classList.add('hidden');
+      
+      // Load warehouse data if needed
+      if (window.warehouse && !window.warehouse.loaded) {
+        await window.warehouse.loadData();
+        window.warehouse.initFilters();
+        window.warehouse.loaded = true;
+      }
+    } else if (hash === '/warehouse/labels') {
+      // Show labels section
+      document.getElementById('labels-section')?.classList.remove('hidden');
+      if (window.warehouseLabels) {
+        window.warehouseLabels.render();
+      }
+    } else if (hash.startsWith('/')) {
       const projectId = hash.slice(1);
       if (projectId && state.projects.find(p => p.projectId === projectId)) {
         await loadProjectDetail(projectId);
@@ -505,6 +539,18 @@
     setupEventHandlers();
     await loadData();
     await router();
+    
+    // Warehouse navigation button
+    document.getElementById('navWarehouse')?.addEventListener('click', () => {
+      location.hash = '#/warehouse';
+    });
+    
+    // Export patch button
+    document.getElementById('export-patch')?.addEventListener('click', () => {
+      if (window.warehouse) {
+        window.warehouse.exportPatch();
+      }
+    });
   });
 
   // Handle hash changes
