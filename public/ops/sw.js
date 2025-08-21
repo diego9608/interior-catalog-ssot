@@ -49,8 +49,10 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
   
-  // History endpoints - stale-while-revalidate
-  if (url.pathname === '/api/ops/history.json' || url.pathname.includes('/api/ops/snapshots/')) {
+  // History and targets endpoints - stale-while-revalidate
+  if (url.pathname === '/api/ops/history.json' || 
+      url.pathname === '/api/ops/targets.json' ||
+      url.pathname.includes('/api/ops/snapshots/')) {
     event.respondWith(
       (async () => {
         const cache = await caches.open(OPS_HISTORY_CACHE);

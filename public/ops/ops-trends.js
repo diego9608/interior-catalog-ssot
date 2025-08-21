@@ -5,6 +5,32 @@
   // Export trends module
   window.opsT = window.opsTrends || {};
   
+  // State
+  const state = {
+    targets: null
+  };
+  
+  // Load targets
+  window.opsT.loadTargets = async function() {
+    try {
+      const response = await fetch('/api/ops/targets.json');
+      if (response.ok) {
+        state.targets = await response.json();
+      }
+    } catch (e) {
+      // Default targets
+      state.targets = {
+        default: {
+          target_cost_p50: 26000,
+          target_cost_p80: 35000,
+          target_waste_pct: 0.24,
+          target_qc_pass_rate: 0.95
+        }
+      };
+    }
+    return state.targets;
+  };
+  
   // Date range utilities
   window.opsT.getDateRange = function(rangeType) {
     const now = new Date();
@@ -190,8 +216,64 @@
     });
   };
   
+  // Export CSV of filtered history
+  window.opsT.exportHistoryCSV = function(history) {
+    // Get current filter settings
+    const activeRange = document.querySelector('.range-btn.active')?.dataset.range || '30d';
+    const range = window.opsT.getDateRange(activeRange);
+    const filtered = window.opsT.filterHistory(history, range);
+    
+    // Flatten history
+    const flat = [];
+    filtered.forEach(entry => {
+      if (entry.projects && Array.isArray(entry.projects)) {
+        entry.projects.forEach(p => {
+          flat.push({
+            ...p,
+            generated_at: entry.generated_at,
+            commit: entry.commit
+          });
+        });
+      } else {
+        flat.push(entry);
+      }
+    });
+    
+    if (flat.length === 0) {
+      alert('No hay datos para exportar en el rango seleccionado');
+      return;
+    }
+    
+    // Create CSV
+    const headers = [
+      'generated_at', 'commit', 'projectId', 'cliente',
+      'cost_p50', 'cost_p80', 'waste_pct', 'timeline_days_p50',
+      'qc_overall_pass', 'pieces_count', 'sheets_used'
+    ];
+    
+    const csv = [
+      headers.join(','),
+      ...flat.map(row => headers.map(h => {
+        const val = row[h];
+        if (val === null || val === undefined) return '';
+        if (typeof val === 'string' && val.includes(',')) return `"${val}"`;
+        return val;
+      }).join(','))
+    ].join('\n');
+    
+    // Download
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    const dateStr = new Date().toISOString().split('T')[0];
+    link.download = `ops_history_${activeRange}_${dateStr}.csv`;
+    link.click();
+  };
+  
   // Initialize trends
-  window.opsT.initTrends = function(history) {
+  window.opsT.initTrends = async function(history) {
+    // Load targets first
+    await window.opsT.loadTargets();
     // Set up event listeners
     document.querySelectorAll('.range-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -228,6 +310,11 @@
       window.opsT.updateTrends(history);
     });
     
+    // Export CSV button
+    document.getElementById('export-csv')?.addEventListener('click', () => {
+      window.opsT.exportHistoryCSV(history);
+    });
+    
     // Initial update
     window.opsT.updateTrends(history);
   };
@@ -246,11 +333,12 @@
     // Aggregate metrics
     const metrics = window.opsT.aggregateMetrics(filtered, groupGlobal);
     
-    // Draw sparklines
-    window.opsT.drawSparkline('trend-cost-p50', metrics.costP50, null, v => `$${(v/1000).toFixed(0)}k`);
-    window.opsT.drawSparkline('trend-cost-p80', metrics.costP80, null, v => `$${(v/1000).toFixed(0)}k`);
-    window.opsT.drawSparkline('trend-waste', metrics.waste, null, v => `${(v*100).toFixed(1)}%`);
-    window.opsT.drawSparkline('trend-qc', metrics.qcPass, null, v => `${(v*100).toFixed(0)}%`);
+    // Draw sparklines with targets
+    const targets = state.targets?.default || {};
+    window.opsT.drawSparkline('trend-cost-p50', metrics.costP50, targets.target_cost_p50, v => `$${(v/1000).toFixed(0)}k`);
+    window.opsT.drawSparkline('trend-cost-p80', metrics.costP80, targets.target_cost_p80, v => `$${(v/1000).toFixed(0)}k`);
+    window.opsT.drawSparkline('trend-waste', metrics.waste, targets.target_waste_pct, v => `${(v*100).toFixed(1)}%`);
+    window.opsT.drawSparkline('trend-qc', metrics.qcPass, targets.target_qc_pass_rate, v => `${(v*100).toFixed(0)}%`);
   };
   
   // Helper functions

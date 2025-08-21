@@ -1,0 +1,22 @@
+{
+  "generated_at": "2025-08-21T12:21:42.872Z",
+  "commit": "33854f1",
+  "projects": [
+    {
+      "projectId": "DEMO-001",
+      "cliente": "Demo Cliente",
+      "generated_at": "2025-08-21T12:21:40.950Z",
+      "commit": "33854f1",
+      "cost_p50": 25242.52,
+      "cost_p80": 27009.5,
+      "timeline_days_p50": 10.4,
+      "waste_pct": 0.298,
+      "sheets_used": 3,
+      "pieces_count": 32,
+      "qc_overall_pass": false,
+      "target_cost_p50": null,
+      "target_waste_pct": null,
+      "target_timeline_days": null
+    }
+  ]
+}
