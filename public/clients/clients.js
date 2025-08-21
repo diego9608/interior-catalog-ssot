@@ -2,6 +2,24 @@
 (function() {
   'use strict';
   
+  // Initialize sidebar on load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Ensure sidebar is created
+    if (!document.getElementById('sidebar')) {
+      const sidebar = document.createElement('div');
+      sidebar.id = 'sidebar';
+      sidebar.className = 'app-sidebar';
+      document.body.insertBefore(sidebar, document.body.firstChild);
+    }
+    
+    // Create scrim if it doesn't exist
+    if (!document.querySelector('.scrim')) {
+      const scrim = document.createElement('div');
+      scrim.className = 'scrim';
+      document.body.appendChild(scrim);
+    }
+  });
+  
   // Sample client data (to be replaced with real data)
   const CLIENTS_DATA = [
     {
