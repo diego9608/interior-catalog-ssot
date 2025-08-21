@@ -1,0 +1,7 @@
+{
+  "consumibles_pct": 0.03,
+  "overhead_pct": 0.10,
+  "profit_pct": 0.15,
+  "risk_p80_pct": 0.07,
+  "timeline": { "risk_p80_pct": 0.15, "fabrication_buffer_days": 1 }
+}

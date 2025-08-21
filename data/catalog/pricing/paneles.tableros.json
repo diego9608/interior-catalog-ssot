@@ -1,0 +1,11 @@
+{
+  "currency": "MXN",
+  "items": {
+    "mat.melamina.mdf18_mr": { "price_m2": 280, "waste_factor_pct": 0.10, "sheet_mm": [1220, 2440] },
+    "mat.madera.chapada_roble": { "price_m2": 650, "waste_factor_pct": 0.15, "sheet_mm": [1220, 2440] }
+  },
+  "coefficients": {
+    "panel_area_m2_per_ml_base": 1.2,
+    "panel_area_m2_per_ml_altos": 0.8
+  }
+}

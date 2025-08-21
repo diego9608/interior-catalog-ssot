@@ -7,7 +7,8 @@
     "validate:data": "node scripts/validate-catalogs.js",
     "validate:rules": "node scripts/verify-rules.js",
     "validate:all": "npm run validate:data && npm run validate:rules",
-    "build": "echo \"Build complete\"",
+    "calc:costs": "node scripts/calc-costs.js",
+    "build": "npm run calc:costs",
     "test": "npm run validate:all"
   },
   "keywords": [

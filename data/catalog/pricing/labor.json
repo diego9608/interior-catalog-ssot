@@ -1,0 +1,21 @@
+{
+  "currency": "MXN",
+  "rates_hr": {
+    "instalacion": 350,
+    "cnc": 420,
+    "acabados": 380
+  },
+  "coefficients": {
+    "install_hours_per_ml_base": 0.9,
+    "install_hours_per_ml_altos": 0.7,
+    "install_hours_per_m2_counter": 0.6,
+    "cnc_hours_per_m2_panel": 0.4,
+    "finishing_hours_per_m2_panel_melamina": 0.0,
+    "finishing_hours_per_m2_panel_madera_chapada": 0.5
+  },
+  "crew": {
+    "install_team_size": 2,
+    "hours_per_day": 8,
+    "cnc_effective_hours_per_day": 6
+  }
+}

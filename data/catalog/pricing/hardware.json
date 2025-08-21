@@ -1,0 +1,10 @@
+{
+  "currency": "MXN",
+  "items": {
+    "hard.guia.total45kg": { "price_unit": 230 },
+    "hard.bisagra.110.slow": { "price_unit": 90 }
+  },
+  "assumptions": {
+    "bisagras_por_puerta": 2
+  }
+}

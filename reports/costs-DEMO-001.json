@@ -1,0 +1,73 @@
+{
+  "projectId": "DEMO-001",
+  "currency": "MXN",
+  "inputs": {
+    "scope": {
+      "lineales_base_ml": 3.6,
+      "lineales_altos_ml": 2.4,
+      "cajones_unidades": 6,
+      "puertas_unidades": 8,
+      "cubierta_m2": 2.6
+    },
+    "materials": {
+      "encimera": "mat.cuarzo.calacatta",
+      "frentes": "mat.melamina.mdf18_mr"
+    },
+    "hardware": [
+      "hard.bisagra.110.slow",
+      "hard.guia.total45kg"
+    ]
+  },
+  "breakdown": {
+    "encimera": {
+      "area_m2": 2.6,
+      "price_m2": 3800,
+      "waste_pct": 0.12,
+      "cost": 11065.6
+    },
+    "paneles": {
+      "area_m2": 6.24,
+      "price_m2": 280,
+      "waste_pct": 0.1,
+      "cost": 1921.92
+    },
+    "hardware": {
+      "guias": {
+        "count": 6,
+        "price": 230,
+        "cost": 1380
+      },
+      "bisagras": {
+        "count": 16,
+        "price": 90,
+        "cost": 1440
+      },
+      "total": 2820
+    },
+    "consumibles": {
+      "pct": 0.03,
+      "cost": 474.23
+    },
+    "labor": {
+      "install_hours": 6.48,
+      "cnc_hours": 2.5,
+      "finishing_hours": 0,
+      "cost": 3316.32
+    }
+  },
+  "totals": {
+    "materials": 15807.52,
+    "direct": 19598.07,
+    "p50": 24497.58,
+    "p80": 26212.41
+  },
+  "timeline_days": {
+    "p50": 10.4,
+    "p80": 11.97,
+    "lead_time": 10,
+    "cnc": 0.42,
+    "install": 0.41,
+    "crew_size_install": 2
+  },
+  "warnings": []
+}

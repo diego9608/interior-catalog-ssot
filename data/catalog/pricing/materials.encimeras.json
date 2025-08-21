@@ -1,0 +1,8 @@
+{
+  "currency": "MXN",
+  "items": {
+    "mat.cuarzo.calacatta": { "price_m2": 3800, "waste_factor_pct": 0.12 },
+    "mat.madera.chapada_roble": { "price_m2": 0, "waste_factor_pct": 0.00 },
+    "mat.melamina.mdf18_mr": { "price_m2": 0, "waste_factor_pct": 0.00 }
+  }
+}

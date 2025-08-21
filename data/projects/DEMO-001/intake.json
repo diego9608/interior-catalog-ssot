@@ -25,5 +25,12 @@
   },
   "proveedor_principal": "vend.fenix_cuarzos",
   "paleta": "palette.natural_warm",
+  "scope": {
+    "lineales_base_ml": 3.6,
+    "lineales_altos_ml": 2.4,
+    "cajones_unidades": 6,
+    "puertas_unidades": 8,
+    "cubierta_m2": 2.6
+  },
   "notas": "Proyecto demo para validación del sistema SSOT"
 }
