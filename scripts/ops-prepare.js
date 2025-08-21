@@ -312,6 +312,14 @@ function main() {
   fs.writeFileSync(historyPath, JSON.stringify(uniqueHistory, null, 2));
   
   console.log(`${colors.cyan}📊 OpsPrepare: ${projectDirs.length} project(s) → OK:${okCount} | BLOCKED:${blockedCount} | Missing:${missingCount}${colors.reset}`);
+  
+  // Save build metadata
+  const metaPath = path.join(opsDir, 'meta.json');
+  fs.writeFileSync(metaPath, JSON.stringify({
+    date: new Date().toISOString(),
+    sha: process.env.COMMIT_REF || null
+  }, null, 2));
+  
   console.log(`${colors.green}${colors.bold}✅ Ops preparation complete${colors.reset}`);
 }
 
