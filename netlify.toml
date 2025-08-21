@@ -1,5 +1,5 @@
 [build]
-  command = "npm run validate:data && npm run build"
+  command = "npm run validate:all && npm run build"
   publish = "public"
 
 [build.environment]

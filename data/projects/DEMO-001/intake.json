@@ -6,7 +6,11 @@
   "dimensiones": {
     "ancho_paso_mm": 1100,
     "alto_mm": 2400,
-    "profundidad_mm": 600
+    "profundidad_mm": 600,
+    "encimera_altura_mm": 920
+  },
+  "distancias": {
+    "campana_sobre_placa_mm": 700
   },
   "especificaciones": {
     "encimera": "mat.cuarzo.calacatta",

@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "validate:data": "node scripts/validate-catalogs.js",
-    "build": "npm run validate:data && echo 'Build complete'",
-    "test": "npm run validate:data"
+    "validate:rules": "node scripts/verify-rules.js",
+    "validate:all": "npm run validate:data && npm run validate:rules",
+    "build": "echo \"Build complete\"",
+    "test": "npm run validate:all"
   },
   "keywords": [
     "interior-design",
@@ -18,5 +20,8 @@
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1"
   }
 }

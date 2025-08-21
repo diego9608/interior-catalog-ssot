@@ -1,0 +1,104 @@
+rules:
+  - id: ERG-001
+    domain: ergonomia
+    severity: high
+    desc: "Paso útil entre frentes en cocina"
+    applies:
+      equals:
+        path: "ambiente"
+        value: "cocina"
+    check:
+      type: range
+      path: "dimensiones.ancho_paso_mm"
+      min: 1000
+      max: 1500
+      guidance: "1 persona: 1000–1200 mm; 2 personas: 1200–1500 mm."
+
+  - id: ERG-002
+    domain: ergonomia
+    severity: medium
+    desc: "Altura recomendada de encimera"
+    applies:
+      exists:
+        path: "dimensiones.encimera_altura_mm"
+    check:
+      type: range
+      path: "dimensiones.encimera_altura_mm"
+      min: 900
+      max: 950
+      guidance: "Estándar cómodo 90–95 cm; ajustar por usuario."
+
+  - id: ERG-003
+    domain: ergonomia
+    severity: medium
+    desc: "Altura de campana sobre placa"
+    applies:
+      exists:
+        path: "distancias.campana_sobre_placa_mm"
+    check:
+      type: range
+      path: "distancias.campana_sobre_placa_mm"
+      min: 650
+      max: 750
+      guidance: "Suele ser 65–75 cm según fabricante de campana/placa."
+
+  - id: HUM-001
+    domain: humedad
+    severity: high
+    desc: "Adhesivo adecuado para zona húmeda"
+    applies:
+      exists:
+        path: "especificaciones.adhesivo_zona_humeda"
+    check:
+      type: catalog_prop_equals
+      from:
+        path: "especificaciones.adhesivo_zona_humeda"
+        catalog: "adhesives"
+        prop: "tipo"
+      equals: "PUR"
+      guidance: "Zona húmeda requiere PUR; EVA sólo interior seco."
+
+  - id: HARD-001
+    domain: herrajes
+    severity: high
+    desc: "Guías: capacidad y ciclos mínimos"
+    applies:
+      some_in_list_catalog:
+        path: "especificaciones.herrajes_estandar"
+        catalog: "hardware"
+        filter:
+          prop: "categoria"
+          equals: "guia"
+    check:
+      type: list_catalog_min
+      path: "especificaciones.herrajes_estandar"
+      catalog: "hardware"
+      where:
+        prop: "categoria"
+        equals: "guia"
+      mins:
+        capacidad_kg: 30
+        ciclos: 60000
+      guidance: "Extensión total/uso intensivo: ≥30 kg y ≥60k ciclos."
+
+  - id: HARD-002
+    domain: herrajes
+    severity: high
+    desc: "Bisagras: ciclos mínimos"
+    applies:
+      some_in_list_catalog:
+        path: "especificaciones.herrajes_estandar"
+        catalog: "hardware"
+        filter:
+          prop: "categoria"
+          equals: "bisagra"
+    check:
+      type: list_catalog_min
+      path: "especificaciones.herrajes_estandar"
+      catalog: "hardware"
+      where:
+        prop: "categoria"
+        equals: "bisagra"
+      mins:
+        ciclos: 50000
+      guidance: "Cierre suave calidad: ≥50k ciclos."

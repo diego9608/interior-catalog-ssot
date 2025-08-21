@@ -1,0 +1,72 @@
+{
+  "projectId": "DEMO-001",
+  "timestamp": "2025-08-21T01:06:20.845Z",
+  "results": [
+    {
+      "ruleId": "ERG-001",
+      "domain": "ergonomia",
+      "severity": "high",
+      "desc": "Paso útil entre frentes en cocina",
+      "pass": true,
+      "actual": 1100,
+      "expected": "1000–1500",
+      "guidance": "1 persona: 1000–1200 mm; 2 personas: 1200–1500 mm.",
+      "path": "dimensiones.ancho_paso_mm"
+    },
+    {
+      "ruleId": "ERG-002",
+      "domain": "ergonomia",
+      "severity": "medium",
+      "desc": "Altura recomendada de encimera",
+      "pass": true,
+      "actual": 920,
+      "expected": "900–950",
+      "guidance": "Estándar cómodo 90–95 cm; ajustar por usuario.",
+      "path": "dimensiones.encimera_altura_mm"
+    },
+    {
+      "ruleId": "ERG-003",
+      "domain": "ergonomia",
+      "severity": "medium",
+      "desc": "Altura de campana sobre placa",
+      "pass": true,
+      "actual": 700,
+      "expected": "650–750",
+      "guidance": "Suele ser 65–75 cm según fabricante de campana/placa.",
+      "path": "distancias.campana_sobre_placa_mm"
+    },
+    {
+      "ruleId": "HUM-001",
+      "domain": "humedad",
+      "severity": "high",
+      "desc": "Adhesivo adecuado para zona húmeda",
+      "pass": true,
+      "actual": "PUR",
+      "expected": "PUR",
+      "guidance": "Zona húmeda requiere PUR; EVA sólo interior seco.",
+      "path": "especificaciones.adhesivo_zona_humeda"
+    },
+    {
+      "ruleId": "HARD-001",
+      "domain": "herrajes",
+      "severity": "high",
+      "desc": "Guías: capacidad y ciclos mínimos",
+      "pass": true,
+      "actual": "all meet mins",
+      "expected": "mins: {\"capacidad_kg\":30,\"ciclos\":60000}",
+      "guidance": "Extensión total/uso intensivo: ≥30 kg y ≥60k ciclos.",
+      "path": "especificaciones.herrajes_estandar"
+    },
+    {
+      "ruleId": "HARD-002",
+      "domain": "herrajes",
+      "severity": "high",
+      "desc": "Bisagras: ciclos mínimos",
+      "pass": true,
+      "actual": "all meet mins",
+      "expected": "mins: {\"ciclos\":50000}",
+      "guidance": "Cierre suave calidad: ≥50k ciclos.",
+      "path": "especificaciones.herrajes_estandar"
+    }
+  ]
+}
