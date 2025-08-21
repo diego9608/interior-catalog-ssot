@@ -45,7 +45,32 @@
     "hinges": "Bisagras",
     "noHistory": "Sin datos históricos",
     "backToList": "Volver a lista",
-    "days": "días"
+    "days": "días",
+    "allProjects": "Todos los proyectos",
+    "timelineP50": "Plazo P50",
+    "bomPieces": "Piezas BOM",
+    "deltaTarget": "Δ Meta",
+    "deltaWaste": "Δ Meta",
+    "groupGlobal": "Agrupar Global",
+    "range": {
+      "7d": "7d",
+      "30d": "30d",
+      "90d": "90d",
+      "ytd": "YTD",
+      "all": "Todo",
+      "custom": "Custom"
+    },
+    "trends": {
+      "costP50": "Costo P50",
+      "costP80": "Costo P80",
+      "waste": "Merma (%)",
+      "qcPass": "QC Pass Rate"
+    },
+    "targets": {
+      "cost": "Meta Costo",
+      "waste": "Meta Merma",
+      "timeline": "Meta Plazo"
+    }
   },
   "app": {
     "title": "Field App",
@@ -76,6 +101,25 @@
     "high": "Alto",
     "medium": "Medio",
     "low": "Bajo"
+  },
+  "sidebar": {
+    "home": "Inicio",
+    "operations": "Operación",
+    "clients": "Clientes",
+    "suppliers": "Proveedores",
+    "inventory": "Inventario",
+    "finance": "Finanzas",
+    "reports": "Reportes",
+    "settings": "Configuración"
+  },
+  "clients": {
+    "title": "Portafolio de Clientes",
+    "comingSoon": "Próximamente",
+    "description": "El portafolio visual de clientes estará disponible pronto. Mostrará proyectos desde 2017 con fotos, ubicaciones, acabados y más.",
+    "feature1": "Galería visual con lazy-load",
+    "feature2": "Búsqueda y filtros avanzados",
+    "feature3": "Timeline y métricas por cliente",
+    "feature4": "Disponible offline"
   },
   "common": {
     "yes": "Sí",

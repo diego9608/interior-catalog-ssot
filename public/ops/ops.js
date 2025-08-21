@@ -14,6 +14,7 @@
   const state = {
     projects: [],
     history: [],
+    targets: null,
     currentFilter: localStorage.getItem('ops.filter') || 'all',
     currentSort: { field: 'projectId', direction: 'asc' },
     selectedProject: null
@@ -28,7 +29,34 @@
 
       // Load history for trends
       const historyResponse = await fetch('/api/ops/history.json');
-      state.history = await historyResponse.json();
+      const historyData = await historyResponse.json();
+      
+      // Flatten history if it's nested
+      state.history = [];
+      historyData.forEach(entry => {
+        if (entry.projects && Array.isArray(entry.projects)) {
+          // Nested format from ops-snapshot.js
+          state.history.push(entry);
+        } else {
+          // Already flat
+          state.history.push(entry);
+        }
+      });
+      
+      // Load targets
+      try {
+        const targetsResponse = await fetch('/api/ops/targets.json');
+        if (targetsResponse.ok) {
+          state.targets = await targetsResponse.json();
+        }
+      } catch (e) {
+        state.targets = {
+          default: {
+            target_cost_p50: 26000,
+            target_waste_pct: 0.24
+          }
+        };
+      }
 
       // Populate project filter dropdown
       const projectFilter = document.getElementById('project-filter');
@@ -44,6 +72,11 @@
 
       updateKPIs();
       renderTable();
+      
+      // Initialize trends if module loaded
+      if (window.opsT && window.opsT.initTrends) {
+        window.opsT.initTrends(state.history);
+      }
     } catch (error) {
       console.error('Error loading data:', error);
     }
@@ -141,13 +174,35 @@
         qcBadge = '<span class="badge fail">FAIL</span>';
       }
 
+      // Calculate deltas vs targets
+      const targets = {
+        ...state.targets?.default,
+        ...(state.targets?.byId?.[project.projectId] || {})
+      };
+      
+      let costDelta = '—';
+      if (targets.target_cost_p50 && project.cost_p50) {
+        const delta = ((project.cost_p50 - targets.target_cost_p50) / targets.target_cost_p50) * 100;
+        const sign = delta > 0 ? '+' : '';
+        costDelta = `<span class="${Math.abs(delta) > 10 ? 'text-danger' : Math.abs(delta) > 5 ? 'text-warning' : 'text-success'}">${sign}${delta.toFixed(1)}%</span>`;
+      }
+      
+      let wasteDelta = '—';
+      if (targets.target_waste_pct !== undefined && project.waste_pct !== undefined) {
+        const delta = (project.waste_pct - targets.target_waste_pct) * 100; // Already in percentage points
+        const sign = delta > 0 ? '+' : '';
+        wasteDelta = `<span class="${Math.abs(delta) > 5 ? 'text-danger' : Math.abs(delta) > 3 ? 'text-warning' : 'text-success'}">${sign}${delta.toFixed(1)}pp</span>`;
+      }
+      
       tr.innerHTML = `
         <td>${project.projectId}</td>
         <td>${project.cliente || '—'}</td>
         <td>${fmt.mxn(project.cost_p50)}</td>
+        <td>${costDelta}</td>
         <td>${fmt.mxn(project.cost_p80)}</td>
         <td>${project.timeline_days_p50 ? `${project.timeline_days_p50}d` : '—'}</td>
         <td>${fmt.pct(project.waste_pct)}</td>
+        <td>${wasteDelta}</td>
         <td>${project.sheets_used || '—'}</td>
         <td>${qcBadge}</td>
         <td>${project.pieces_count || '—'}</td>

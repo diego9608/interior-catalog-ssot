@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SSOT • Clientes</title>
+  <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/shared/tokens.css">
+  <link rel="stylesheet" href="/shared/sidebar.css">
+  <link rel="stylesheet" href="/clients/clients.css">
+</head>
+<body class="has-app-shell">
+  <main>
+    <header class="app-header">
+      <h1 class="app-header-title" data-i18n="clients.title">Portafolio de Clientes</h1>
+      <div class="app-header-actions">
+        <select id="langSelector" aria-label="Language">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+        </select>
+        <button id="themeToggle" aria-label="Cambiar tema" class="btn-icon">
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="app-content">
+      <!-- Placeholder for clients portfolio -->
+      <div class="placeholder-container">
+        <div class="placeholder-icon">👥</div>
+        <h2 class="placeholder-title" data-i18n="clients.comingSoon">Próximamente</h2>
+        <p class="placeholder-text" data-i18n="clients.description">
+          El portafolio visual de clientes estará disponible pronto. 
+          Mostrará proyectos desde 2017 con fotos, ubicaciones, acabados y más.
+        </p>
+        <div class="placeholder-features">
+          <div class="feature-item">
+            <span class="feature-icon">📸</span>
+            <span data-i18n="clients.feature1">Galería visual con lazy-load</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔍</span>
+            <span data-i18n="clients.feature2">Búsqueda y filtros avanzados</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📊</span>
+            <span data-i18n="clients.feature3">Timeline y métricas por cliente</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">💾</span>
+            <span data-i18n="clients.feature4">Disponible offline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/clients/sw-register.js" defer></script>
+  <script src="/shared/sidebar.js" defer></script>
+  <script src="/shared/i18n.js" defer></script>
+  <script src="/shared/theme.js" defer></script>
+  <script src="/clients/clients.js" defer></script>
+</body>
+</html>

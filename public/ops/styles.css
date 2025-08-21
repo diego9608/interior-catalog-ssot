@@ -353,6 +353,98 @@ td {
   color: var(--primary);
 }
 
+/* Date Controls */
+.date-controls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.range-btn {
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.15s;
+}
+
+.range-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.range-btn.active {
+  background: white;
+  color: var(--brand);
+  border-color: white;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.date-inputs input {
+  padding: 0.5rem;
+  background: white;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.grouping-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.grouping-toggle input {
+  cursor: pointer;
+}
+
+/* Trends Section */
+.trends-container {
+  margin-bottom: 2rem;
+}
+
+.trends-container h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.trends-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.trend-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.trend-card label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.sparkline-svg {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
 /* Sparklines */
 .trend-item {
   margin-bottom: 1rem;
@@ -418,6 +510,10 @@ footer {
   }
   
   .kpi-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .trends-grid {
     grid-template-columns: repeat(4, 1fr);
   }
   
@@ -535,6 +631,14 @@ tbody tr:hover {
 
 td {
   color: var(--text);
+}
+
+.text-danger {
+  color: var(--danger);
+}
+
+.text-success {
+  color: var(--accent);
 }
 
 .badge.pass {

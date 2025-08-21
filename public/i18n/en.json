@@ -45,7 +45,32 @@
     "hinges": "Hinges",
     "noHistory": "No historical data",
     "backToList": "Back to list",
-    "days": "days"
+    "days": "days",
+    "allProjects": "All projects",
+    "timelineP50": "Timeline P50",
+    "bomPieces": "BOM Pieces",
+    "deltaTarget": "Δ Target",
+    "deltaWaste": "Δ Target",
+    "groupGlobal": "Group Global",
+    "range": {
+      "7d": "7d",
+      "30d": "30d",
+      "90d": "90d",
+      "ytd": "YTD",
+      "all": "All",
+      "custom": "Custom"
+    },
+    "trends": {
+      "costP50": "Cost P50",
+      "costP80": "Cost P80",
+      "waste": "Waste (%)",
+      "qcPass": "QC Pass Rate"
+    },
+    "targets": {
+      "cost": "Cost Target",
+      "waste": "Waste Target",
+      "timeline": "Timeline Target"
+    }
   },
   "app": {
     "title": "Field App",
@@ -76,6 +101,25 @@
     "high": "High",
     "medium": "Medium",
     "low": "Low"
+  },
+  "sidebar": {
+    "home": "Home",
+    "operations": "Operations",
+    "clients": "Clients",
+    "suppliers": "Suppliers",
+    "inventory": "Inventory",
+    "finance": "Finance",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "clients": {
+    "title": "Client Portfolio",
+    "comingSoon": "Coming Soon",
+    "description": "The visual client portfolio will be available soon. It will showcase projects since 2017 with photos, locations, finishes and more.",
+    "feature1": "Visual gallery with lazy-load",
+    "feature2": "Advanced search and filters",
+    "feature3": "Timeline and metrics per client",
+    "feature4": "Available offline"
   },
   "common": {
     "yes": "Yes",

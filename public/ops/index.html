@@ -6,10 +6,14 @@
   <title>SSOT • Operaciones</title>
   <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <style>/* CRITICAL CSS START */*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);font-size:14px;line-height:1.5;color:var(--text,#111);background:var(--bg,#f6f7f9);min-height:100vh;display:flex;flex-direction:column}:root{--bg:#f6f7f9;--surface:#fff;--text:#111;--text-secondary:#6b7280;--border:#e5e7eb;--brand:#111;--accent:#0f766e;--danger:#b91c1c;--success:#28a745;}@media(prefers-color-scheme:dark){:root{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}}.dark{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}header{background:var(--brand);color:#fff;padding:1rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,0.1)}header h1{font-size:1.25rem;font-weight:600;margin-bottom:1rem}.controls{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center}.filter-btn{padding:0.5rem 1rem;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:0.875rem}.filter-btn.active{background:#fff;color:var(--brand);border-color:#fff}.btn-export{background:var(--success);color:#fff;border-color:var(--success)}main{flex:1;padding:1rem;max-width:1400px;margin:0 auto;width:100%}.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;box-shadow:0 1px 3px rgba(0,0,0,0.05)}.kpi-label{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;font-weight:600;margin-bottom:0.25rem}.kpi-value{font-size:1.5rem;font-weight:700;color:var(--text)}.kpi-value.ok{color:var(--success)}.kpi-value.blocked{color:var(--danger)}#projects-section h2{font-size:1.25rem;margin-bottom:1rem}.table-wrapper{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px}#langSelector{padding:0.5rem;background:#fff;color:var(--brand);border:1px solid var(--border);border-radius:4px;font-size:0.875rem}@media(min-width:768px){header h1{font-size:1.5rem}.kpi-grid{grid-template-columns:repeat(4,1fr)}}/* CRITICAL CSS END */</style>
+  <style>/* CRITICAL CSS START */*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);font-size:14px;line-height:1.5;color:var(--text,#111);background:var(--bg,#f6f7f9);min-height:100vh;display:flex;flex-direction:column}:root{--bg:#f6f7f9;--surface:#fff;--text:#111;--text-secondary:#6b7280;--border:#e5e7eb;--brand:#111;--accent:#0f766e;--danger:#b91c1c;--success:#28a745;}@media(prefers-color-scheme:dark){:root{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}}.dark{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}header{background:var(--brand);color:#fff;padding:1rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,0.1)}header h1{font-size:1.25rem;font-weight:600;margin-bottom:1rem}.controls{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center}.filter-btn{padding:0.5rem 1rem;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:0.875rem}.filter-btn.active{background:#fff;color:var(--brand);border-color:#fff}.btn-export{background:var(--success);color:#fff;border-color:var(--success)}main{flex:1;padding:1rem;max-width:1400px;margin:0 auto;width:100%}.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;box-shadow:0 1px 3px rgba(0,0,0,0.05)}.kpi-label{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;font-weight:600;margin-bottom:0.25rem}.kpi-value{font-size:1.5rem;font-weight:700;color:var(--text)}.kpi-value.ok{color:var(--success)}.kpi-value.blocked{color:var(--danger)}#projects-section h2{font-size:1.25rem;margin-bottom:1rem}.table-wrapper{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px}#langSelector{padding:0.5rem;background:#fff;color:var(--brand);border:1px solid var(--border);border-radius:4px;font-size:0.875rem}@media(min-width:768px){header h1{font-size:1.5rem}.kpi-grid{grid-template-columns:repeat(4,1fr)}}/* CRITICAL CSS END */</style>
+  <style>/* CRITICAL CSS START */*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);font-size:14px;line-height:1.5;color:var(--text,#111);background:var(--bg,#f6f7f9);min-height:100vh;display:flex;flex-direction:column}:root{--bg:#f6f7f9;--surface:#fff;--text:#111;--text-secondary:#6b7280;--border:#e5e7eb;--brand:#111;--accent:#0f766e;--danger:#b91c1c;--success:#28a745;}@media(prefers-color-scheme:dark){:root{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}}.dark{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}header{background:var(--brand);color:#fff;padding:1rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,0.1)}header h1{font-size:1.25rem;font-weight:600;margin-bottom:1rem}.controls{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center}.filter-btn{padding:0.5rem 1rem;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:0.875rem}.filter-btn.active{background:#fff;color:var(--brand);border-color:#fff}.btn-export{background:var(--success);color:#fff;border-color:var(--success)}main{flex:1;padding:1rem;max-width:1400px;margin:0 auto;width:100%}.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;box-shadow:0 1px 3px rgba(0,0,0,0.05)}.kpi-label{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;font-weight:600;margin-bottom:0.25rem}.kpi-value{font-size:1.5rem;font-weight:700;color:var(--text)}.kpi-value.ok{color:var(--success)}.kpi-value.blocked{color:var(--danger)}#projects-section h2{font-size:1.25rem;margin-bottom:1rem}.table-wrapper{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px}#langSelector{padding:0.5rem;background:#fff;color:var(--brand);border:1px solid var(--border);border-radius:4px;font-size:0.875rem}@media(min-width:768px){header h1{font-size:1.5rem}.kpi-grid{grid-template-columns:repeat(4,1fr)}}/* CRITICAL CSS END */</style>
+  <style>/* CRITICAL CSS START */*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);font-size:14px;line-height:1.5;color:var(--text,#111);background:var(--bg,#f6f7f9);min-height:100vh;display:flex;flex-direction:column}:root{--bg:#f6f7f9;--surface:#fff;--text:#111;--text-secondary:#6b7280;--border:#e5e7eb;--brand:#111;--accent:#0f766e;--danger:#b91c1c;--success:#28a745;}@media(prefers-color-scheme:dark){:root{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}}.dark{--bg:#0b0c0f;--surface:#111418;--text:#f3f4f6;--text-secondary:#9ca3af;--border:#1f2937;--brand:#e5e7eb;--accent:#14b8a6;--danger:#ef4444;}header{background:var(--brand);color:#fff;padding:1rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,0.1)}header h1{font-size:1.25rem;font-weight:600;margin-bottom:1rem}.controls{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center}.filter-btn{padding:0.5rem 1rem;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:0.875rem}.filter-btn.active{background:#fff;color:var(--brand);border-color:#fff}.btn-export{background:var(--success);color:#fff;border-color:var(--success)}main{flex:1;padding:1rem;max-width:1400px;margin:0 auto;width:100%}.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;box-shadow:0 1px 3px rgba(0,0,0,0.05)}.kpi-label{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;font-weight:600;margin-bottom:0.25rem}.kpi-value{font-size:1.5rem;font-weight:700;color:var(--text)}.kpi-value.ok{color:var(--success)}.kpi-value.blocked{color:var(--danger)}#projects-section h2{font-size:1.25rem;margin-bottom:1rem}.table-wrapper{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px}#langSelector{padding:0.5rem;background:#fff;color:var(--brand);border:1px solid var(--border);border-radius:4px;font-size:0.875rem}@media(min-width:768px){header h1{font-size:1.5rem}.kpi-grid{grid-template-columns:repeat(4,1fr)}}/* CRITICAL CSS END */</style>
   <link rel="stylesheet" href="/shared/tokens.css">
+  <link rel="stylesheet" href="/shared/sidebar.css">
   <link rel="stylesheet" href="/ops/styles.css">
 </head>
-<body>
+<body class="has-app-shell">
   <header>
     <h1 data-i18n="ops.title">SSOT • Operaciones</h1>
     <div class="controls">
@@ -21,6 +25,25 @@
         <button class="filter-btn" data-status="ok">PASS</button>
         <button class="filter-btn" data-status="blocked">FAIL</button>
       </div>
+      <!-- Date range controls -->
+      <div class="date-controls">
+        <button class="range-btn" data-range="7d" data-i18n="ops.range.7d">7d</button>
+        <button class="range-btn active" data-range="30d" data-i18n="ops.range.30d">30d</button>
+        <button class="range-btn" data-range="90d" data-i18n="ops.range.90d">90d</button>
+        <button class="range-btn" data-range="ytd" data-i18n="ops.range.ytd">YTD</button>
+        <button class="range-btn" data-range="all" data-i18n="ops.range.all">Todo</button>
+        <button class="range-btn" data-range="custom" data-i18n="ops.range.custom">Custom</button>
+      </div>
+      <div class="date-inputs hidden" id="custom-dates">
+        <label for="date-from" class="sr-only">From date</label>
+        <input type="date" id="date-from" aria-label="From">
+        <label for="date-to" class="sr-only">To date</label>
+        <input type="date" id="date-to" aria-label="To">
+      </div>
+      <label class="grouping-toggle" for="group-global">
+        <input type="checkbox" id="group-global" aria-label="Agrupar Global">
+        <span data-i18n="ops.groupGlobal">Agrupar Global</span>
+      </label>
       <button id="export-csv" class="btn btn-export" data-i18n="ops.exportCSV">📥 Export CSV</button>
       <select id="langSelector" aria-label="Language">
         <option value="es">ES</option>
@@ -43,6 +66,37 @@
   </header>
   
   <main>
+    <!-- Trends Section -->
+    <section id="trends-section" class="trends-container">
+      <h2 data-i18n="ops.trends">Tendencias</h2>
+      <div class="trends-grid">
+        <div class="trend-card">
+          <label data-i18n="ops.trends.costP50">Costo P50</label>
+          <svg id="trend-cost-p50" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Costo P50">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.costP80">Costo P80</label>
+          <svg id="trend-cost-p80" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Costo P80">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.waste">Merma (%)</label>
+          <svg id="trend-waste" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de Merma">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+        <div class="trend-card">
+          <label data-i18n="ops.trends.qcPass">QC Pass Rate</label>
+          <svg id="trend-qc" class="sparkline-svg" viewBox="0 0 300 60" aria-label="Tendencia de QC Pass Rate">
+            <!-- Populated by JS -->
+          </svg>
+        </div>
+      </div>
+    </section>
+    
     <!-- KPI Cards -->
     <section id="kpi-cards" class="kpi-grid">
       <div class="kpi-card">
@@ -89,9 +143,11 @@
               <th data-sort="projectId">ID</th>
               <th data-sort="cliente" data-i18n="ops.client">Cliente</th>
               <th data-sort="cost_p50" data-i18n="ops.costP50">Costo P50</th>
+              <th data-i18n="ops.deltaTarget">Δ Meta</th>
               <th data-sort="cost_p80" data-i18n="ops.costP80">Costo P80</th>
               <th data-sort="timeline_days_p50" data-i18n="ops.timeline">Plazo</th>
               <th data-sort="waste_pct" data-i18n="ops.waste">Merma</th>
+              <th data-i18n="ops.deltaWaste">Δ Meta</th>
               <th data-sort="sheets_used">Sheets</th>
               <th data-sort="qc_overall_pass">QC</th>
               <th data-sort="pieces_count" data-i18n="ops.pieces">Piezas</th>
@@ -157,8 +213,10 @@
   </footer>
   
   <script src="/ops/sw-register.js" defer></script>
+  <script src="/shared/sidebar.js" defer></script>
   <script src="/shared/i18n.js" defer></script>
   <script src="/shared/theme.js" defer></script>
+  <script src="/ops/ops-trends.js" defer></script>
   <script src="/ops/ops.js" defer></script>
 </body>
 </html>
