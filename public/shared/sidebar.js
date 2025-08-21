@@ -31,27 +31,22 @@
       document.body.appendChild(sidebar);
     }
 
-    // Create sidebar HTML
+    // Create sidebar HTML with hover-friendly classes
     sidebar.innerHTML = `
       <div class="sidebar-header">
         <a href="/" class="sidebar-logo">
           <span class="sidebar-logo-icon">⟟</span>
-          <span class="sidebar-logo-text">SSOT</span>
+          <span class="sidebar-logo-text sidebar-text">SSOT</span>
         </a>
-        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 10h14M3 5h14M3 15h14"/>
-          </svg>
-        </button>
       </div>
       
       <nav class="sidebar-nav" role="navigation">
         <ul class="sidebar-nav-list">
           ${navItems.map(item => `
             <li class="sidebar-nav-item">
-              <a href="${item.href}" class="sidebar-nav-link" data-nav-id="${item.id}">
+              <a href="${item.href}" class="sidebar-nav-link" data-nav-id="${item.id}" title="${item.label.split('.').pop()}">
                 <span class="sidebar-nav-icon">${item.icon}</span>
-                <span class="sidebar-nav-text" data-i18n="${item.label}">${item.label.split('.').pop()}</span>
+                <span class="sidebar-nav-text sidebar-text" data-i18n="${item.label}">${item.label.split('.').pop()}</span>
               </a>
             </li>
           `).join('')}
@@ -61,7 +56,7 @@
       <div class="sidebar-footer">
         <div class="sidebar-user">
           <div class="sidebar-user-avatar">U</div>
-          <div class="sidebar-user-info">
+          <div class="sidebar-user-info sidebar-text">
             <div class="sidebar-user-name">Usuario</div>
             <div class="sidebar-user-role">Admin</div>
           </div>

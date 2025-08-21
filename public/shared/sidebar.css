@@ -1,8 +1,9 @@
 /* Sidebar Component Styles */
 :root {
   --sidebar-width: 240px;
-  --sidebar-collapsed: 64px;
+  --sidebar-collapsed: 56px;
   --header-height: 56px;
+  --sidebar-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* App Shell Layout */
@@ -17,17 +18,31 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: var(--sidebar-width);
+  width: var(--sidebar-collapsed);
   background: var(--surface);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   z-index: 200;
-  transition: transform 0.3s ease, width 0.3s ease;
+  transition: width var(--sidebar-transition);
+  overflow: hidden;
 }
 
-.app-sidebar.collapsed {
-  width: var(--sidebar-collapsed);
+/* Expand on hover for desktop */
+@media (min-width: 1024px) {
+  .app-sidebar:hover {
+    width: var(--sidebar-width);
+  }
+  
+  /* Keep expanded if user is interacting with sidebar content */
+  .app-sidebar:focus-within {
+    width: var(--sidebar-width);
+  }
+}
+
+/* Manual collapse toggle - optional */
+.app-sidebar.manually-expanded {
+  width: var(--sidebar-width) !important;
 }
 
 .app-sidebar.mobile-hidden {
@@ -67,16 +82,22 @@
 }
 
 .sidebar-logo-text {
-  transition: opacity 0.3s;
-}
-
-.collapsed .sidebar-logo-text {
   opacity: 0;
   width: 0;
   overflow: hidden;
+  white-space: nowrap;
+  transition: opacity var(--sidebar-transition);
+}
+
+.app-sidebar:hover .sidebar-logo-text,
+.app-sidebar:focus-within .sidebar-logo-text,
+.app-sidebar.manually-expanded .sidebar-logo-text {
+  opacity: 1;
+  width: auto;
 }
 
 .sidebar-toggle {
+  display: none; /* Hide toggle button since we're using hover */
   background: transparent;
   border: none;
   color: var(--text-secondary);
@@ -145,14 +166,18 @@
 .sidebar-nav-text {
   font-size: 0.875rem;
   font-weight: 500;
-  transition: opacity 0.3s;
-  white-space: nowrap;
-}
-
-.collapsed .sidebar-nav-text {
   opacity: 0;
   width: 0;
   overflow: hidden;
+  white-space: nowrap;
+  transition: opacity var(--sidebar-transition), width var(--sidebar-transition);
+}
+
+.app-sidebar:hover .sidebar-nav-text,
+.app-sidebar:focus-within .sidebar-nav-text,
+.app-sidebar.manually-expanded .sidebar-nav-text {
+  opacity: 1;
+  width: auto;
 }
 
 /* Sidebar Footer */
@@ -188,13 +213,17 @@
 
 .sidebar-user-info {
   flex: 1;
-  transition: opacity 0.3s;
-}
-
-.collapsed .sidebar-user-info {
   opacity: 0;
   width: 0;
   overflow: hidden;
+  transition: opacity var(--sidebar-transition);
+}
+
+.app-sidebar:hover .sidebar-user-info,
+.app-sidebar:focus-within .sidebar-user-info,
+.app-sidebar.manually-expanded .sidebar-user-info {
+  opacity: 1;
+  width: auto;
 }
 
 .sidebar-user-name {
@@ -211,13 +240,17 @@
 /* Main Content Area */
 .app-main {
   flex: 1;
-  margin-left: var(--sidebar-width);
-  transition: margin-left 0.3s ease;
+  margin-left: var(--sidebar-collapsed);
+  transition: margin-left var(--sidebar-transition);
   min-width: 0;
 }
 
-.sidebar-collapsed + .app-main {
-  margin-left: var(--sidebar-collapsed);
+/* Adjust margin when sidebar is hovered */
+@media (min-width: 1024px) {
+  body:has(.app-sidebar:hover) .app-main,
+  body:has(.app-sidebar:focus-within) .app-main {
+    margin-left: var(--sidebar-width);
+  }
 }
 
 /* Top Header Bar */
